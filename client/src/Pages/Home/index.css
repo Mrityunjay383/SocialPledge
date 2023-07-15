@@ -1,0 +1,198 @@
+/*Title Section*/
+.title {
+    padding: 4vh 6% 10vh;
+    overflow: hidden;
+}
+
+.title-content {
+    padding: 5% 0;
+}
+
+.title-content h1 {
+    font-size: 3.8rem;
+    padding: 20px 0;
+    width: 85%;
+}
+
+.title-content p {
+    font-size: 1.5rem;
+    padding: 20px 0 40px;
+    width: 75%;
+}
+
+.ap-img-container {
+    display: none;
+}
+
+.bl-bg-img {
+    position: absolute;
+    z-index: 0;
+    top: -23vh;
+    right: -20vh;
+    width: 100%;
+}
+
+.bl-title-img {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    width: 90%
+}
+
+.ap-img-container {
+    height: 60vh;
+}
+
+.ab-bg-img {
+    position: absolute;
+    z-index: 0;
+    width: 80vh;
+    top: -25vh;
+    left: 30vh;
+}
+
+.ab-title-img {
+    position: absolute;
+    width: 70vh;
+    left: 20vh;
+}
+
+
+@media screen and (max-width: 991px) {
+    html {
+        overflow-x: hidden;
+    }
+
+    body {
+        text-align: center;
+    }
+
+    .title-content h1, .title-content p {
+        margin: auto;
+    }
+
+    .cta-btn {
+        display: none;
+    }
+
+
+    .bl-img-container {
+        display: none;
+    }
+
+    .ap-img-container {
+        display: block;
+    }
+
+    .cta-sec {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .title-content h1 {
+        font-size: 3.3rem;
+        padding-bottom: 10px;
+    }
+
+    .title-content p {
+        font-size: 1.2rem;
+        padding-top: 10px;
+    }
+
+    .ap-img-container {
+        height: 45vh;
+    }
+
+    .ab-bg-img {
+        left: 32vh;
+        width: 60vh
+    }
+
+    .ab-title-img {
+        left: 20vh;
+        width: 50vh;
+    }
+
+
+    .cta h2 {
+        font-size: 2.5rem;
+    }
+
+    .btn-cta {
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width: 560px) {
+
+    .title-content h1 {
+        font-size: 2.7rem;
+    }
+
+    .title-content p {
+        font-size: 1rem;
+    }
+
+    .ab-bg-img {
+        left: 18vh;
+        width: 55vh;
+    }
+
+    .ab-title-img {
+        left: 5vh;
+        width: 45vh;
+    }
+
+    .cta {
+        padding: 25% 4%;
+    }
+
+    .cta h2 {
+        font-size: 2.1rem;
+    }
+
+    .btn-cta {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .title-content h1 {
+        font-size: 2.3rem;
+        width: 100%;
+    }
+
+    .title-content p {
+        width: 90%;
+        font-size: 0.8rem;
+    }
+
+    .ap-img-container {
+        height: 35vh;
+    }
+
+    .ab-bg-img {
+        left: 9vh;
+        top: -20vh;
+        width: 45vh;
+    }
+
+    .ab-title-img {
+        left: 1vh;
+        width: 35vh;
+    }
+
+    .cta h2 {
+        font-size: 1.7rem;
+    }
+
+    .btn-cta {
+        font-size: 1rem;
+    }
+
+}
+
+
