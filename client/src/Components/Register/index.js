@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import CtaBtn from "../CtaBtn";
 import { Auth } from "../../service";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Register = ({ setAuthToggle, setIsLoggedIn }) => {
+  const { pledgeId } = useParams();
+
   const navigate = useNavigate();
 
   const [regBtnText, srtRegBtnText] = useState("Send OTP");
@@ -44,7 +46,11 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
           if (res.status === 200) {
             toast.success("Account Created Successfully!!!");
             setIsLoggedIn(true);
-            navigate("/");
+            if (pledgeId) {
+              navigate(`/pledge/${pledgeId}`);
+            } else {
+              navigate("/");
+            }
           } else {
             toast.error(res.data);
           }

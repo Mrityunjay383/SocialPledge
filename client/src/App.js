@@ -10,6 +10,7 @@ import AuthPage from "./Pages/Auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./Components/Header";
+import IndiePledge from "./Pages/IndiePlege";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,6 +18,8 @@ function App() {
     user_id: "",
     name: "",
   });
+
+  const [isAuthDone, setIsAuthDone] = useState(false);
 
   const valLogin = async () => {
     const res = await Auth.root();
@@ -34,6 +37,10 @@ function App() {
   };
 
   useEffect(() => {
+    setIsAuthDone(true);
+  }, [userData]);
+
+  useEffect(() => {
     valLogin();
   }, [isLoggedIn]);
 
@@ -41,7 +48,11 @@ function App() {
     <Router>
       <div className="App">
         <ToastContainer />
-        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+
+        {isAuthDone && (
+          <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        )}
+
         <Routes>
           {/*Home Route have Landing Page */}
           <Route
@@ -59,6 +70,21 @@ function App() {
             element={
               <div>
                 <AuthPage setIsLoggedIn={setIsLoggedIn} />
+              </div>
+            }
+          />
+
+          {/* Indie Pledge Route*/}
+          <Route
+            path="/pledge/:pledgeId"
+            element={
+              <div>
+                {isAuthDone &&
+                  (!isLoggedIn ? (
+                    <AuthPage setIsLoggedIn={setIsLoggedIn} />
+                  ) : (
+                    <IndiePledge userName={userData.name} />
+                  ))}
               </div>
             }
           />

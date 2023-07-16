@@ -38,4 +38,7 @@ export const Pledge = {
   getPledges: () => {
     return request("GET", "/pledge/get_all_pledges");
   },
+  getIndiePledge: (data) => {
+    return request("POST", "/pledge/get_indie_pledge", data);
+  },
 };

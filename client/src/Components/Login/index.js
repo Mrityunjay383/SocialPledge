@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import CtaBtn from "../CtaBtn";
 import { toast } from "react-toastify";
 import { Auth } from "../../service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Login = ({ setAuthToggle, setIsLoggedIn }) => {
   const navigate = useNavigate();
+  const { pledgeId } = useParams();
 
   const [loginFormData, setLoginFormData] = useState({
     mobNo: "",
@@ -22,7 +23,11 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
       if (res.status === 200) {
         toast.success("Login successful");
         setIsLoggedIn(true);
-        navigate("/");
+        if (pledgeId) {
+          navigate(`/pledge/${pledgeId}`);
+        } else {
+          navigate("/");
+        }
       } else {
         toast.error(res.data);
       }

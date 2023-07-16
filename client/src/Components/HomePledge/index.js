@@ -3,6 +3,7 @@ import ReactCanvasConfetti from "react-canvas-confetti";
 import CtaBtn from "../CtaBtn";
 import "./index.css";
 import { Pledge } from "../../service";
+import { useNavigate } from "react-router-dom";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -31,6 +32,8 @@ function getAnimationSettings(originXA, originXB) {
   };
 }
 const HomePledge = () => {
+  const navigate = useNavigate();
+
   const refAnimationInstance = useRef(null);
   const [intervalId, setIntervalId] = useState();
 
@@ -45,16 +48,20 @@ const HomePledge = () => {
     }
   }, []);
 
-  const startAnimation = useCallback(() => {
-    if (!intervalId) {
-      setIntervalId(setInterval(nextTickAnimation, 400));
-    }
+  const startAnimation = useCallback(
+    (pledgeId) => {
+      if (!intervalId) {
+        setIntervalId(setInterval(nextTickAnimation, 400));
+      }
 
-    setTimeout(() => {
-      clearInterval(intervalId);
-      setIntervalId(null);
-    }, 1500);
-  }, [intervalId, nextTickAnimation]);
+      setTimeout(() => {
+        clearInterval(intervalId);
+        setIntervalId(null);
+        navigate(`/pledge/${pledgeId}`);
+      }, 1500);
+    },
+    [intervalId, nextTickAnimation]
+  );
 
   useEffect(() => {
     return () => {
@@ -66,8 +73,6 @@ const HomePledge = () => {
 
   const getPledges = async () => {
     const res = await Pledge.getPledges();
-
-    console.log(`#202319713422499 res Pledge`, res.data);
 
     if (res.status === 200) {
       setAllPledgeData(res.data.allPledges);
@@ -99,7 +104,7 @@ const HomePledge = () => {
                 </figure>
 
                 <div>
-                  <h1>{pledge.name}</h1>
+                  <h3>{pledge.name}</h3>
                   <p>{pledge.about}</p>
 
                   <div className="clickme">
@@ -111,7 +116,7 @@ const HomePledge = () => {
                   <CtaBtn
                     Text={"Take this Pledge"}
                     fontSize={14}
-                    onClick={startAnimation}
+                    onClick={() => startAnimation(pledge._id)}
                   />
                 </div>
               </article>

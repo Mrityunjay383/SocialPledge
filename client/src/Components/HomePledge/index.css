@@ -2,7 +2,7 @@
 .pledge {
     background-color: #F3F1FE;
     padding: 9% 6%;
-    box-shadow: 0px -3px 200px 10px #FF5A60;
+    box-shadow: 0 -3px 200px 10px #FF5A60;
 }
 
 .pledge h2 {
@@ -20,10 +20,11 @@
 }
 
 .pledgeCon {
-    margin-top: 20vh;
+    margin-top: 8vh;
 }
 
 .indiePledgeCon {
+    margin-top: 10vh;
     margin-bottom: 10vh;
 }
 
@@ -43,7 +44,7 @@ article {
 
 article figure {
     /* limit the width and height of the figure to show the image in a circle */
-    width: 70%;
+    width: 85%;
     /*height: 120px;*/
     border-radius: 5%;
     /* specify negative margin matching half the height of the element */
@@ -69,7 +70,8 @@ article figure:before {
 
 article figure img {
     /* stretch the image to cover the size of the wrapping container */
-    border-radius: inherit;
+    /*border-radius: inherit;*/
+    border-radius: 5%;
     width: 100%;
     height: 100%;
     /* object fit to maintain the aspect ratio and fit the width/height */
@@ -86,6 +88,7 @@ article div p {
     color: hsl(250, 5%, 45%);
     font-weight: 200;
     font-style: italic;
+    font-size: 0.9rem;
     margin: 0.5rem 0 1.5rem;
     font-family: "Noticia Text", serif;
     /* position relative for the pseudo element */
@@ -106,12 +109,63 @@ article div p:before {
     opacity: 0.05;
 }
 
-article div h1 {
+article div h3 {
     /* considerably reduce the size of the heading */
     color: hsl(260, 5%, 55%);
     font-weight: 400;
-    font-family: "Lato", sans-serif;
-    font-size: 0.75rem;
+    /*font-family: "Lato", sans-serif;*/
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
 }
+
+@media screen and (max-width: 991px) {
+    article figure{
+        width: 70%;
+    }
+    article div h3{
+        font-size: 1.5rem;
+    }
+    article div p{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .pledge h2{
+        font-size: 3.5rem;
+    }
+    .pledgeSubHead{
+        width: 90%;
+        font-size: 1rem;
+    }
+    article div h3{
+        font-size: 1.2rem;
+    }
+    article div p{
+        font-size: 0.9rem;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .pledge h2{
+        font-size: 2.5rem;
+        margin-top: 30px;
+    }
+    .pledgeSubHead{
+        width: 100%;
+        font-size: 0.9rem;
+    }
+    article div h3{
+        font-size: 1rem;
+    }
+    article div p{
+        font-size: 0.8rem;
+    }
+
+}
+
+
+

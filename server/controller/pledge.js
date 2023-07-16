@@ -31,3 +31,14 @@ exports.getPledges = async (req, res) => {
     console.log(`#202319712556255 err`, err);
   }
 };
+
+exports.getIndiePledge = async (req, res) => {
+  try {
+    const { pledgeId } = req.body;
+
+    const pledge = await Pledge.findOne({ _id: pledgeId });
+    res.status(200).json({ pledge });
+  } catch (err) {
+    console.log(`#2023197132616177 err`, err);
+  }
+};
