@@ -17,8 +17,8 @@ const IndiePledge = ({ userName }) => {
     const res = await Pledge.getIndiePledge({ pledgeId });
 
     if (res.status === 200) {
-      setPledgeData(res.data.pledge);
-      setDataLoaded(true);
+      await setPledgeData(res.data.pledge);
+      await setDataLoaded(true);
     }
   };
 

@@ -25,20 +25,18 @@ function App() {
     const res = await Auth.root();
 
     if (res.status === 200) {
-      setUserData({
+      await setUserData({
         user_id: res.data.user.user_id,
         name: res.data.user.name,
       });
-      setIsLoggedIn(true);
+      await setIsLoggedIn(true);
     } else {
-      setUserData({ user_id: "", name: "" });
-      setIsLoggedIn(false);
+      await setUserData({ user_id: "", name: "" });
+      await setIsLoggedIn(false);
     }
-  };
 
-  useEffect(() => {
-    setIsAuthDone(true);
-  }, [userData]);
+    await setIsAuthDone(true);
+  };
 
   useEffect(() => {
     valLogin();
