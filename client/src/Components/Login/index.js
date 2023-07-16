@@ -1,20 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import CtaBtn from "../CtaBtn";
+import { toast } from "react-toastify";
+import { Auth } from "../../service";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ setAuthToggle }) => {
+const Login = ({ setAuthToggle, setIsLoggedIn }) => {
+  const navigate = useNavigate();
+
+  const [loginFormData, setLoginFormData] = useState({
+    mobNo: "",
+    password: "",
+  });
+
+  const loginSubmit = async () => {
+    if (loginFormData.mobNo !== "" && loginFormData.password !== "") {
+      const res = await Auth.login({
+        mobNo: loginFormData.mobNo,
+        password: loginFormData.password,
+      });
+
+      if (res.status === 200) {
+        toast.success("Login successful");
+        setIsLoggedIn(true);
+        navigate("/");
+      } else {
+        toast.error(res.data);
+      }
+    } else {
+      toast.error("Please Provide all details");
+    }
+  };
+
   return (
     <div id="loginCon" className="login-box">
       <h2>Login</h2>
       <div>
         <div className="user-box">
-          <input type="number" />
+          <input
+            type="number"
+            onChange={(e) => {
+              setLoginFormData((curr) => {
+                return { ...curr, mobNo: e.target.value };
+              });
+            }}
+          />
           <label>Mobile Number</label>
         </div>
         <div className="user-box">
-          <input type="password" />
+          <input
+            type="password"
+            onChange={(e) => {
+              setLoginFormData((curr) => {
+                return { ...curr, password: e.target.value };
+              });
+            }}
+          />
           <label>Password</label>
         </div>
-        <CtaBtn Text={"Login"} fontSize={16} />
+        <CtaBtn Text={"Login"} fontSize={16} onClick={loginSubmit} />
 
         <p className="shift">
           Don't have an account,{" "}

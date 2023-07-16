@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const User = require("../model/user");
 
@@ -13,21 +13,25 @@ const valToken = async (req, res, next) => {
     }
 
     const token = authHeaderVal.replace("Bearer ", ""); //replacing Bearer from token if getting from header
-
-
-     //verifing token with the secret key
+    //verifying token with the secret key
     req.userData = jwt.verify(token, process.env.SECRET_KEY);
-    next();
 
+    const user = await User.findOne({ _id: req.userData.user_id });
+    if (!user) {
+      return res.status(403).send("user not found");
+    } else {
+      req.userData.name = user.name;
+    }
+
+    next();
   } catch (e) {
     return res.status(401).json({
       msg: "Auth failed not verified user",
-      err: e
+      err: e,
     });
   }
-
-}
+};
 
 module.exports = {
-  valToken
-}
+  valToken,
+};

@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import Header from "../../Components/Header";
 import "./index.css";
 import Login from "../../Components/Login";
 import Register from "../../Components/Register";
 
-const AuthPage = () => {
+const AuthPage = ({ setIsLoggedIn }) => {
   const [authToggle, setAuthToggle] = useState(false);
 
   return (
     <div>
-      <Header />
-
       {/*Auth Section*/}
       <div className="auth">
         {!authToggle ? (
-          <Login setAuthToggle={setAuthToggle} />
+          <Login setAuthToggle={setAuthToggle} setIsLoggedIn={setIsLoggedIn} />
         ) : (
-          <Register setAuthToggle={setAuthToggle} />
+          <Register
+            setAuthToggle={setAuthToggle}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         )}
       </div>
     </div>

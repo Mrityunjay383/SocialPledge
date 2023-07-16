@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import Header from "../../Components/Header";
+import React from "react";
 import "./index.css";
 import CtaBtn from "../../Components/CtaBtn";
 import HomePledge from "../../Components/HomePledge";
@@ -7,8 +6,6 @@ import HomePledge from "../../Components/HomePledge";
 const Home = () => {
   return (
     <div>
-      <Header />
-
       <div className="title">
         <div className="row">
           <div className="col-lg-6 ap-img-container">
