@@ -8,8 +8,7 @@ exports.sendOpt = async ({ mobNo }) => {
   try {
     let config = {
       headers: {
-        authorization:
-          "bupzvT42hY0L8J5esqcU6gHNIGRo3iKaZlDEPjSBwFfQrV9Odnt2qJLvaCYznd43wuxcREgSZXAPplNV",
+        authorization: process.env.FASTSMS_KEY,
       },
     };
 
