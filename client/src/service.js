@@ -33,3 +33,9 @@ export const Auth = {
     return request("POST", "/auth/register", data);
   },
 };
+
+export const Pledge = {
+  getPledges: () => {
+    return request("GET", "/pledge/get_all_pledges");
+  },
+};

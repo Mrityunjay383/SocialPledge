@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import CtaBtn from "../CtaBtn";
 import "./index.css";
+import { Pledge } from "../../service";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -61,6 +62,22 @@ const HomePledge = () => {
     };
   }, [intervalId]);
 
+  const [allPledgeData, setAllPledgeData] = useState([]);
+
+  const getPledges = async () => {
+    const res = await Pledge.getPledges();
+
+    console.log(`#202319713422499 res Pledge`, res.data);
+
+    if (res.status === 200) {
+      setAllPledgeData(res.data.allPledges);
+    }
+  };
+
+  useEffect(() => {
+    getPledges();
+  }, []);
+
   return (
     <div className="pledge" id="pledge">
       <h2>Pledges</h2>
@@ -72,34 +89,35 @@ const HomePledge = () => {
       </p>
 
       <div className="row pledgeCon">
-        <div className="col-lg-3 indiePledgeCon">
-          <article>
-            <figure>
-              {/*certificate logo*/}
-              <img
-                src="https://res.cloudinary.com/ddb1evz5g/image/upload/v1688654479/WhatsApp_Image_2023-06-21_at_2.54.14_PM_z38xac.jpg"
-                alt=""
-              />
-            </figure>
+        {allPledgeData.map((pledge, index) => {
+          return (
+            <div className="col-lg-3 indiePledgeCon" key={index}>
+              <article>
+                <figure>
+                  {/*certificate logo*/}
+                  <img src={pledge.previewURL} alt="" />
+                </figure>
 
-            <div>
-              <h1>Anti-Dowry</h1>
-              <p>About this Pledge</p>
+                <div>
+                  <h1>{pledge.name}</h1>
+                  <p>{pledge.about}</p>
 
-              <div className="clickme">
-                <ReactCanvasConfetti
-                  refConfetti={getInstance}
-                  style={canvasStyles}
-                />
-              </div>
-              <CtaBtn
-                Text={"Take this Pledge"}
-                fontSize={14}
-                onClick={startAnimation}
-              />
+                  <div className="clickme">
+                    <ReactCanvasConfetti
+                      refConfetti={getInstance}
+                      style={canvasStyles}
+                    />
+                  </div>
+                  <CtaBtn
+                    Text={"Take this Pledge"}
+                    fontSize={14}
+                    onClick={startAnimation}
+                  />
+                </div>
+              </article>
             </div>
-          </article>
-        </div>
+          );
+        })}
       </div>
     </div>
   );
