@@ -70,14 +70,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   className="nav-links"
                   onClick={click ? handleClick : null}
                 >
-                  Login
+                  Login / Register
                 </NavLink>
               </li>
             ) : (
               <li className="nav-item">
                 <NavLink
                   exact
-                  to="/"
+                  // to="/"
                   activeclassname="active"
                   className="nav-links"
                   onClick={logout}

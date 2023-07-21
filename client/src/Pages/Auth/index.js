@@ -3,7 +3,7 @@ import "./index.css";
 import Login from "../../Components/Login";
 import Register from "../../Components/Register";
 
-const AuthPage = ({ setIsLoggedIn, setIsLoading }) => {
+const AuthPage = ({ setIsLoggedIn }) => {
   const [authToggle, setAuthToggle] = useState(false);
 
   return (
@@ -11,16 +11,11 @@ const AuthPage = ({ setIsLoggedIn, setIsLoading }) => {
       {/*Auth Section*/}
       <div className="auth">
         {!authToggle ? (
-          <Login
-            setAuthToggle={setAuthToggle}
-            setIsLoggedIn={setIsLoggedIn}
-            setIsLoading={setIsLoading}
-          />
+          <Login setAuthToggle={setAuthToggle} setIsLoggedIn={setIsLoggedIn} />
         ) : (
           <Register
             setAuthToggle={setAuthToggle}
             setIsLoggedIn={setIsLoggedIn}
-            setIsLoading={setIsLoading}
           />
         )}
       </div>

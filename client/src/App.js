@@ -40,8 +40,14 @@ function App() {
     await setIsLoading(false);
   };
 
+  const authFunc = async () => {
+    await setIsLoading(true);
+    await valLogin();
+    await setIsLoading(false);
+  };
+
   useEffect(() => {
-    valLogin();
+    authFunc();
   }, [isLoggedIn]);
 
   return (
@@ -53,7 +59,7 @@ function App() {
           spinnerColor="#FF5A60"
           textColor="#FF5A60"
           // logoSrc="/logo.png"
-          text="Loading"
+          text="Loading..."
         >
           <ToastContainer />
 
@@ -85,10 +91,7 @@ function App() {
               path="/auth"
               element={
                 <div>
-                  <AuthPage
-                    setIsLoggedIn={setIsLoggedIn}
-                    setIsLoading={setIsLoading}
-                  />
+                  <AuthPage setIsLoggedIn={setIsLoggedIn} />
                 </div>
               }
             />
@@ -99,9 +102,15 @@ function App() {
               element={
                 <div>
                   {!isLoggedIn ? (
-                    <AuthPage setIsLoggedIn={setIsLoggedIn} />
+                    <AuthPage
+                      setIsLoggedIn={setIsLoggedIn}
+                      setIsLoading={setIsLoading}
+                    />
                   ) : (
-                    <IndiePledge userName={userData.name} />
+                    <IndiePledge
+                      userName={userData.name}
+                      setIsLoading={setIsLoading}
+                    />
                   )}
                 </div>
               }

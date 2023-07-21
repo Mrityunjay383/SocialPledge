@@ -1,25 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 
-const Canvas = ({ userName, pledgeData }) => {
+const Canvas = ({ userName, pledgeData, setIsCanvasMount }) => {
   const canvasRef = useRef(null);
-
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-  useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
-
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-    };
-  }, [screenSize]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,17 +11,8 @@ const Canvas = ({ userName, pledgeData }) => {
     background.crossOrigin = "anonymous";
     background.src = pledgeData.url;
 
-    // let width = screenSize.width / 1.5;
-    let width = 1103;
-
-    // if (screenSize.width < 838) {
-    //   width = screenSize.width / 1.2;
-    // }
-    // if (screenSize.width < 590) {
-    //   width = screenSize.width;
-    // }
-
-    const height = width / 1.5;
+    const width = 1024;
+    const height = 768;
 
     canvas.width = width;
     canvas.height = height;
@@ -51,6 +24,7 @@ const Canvas = ({ userName, pledgeData }) => {
 
       context.font = `${width / 25}px Chelsea`;
       context.fillText(userName, xPos, height / 2.2);
+      setIsCanvasMount(true);
     };
   }, []);
 

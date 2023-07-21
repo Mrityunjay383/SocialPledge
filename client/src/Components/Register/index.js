@@ -4,7 +4,7 @@ import { Auth } from "../../service";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Register = ({ setAuthToggle, setIsLoggedIn, setIsLoading }) => {
+const Register = ({ setAuthToggle, setIsLoggedIn }) => {
   const { pledgeId } = useParams();
 
   const navigate = useNavigate();
@@ -37,8 +37,6 @@ const Register = ({ setAuthToggle, setIsLoggedIn, setIsLoading }) => {
     } else {
       if (regFormData.name !== "" && regFormData.password !== "") {
         if (regFormData.otp === generatedOtp) {
-          setIsLoading(true);
-
           const res = await Auth.register({
             name: regFormData.name,
             mobNo: regFormData.mobNo,
@@ -46,8 +44,8 @@ const Register = ({ setAuthToggle, setIsLoggedIn, setIsLoading }) => {
           });
 
           if (res.status === 200) {
-            toast.success("Account Created Successfully!!!");
             setIsLoggedIn(true);
+            toast.success("Account Created Successfully!!!");
             if (pledgeId) {
               navigate(`/pledge/${pledgeId}`);
             } else {
