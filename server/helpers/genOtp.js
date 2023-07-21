@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const genOpt = () => {
-  return Math.floor(1000 + Math.random() * 9000);
+  return Math.floor(1000 + Math.random() * 9000).toString();
 };
 
 exports.sendOpt = async ({ mobNo }) => {
@@ -12,7 +12,7 @@ exports.sendOpt = async ({ mobNo }) => {
       },
     };
 
-    const otp = genOpt({ length: 6 });
+    const otp = genOpt();
 
     let data = {
       variables_values: otp,
