@@ -37,12 +37,15 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
     } else {
       if (regFormData.name !== "" && regFormData.password !== "") {
         if (regFormData.otp === generatedOtp) {
+          toast.success("Registration in progress, please wait!");
+
           const res = await Auth.register({
             name: regFormData.name,
             mobNo: regFormData.mobNo,
             password: regFormData.password,
           });
 
+          toast.dismiss();
           if (res.status === 200) {
             setIsLoggedIn(true);
             toast.success("Account Created Successfully!!!");

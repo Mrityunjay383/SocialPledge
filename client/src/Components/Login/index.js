@@ -15,14 +15,17 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
 
   const loginSubmit = async () => {
     if (loginFormData.mobNo !== "" && loginFormData.password !== "") {
+      toast.success("Login in progress, please wait!");
+
       const res = await Auth.login({
         mobNo: loginFormData.mobNo,
         password: loginFormData.password,
       });
 
+      toast.dismiss();
       if (res.status === 200) {
         setIsLoggedIn(true);
-        toast.success("Login successful");
+        toast.success("Login Successful!!");
         if (pledgeId) {
           navigate(`/pledge/${pledgeId}`);
         } else {
