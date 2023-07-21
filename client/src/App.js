@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./Components/Header";
 import IndiePledge from "./Pages/IndiePlege";
+import About from "./Pages/About";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,6 +59,16 @@ function App() {
             element={
               <div>
                 <Home />
+              </div>
+            }
+          />
+
+          {/*Home Route have Landing Page */}
+          <Route
+            path="/about"
+            element={
+              <div>
+                <About />
               </div>
             }
           />

@@ -1,0 +1,6 @@
+/* Chrome */
+@media (forced-colors: active) {
+    :root {
+        color-scheme: light;
+    }
+}

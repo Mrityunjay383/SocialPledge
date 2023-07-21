@@ -55,10 +55,6 @@ exports.register = async (req, res) => {
       expiresIn: 30 * 24 * 60 * 60,
     });
 
-    user.token = token;
-
-    user.password = undefined;
-
     // Setting Up cookies
     const options = {
       expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),

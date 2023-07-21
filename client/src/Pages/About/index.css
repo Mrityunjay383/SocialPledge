@@ -1,0 +1,11 @@
+.about{
+    padding: 10vh 6%;
+    overflow-x: hidden;
+    text-align: center;
+    box-shadow: inset 0 3px 100px 10px #FF5A60;
+}
+
+.about p{
+    width: 75%;
+    margin: 5vh auto;
+}
