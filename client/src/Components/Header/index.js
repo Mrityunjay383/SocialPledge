@@ -24,7 +24,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       <nav className="navbar" onClick={(e) => e.stopPropagation()}>
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            Social Pledge
+            <img
+              src={
+                "https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png"
+              }
+              alt={"SocialPledgeLogo"}
+            />
           </NavLink>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">

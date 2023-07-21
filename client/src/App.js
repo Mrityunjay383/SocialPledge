@@ -58,7 +58,7 @@ function App() {
           bgColor="#f1f1f1"
           spinnerColor="#FF5A60"
           textColor="#FF5A60"
-          // logoSrc="/logo.png"
+          logoSrc="https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png"
           text="Loading..."
         >
           <ToastContainer />
