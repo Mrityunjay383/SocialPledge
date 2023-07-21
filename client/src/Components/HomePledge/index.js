@@ -3,11 +3,11 @@ import CtaBtn from "../CtaBtn";
 import "./index.css";
 import { Pledge } from "../../service";
 import { useNavigate } from "react-router-dom";
+import { BallTriangle } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 const HomePledge = () => {
   const navigate = useNavigate();
-
-  // navigate(`/pledge/${pledgeId}`);
 
   const [allPledgeData, setAllPledgeData] = useState([]);
 
@@ -16,6 +16,15 @@ const HomePledge = () => {
 
     if (res.status === 200) {
       setAllPledgeData(res.data.allPledges);
+    } else {
+      toast.error("Some Error occurred while loading pledge");
+    }
+  };
+
+  const [showClass, setShowClass] = useState("unShow");
+  const onLoad = async (index) => {
+    if (index === allPledgeData.length - 1) {
+      setShowClass("");
     }
   };
 
@@ -34,29 +43,53 @@ const HomePledge = () => {
       </p>
 
       <div className="row pledgeCon">
-        {allPledgeData.map((pledge, index) => {
-          return (
-            <div className="col-lg-3 indiePledgeCon" key={index}>
-              <article>
-                <figure>
-                  {/*certificate logo*/}
-                  <img src={pledge.previewURL} alt="" />
-                </figure>
+        {allPledgeData.length !== 0 &&
+          allPledgeData.map((pledge, index) => {
+            return (
+              <div
+                className={`col-lg-3 indiePledgeCon ${showClass}`}
+                key={index}
+              >
+                <article>
+                  <figure>
+                    {/*certificate logo*/}
+                    <img
+                      src={pledge.previewURL}
+                      onLoad={() => onLoad(index)}
+                      alt=""
+                    />
+                  </figure>
 
-                <div>
-                  <h3>{pledge.name}</h3>
-                  <p>{pledge.about}</p>
+                  <div>
+                    <h3>{pledge.name}</h3>
+                    <p>{pledge.about}</p>
 
-                  <CtaBtn
-                    Text={"Take this Pledge"}
-                    fontSize={14}
-                    onClick={() => navigate(`/pledge/${pledge._id}`)}
-                  />
-                </div>
-              </article>
-            </div>
-          );
-        })}
+                    <CtaBtn
+                      Text={"Take this Pledge"}
+                      fontSize={14}
+                      onClick={() => navigate(`/pledge/${pledge._id}`)}
+                    />
+                  </div>
+                </article>
+              </div>
+            );
+          })}
+
+        {showClass === "unShow" && (
+          <div className={"loadingCon"}>
+            <BallTriangle
+              height={100}
+              width={100}
+              radius={5}
+              color="#FF5A60"
+              ariaLabel="ball-triangle-loading"
+              wrapperClass={{}}
+              wrapperStyle=""
+              visible={true}
+            />
+            <p>We are loading top pledges for you, please wait</p>
+          </div>
+        )}
       </div>
     </div>
   );

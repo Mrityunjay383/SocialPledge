@@ -119,6 +119,24 @@ article div h3 {
     letter-spacing: 0.05rem;
 }
 
+.loadingCon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    opacity: 0.5;
+    margin-top: 8vh;
+}
+.loadingCon p{
+    color: #FF5A60;
+    margin-top: 20px;
+}
+
+.unShow{
+    display: none;
+}
+
 @media screen and (max-width: 991px) {
     article figure{
         width: 70%;
