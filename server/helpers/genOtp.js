@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const genOpt = () => {
-  return Math.floor(Math.random() * 10000).toString();
+  return Math.floor(1000 + Math.random() * 9000);
 };
 
 exports.sendOpt = async ({ mobNo }) => {

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Auth } from "../../service";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Login = ({ setAuthToggle, setIsLoggedIn }) => {
+const Login = ({ setAuthToggle, setIsLoggedIn, setIsLoading }) => {
   const navigate = useNavigate();
   const { pledgeId } = useParams();
 
@@ -15,6 +15,8 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
 
   const loginSubmit = async () => {
     if (loginFormData.mobNo !== "" && loginFormData.password !== "") {
+      setIsLoading(true);
+
       const res = await Auth.login({
         mobNo: loginFormData.mobNo,
         password: loginFormData.password,
