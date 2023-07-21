@@ -3,6 +3,7 @@ import CtaBtn from "../CtaBtn";
 import { Auth } from "../../service";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import { ColorRing } from "react-loader-spinner";
 
 const Register = ({ setAuthToggle, setIsLoggedIn }) => {
   const { pledgeId } = useParams();
@@ -19,11 +20,13 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
     password: "",
   });
 
+  const [btnClick, setBtnClick] = useState(false);
   const regSubmit = async () => {
     if (regBtnText === "Send OTP") {
       if (regFormData.mobNo === "" || regFormData.mobNo.length < 10) {
         toast.error("Please enter your correct Mobile Number");
       } else {
+        setBtnClick(true);
         const res = await Auth.opt({ mobNo: regFormData.mobNo });
 
         if (res.status === 200) {
@@ -33,10 +36,12 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
         } else {
           toast.error(res.data);
         }
+        setBtnClick(false);
       }
     } else {
       if (regFormData.name !== "" && regFormData.password !== "") {
         if (regFormData.otp === generatedOtp) {
+          setBtnClick(true);
           toast.success("Registration in progress, please wait!");
 
           const res = await Auth.register({
@@ -56,6 +61,7 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
             }
           } else {
             toast.error(res.data);
+            setBtnClick(false);
           }
         } else {
           toast.error("Invalid OTP!!");
@@ -124,7 +130,19 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
           </div>
         )}
 
-        <CtaBtn Text={regBtnText} fontSize={16} onClick={regSubmit} />
+        {btnClick ? (
+          <ColorRing
+            visible={true}
+            height="40"
+            width="40"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
+          />
+        ) : (
+          <CtaBtn Text={regBtnText} fontSize={16} onClick={regSubmit} />
+        )}
 
         {/*< id="otpBtn" href="#">*/}
         {/*  <span></span>*/}

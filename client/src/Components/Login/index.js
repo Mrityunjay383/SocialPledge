@@ -3,6 +3,7 @@ import CtaBtn from "../CtaBtn";
 import { toast } from "react-toastify";
 import { Auth } from "../../service";
 import { useNavigate, useParams } from "react-router-dom";
+import { ColorRing } from "react-loader-spinner";
 
 const Login = ({ setAuthToggle, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -13,8 +14,10 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
     password: "",
   });
 
+  const [btnClick, setBtnClick] = useState(false);
   const loginSubmit = async () => {
     if (loginFormData.mobNo !== "" && loginFormData.password !== "") {
+      setBtnClick(true);
       toast.success("Login in progress, please wait!");
 
       const res = await Auth.login({
@@ -33,6 +36,7 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
         }
       } else {
         toast.error(res.data);
+        setBtnClick(false);
       }
     } else {
       toast.error("Please Provide all details");
@@ -65,7 +69,20 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
           />
           <label>Password</label>
         </div>
-        <CtaBtn Text={"Login"} fontSize={16} onClick={loginSubmit} />
+
+        {btnClick ? (
+          <ColorRing
+            visible={true}
+            height="40"
+            width="40"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
+          />
+        ) : (
+          <CtaBtn Text={"Login"} fontSize={16} onClick={loginSubmit} />
+        )}
 
         <p className="shift">
           Don't have an account,{" "}
