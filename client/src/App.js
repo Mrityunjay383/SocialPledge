@@ -108,7 +108,7 @@ function App() {
                     />
                   ) : (
                     <IndiePledge
-                      userName={userData.name}
+                      userData={userData}
                       setIsLoading={setIsLoading}
                     />
                   )}

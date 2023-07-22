@@ -10,6 +10,7 @@ const indexRouter = require("./route/index");
 const authRouter = require("./route/auth");
 const pledgeRouter = require("./route/pledge");
 const supporterRouter = require("./route/supporter");
+const certificateRouter = require("./route/certificate");
 
 const app = express();
 app.use(express.json());
@@ -40,5 +41,6 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/pledge", pledgeRouter);
 app.use("/supporter", supporterRouter);
+app.use("/certificate", certificateRouter);
 
 module.exports = app;

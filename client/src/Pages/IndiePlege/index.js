@@ -4,7 +4,7 @@ import ReactCanvasConfetti from "react-canvas-confetti";
 import { toast } from "react-toastify";
 
 import Canvas from "../../Components/Canvas";
-import { Pledge, Supporter } from "../../service";
+import { Certificate, Pledge, Supporter } from "../../service";
 import "./index.css";
 import CtaBtn from "../../Components/CtaBtn";
 
@@ -35,7 +35,7 @@ function getAnimationSettings(originXA, originXB) {
   };
 }
 
-const IndiePledge = ({ userName, setIsLoading }) => {
+const IndiePledge = ({ userData, setIsLoading }) => {
   const { pledgeId } = useParams();
 
   //Animation
@@ -82,7 +82,7 @@ const IndiePledge = ({ userName, setIsLoading }) => {
 
     if (res.status === 200) {
       await setPledgeData(res.data.pledge);
-      setDataLoaded(true);
+      await getSupporter();
     }
   };
 
@@ -90,20 +90,30 @@ const IndiePledge = ({ userName, setIsLoading }) => {
     const res = await Supporter.getAvaSupporter();
     if (res.status === 200) {
       await setSupporterData(res.data.supporter);
+      setDataLoaded(true);
     }
   };
 
   useEffect(() => {
-    getSupporter();
     getPledgeData();
   }, []);
 
   const downloadPledge = async () => {
-    startAnimation();
-    let canvas = document.getElementById("myCanvas");
-    let dataURL = canvas.toDataURL("image/jpeg", 1.0);
-    downloadImage(dataURL, `${userName}_${pledgeData.name}`);
-    toast.success("Your Certificate has been downloaded!!!");
+    const res = await Certificate.newDownload({
+      userId: userData.user_id,
+      pledgeId,
+      supporterId: supporterData.id,
+    });
+
+    if (res.status === 200) {
+      startAnimation();
+      let canvas = document.getElementById("myCanvas");
+      let dataURL = canvas.toDataURL("image/jpeg", 1.0);
+      downloadImage(dataURL, `${userData.name}_${pledgeData.name}`);
+      toast.success("Your Certificate has been downloaded!!!");
+    } else {
+      toast.error("Some Error occurred, please try again");
+    }
   };
 
   // Save | Download image
@@ -132,7 +142,7 @@ const IndiePledge = ({ userName, setIsLoading }) => {
         <div className={"pledgeSection"}>
           <Canvas
             pledgeData={pledgeData}
-            userName={userName}
+            userName={userData.name}
             setIsCanvasMount={setIsCanvasMount}
             supporterData={supporterData}
           />

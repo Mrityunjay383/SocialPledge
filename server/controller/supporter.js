@@ -2,7 +2,7 @@ const Supporter = require("../model/supporter");
 
 exports.createNew = async (req, res) => {
   try {
-    const { name, logo, newLimit, repLimit } = req.body;
+    const { name, logo, newLimit, repLimit, priority } = req.body;
 
     if (!(name && logo && newLimit && repLimit)) {
       return res.status(404).send("All fields are required");
@@ -13,6 +13,7 @@ exports.createNew = async (req, res) => {
       logo,
       newLimit: Number(newLimit),
       repLimit: Number(repLimit),
+      priority: priority ? priority : false,
     });
 
     res.status(201).json({ success: true });
@@ -24,20 +25,39 @@ exports.createNew = async (req, res) => {
 
 exports.getAvaSup = async (req, res) => {
   try {
-    const allSupporters = await Supporter.find({});
+    const allPrioritySupporters = await Supporter.find({ priority: true });
 
-    await allSupporters.filter((sup) => {
+    await allPrioritySupporters.filter((sup) => {
       return sup.newLimit > sup.newCount && sup.repLimit > sup.repCount;
     });
 
-    const randomSup =
-      allSupporters[Math.floor(Math.random() * allSupporters.length)];
+    let supporter;
+    if (allPrioritySupporters.length > 0) {
+      const randomSup =
+        allPrioritySupporters[
+          Math.floor(Math.random() * allPrioritySupporters.length)
+        ];
 
-    const supporter = {
-      id: randomSup._id,
-      name: randomSup.name,
-      logo: randomSup.logo,
-    };
+      supporter = {
+        id: randomSup._id,
+        name: randomSup.name,
+        logo: randomSup.logo,
+      };
+    } else {
+      const allSupporters = await Supporter.find();
+      await allSupporters.filter((sup) => {
+        return sup.newLimit > sup.newCount && sup.repLimit > sup.repCount;
+      });
+
+      const randomSup =
+        allSupporters[Math.floor(Math.random() * allSupporters.length)];
+
+      supporter = {
+        id: randomSup._id,
+        name: randomSup.name,
+        logo: randomSup.logo,
+      };
+    }
 
     res.status(200).json({ success: true, supporter });
   } catch (err) {

@@ -48,8 +48,10 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
       context.drawImage(background, 0, 0, width, height);
 
       context.drawImage(qrCode, 70, 600, 100, 100);
-      context.drawImage(logo, 80, 30, 150, 60);
-      context.drawImage(supporterLogo, 890, 60, 70, 100);
+      context.drawImage(logo, 60, 50, logo.width / 6, logo.height / 6);
+
+      const dimRatio = supporterLogo.width / supporterLogo.height;
+      context.drawImage(supporterLogo, 870, 60, 100, 100 / dimRatio);
 
       context.font = `43px Roboto`;
       context.fillText(userName, xPos, height / 2.19);

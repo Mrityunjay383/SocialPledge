@@ -49,3 +49,9 @@ export const Supporter = {
     return request("GET", "/supporter/get_ava");
   },
 };
+
+export const Certificate = {
+  newDownload: (data) => {
+    return request("POST", "/certificate/new_download", data);
+  },
+};
