@@ -38,6 +38,39 @@ function getAnimationSettings(originXA, originXB) {
 const IndiePledge = ({ userName, setIsLoading }) => {
   const { pledgeId } = useParams();
 
+  //Animation
+  const refAnimationInstance = useRef(null);
+  const [intervalId, setIntervalId] = useState();
+
+  const getInstance = useCallback((instance) => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  const nextTickAnimation = useCallback(() => {
+    if (refAnimationInstance.current) {
+      refAnimationInstance.current(getAnimationSettings(0.1, 0.3));
+      refAnimationInstance.current(getAnimationSettings(0.7, 0.9));
+    }
+  }, []);
+
+  const startAnimation = useCallback(() => {
+    if (!intervalId) {
+      setIntervalId(setInterval(nextTickAnimation, 400));
+    }
+
+    setTimeout(() => {
+      clearInterval(intervalId);
+      setIntervalId(null);
+    }, 1500);
+  }, [intervalId, nextTickAnimation]);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [intervalId]);
+
+  //
   const [pledgeData, setPledgeData] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
@@ -83,38 +116,6 @@ const IndiePledge = ({ userName, setIsLoading }) => {
       setIsLoading(false);
     }
   }, [isCanvasMounted]);
-
-  //Animation
-  const refAnimationInstance = useRef(null);
-  const [intervalId, setIntervalId] = useState();
-
-  const getInstance = useCallback((instance) => {
-    refAnimationInstance.current = instance;
-  }, []);
-
-  const nextTickAnimation = useCallback(() => {
-    if (refAnimationInstance.current) {
-      refAnimationInstance.current(getAnimationSettings(0.1, 0.3));
-      refAnimationInstance.current(getAnimationSettings(0.7, 0.9));
-    }
-  }, []);
-
-  const startAnimation = useCallback(() => {
-    if (!intervalId) {
-      setIntervalId(setInterval(nextTickAnimation, 400));
-    }
-
-    setTimeout(() => {
-      clearInterval(intervalId);
-      setIntervalId(null);
-    }, 1500);
-  }, [intervalId, nextTickAnimation]);
-
-  useEffect(() => {
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [intervalId]);
 
   return (
     <div>

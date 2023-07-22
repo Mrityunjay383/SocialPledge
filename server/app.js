@@ -9,6 +9,7 @@ const cors = require("cors");
 const indexRouter = require("./route/index");
 const authRouter = require("./route/auth");
 const pledgeRouter = require("./route/pledge");
+const supporterRouter = require("./route/supporter");
 
 const app = express();
 app.use(express.json());
@@ -38,5 +39,6 @@ app.use(function (req, res, next) {
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/pledge", pledgeRouter);
+app.use("/supporter", supporterRouter);
 
 module.exports = app;

@@ -1,6 +1,6 @@
 const Pledge = require("../model/pledge");
 
-exports.createNewPledge = async (req, res) => {
+exports.createNew = async (req, res) => {
   try {
     const { name, about, url, previewURL } = req.body;
 
