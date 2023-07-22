@@ -51,22 +51,23 @@ article figure {
     margin-top: -60px;
     /* position relative for the pseudo element */
     position: relative;
+    border: 10px solid #F3F1FE;
 
 }
 
-article figure:before {
-    /* add a border around the figure matching the color of the background, faking the clip */
-    content: "";
-    border-radius: inherit;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    border: 1rem solid hsl(250, 85%, 97%);
-    /*box-shadow: 0 1px hsla(0, 0%, 0%, 0.1);*/
-}
+/*article figure:before {*/
+/*    !* add a border around the figure matching the color of the background, faking the clip *!*/
+/*    content: "";*/
+/*    border-radius: inherit;*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    border: 1rem solid hsl(250, 85%, 97%);*/
+/*    !*box-shadow: 0 1px hsla(0, 0%, 0%, 0.1);*!*/
+/*}*/
 
 article figure img {
     /* stretch the image to cover the size of the wrapping container */

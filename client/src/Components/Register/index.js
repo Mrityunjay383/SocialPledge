@@ -23,6 +23,9 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
   const [btnClick, setBtnClick] = useState(false);
   const regSubmit = async () => {
     if (regBtnText === "Send OTP") {
+      if (regFormData.name === "") {
+        return toast.error("Please enter your full name");
+      }
       if (regFormData.mobNo === "" || regFormData.mobNo.length < 10) {
         toast.error("Please enter your correct Mobile Number");
       } else {

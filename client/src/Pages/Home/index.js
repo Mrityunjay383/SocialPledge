@@ -28,7 +28,13 @@ const Home = () => {
               Drive Meaningful Changes.
             </p>
 
-            <CtaBtn Text={"Explore Pledges"} fontSize={16} />
+            <CtaBtn
+              Text={"Explore Pledges"}
+              fontSize={18}
+              onClick={() => {
+                document.getElementById("pledge").scrollIntoView();
+              }}
+            />
           </div>
 
           <div className="col-lg-6 bl-img-container">
