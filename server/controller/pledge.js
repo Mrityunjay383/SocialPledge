@@ -22,7 +22,7 @@ exports.createNewPledge = async (req, res) => {
   }
 };
 
-exports.getPledges = async (req, res) => {
+exports.getHomePledges = async (req, res) => {
   try {
     const allPledges = await Pledge.find({});
 

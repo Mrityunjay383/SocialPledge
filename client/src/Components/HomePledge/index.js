@@ -12,7 +12,7 @@ const HomePledge = () => {
   const [allPledgeData, setAllPledgeData] = useState([]);
 
   const getPledges = async () => {
-    const res = await Pledge.getPledges();
+    const res = await Pledge.getHomePledges();
 
     if (res.status === 200) {
       setAllPledgeData(res.data.allPledges);
