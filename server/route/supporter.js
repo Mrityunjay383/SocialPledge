@@ -5,7 +5,7 @@ const controller = require("../controller/supporter");
 const { valToken } = require("../middleware/auth"); //Requiring Controllers
 
 router.post("/create_new", controller.createNew);
-// router.get("/get_home_pledges", controller.getHomePledges);
+router.get("/get_ava", valToken, controller.getAvaSup);
 // router.post("/get_indie_pledge", valToken, controller.getIndiePledge);
 
 module.exports = router;

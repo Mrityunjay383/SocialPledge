@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-const Canvas = ({ userName, pledgeData, setIsCanvasMount }) => {
+const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
   const canvasRef = useRef(null);
 
   const getDate = () => {
@@ -29,9 +29,7 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount }) => {
     let logo = getImage(
       "https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png"
     );
-    let supporterLogo = getImage(
-      "https://res.cloudinary.com/ddb1evz5g/image/upload/v1690038836/Screenshot_2023-07-22_204206-removebg-preview_tqcuep.png"
-    );
+    let supporterLogo = getImage(supporterData.logo);
 
     const width = 1024;
     const height = 768;
@@ -43,8 +41,8 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount }) => {
 
     const dateStr = getDate();
 
-    const supporter = "This cause is supported by: ";
-    let xSup = width / 2 - supporter.length * 5;
+    const supporter = `This cause is supported by: ${supporterData.name}`;
+    let xSup = width / 2 - supporter.length * 4.5;
 
     background.onload = function () {
       context.drawImage(background, 0, 0, width, height);
@@ -59,7 +57,7 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount }) => {
       context.font = `26px Roboto`;
       context.fillText(dateStr, 460, 570);
 
-      context.font = `25px Roboto`;
+      context.font = `22px Roboto`;
       context.fillText(supporter, xSup, 700);
 
       setIsCanvasMount(true);

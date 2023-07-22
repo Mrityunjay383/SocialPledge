@@ -43,3 +43,9 @@ export const Pledge = {
     return request("POST", "/pledge/get_indie_pledge", data);
   },
 };
+
+export const Supporter = {
+  getAvaSupporter: () => {
+    return request("GET", "/supporter/get_ava");
+  },
+};

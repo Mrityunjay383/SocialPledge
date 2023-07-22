@@ -4,7 +4,7 @@ import ReactCanvasConfetti from "react-canvas-confetti";
 import { toast } from "react-toastify";
 
 import Canvas from "../../Components/Canvas";
-import { Pledge } from "../../service";
+import { Pledge, Supporter } from "../../service";
 import "./index.css";
 import CtaBtn from "../../Components/CtaBtn";
 
@@ -72,6 +72,7 @@ const IndiePledge = ({ userName, setIsLoading }) => {
 
   //
   const [pledgeData, setPledgeData] = useState({});
+  const [supporterData, setSupporterData] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
 
@@ -85,7 +86,15 @@ const IndiePledge = ({ userName, setIsLoading }) => {
     }
   };
 
+  const getSupporter = async () => {
+    const res = await Supporter.getAvaSupporter();
+    if (res.status === 200) {
+      await setSupporterData(res.data.supporter);
+    }
+  };
+
   useEffect(() => {
+    getSupporter();
     getPledgeData();
   }, []);
 
@@ -125,6 +134,7 @@ const IndiePledge = ({ userName, setIsLoading }) => {
             pledgeData={pledgeData}
             userName={userName}
             setIsCanvasMount={setIsCanvasMount}
+            supporterData={supporterData}
           />
           <img src={imgSrc} className={"pledgeImg"} alt="" />
           <CtaBtn Text={"Download"} fontSize={16} onClick={downloadPledge} />
