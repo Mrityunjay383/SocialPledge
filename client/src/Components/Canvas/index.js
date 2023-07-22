@@ -8,23 +8,27 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount }) => {
     return date.toLocaleDateString("en-GB");
   };
 
+  const getImage = (url) => {
+    let image = new Image();
+    image.crossOrigin = "anonymous";
+    image.src = url;
+
+    return image;
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    let background = new Image();
-    background.crossOrigin = "anonymous";
-    background.src = pledgeData.url;
+    let background = getImage(pledgeData.url);
 
-    let qrCode = new Image();
-    qrCode.crossOrigin = "anonymous";
-    qrCode.src =
-      "https://res.cloudinary.com/ddb1evz5g/image/upload/v1690035710/frame_vyvnun.png";
+    let qrCode = getImage(
+      "https://res.cloudinary.com/ddb1evz5g/image/upload/v1690035710/frame_vyvnun.png"
+    );
 
-    let logo = new Image();
-    logo.crossOrigin = "anonymous";
-    logo.src =
-      "https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png";
+    let logo = getImage(
+      "https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png"
+    );
 
     const width = 1024;
     const height = 768;
