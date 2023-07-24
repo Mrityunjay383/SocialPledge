@@ -13,6 +13,7 @@ import AuthPage from "./Pages/Auth";
 import Header from "./Components/Header";
 import IndiePledge from "./Pages/IndiePlege";
 import About from "./Pages/About";
+import Footer from "./Components/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -116,6 +117,8 @@ function App() {
               }
             />
           </Routes>
+
+          <Footer />
         </LoadingScreen>
       </div>
     </Router>
