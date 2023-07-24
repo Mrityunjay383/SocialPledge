@@ -54,6 +54,9 @@ export const Supporter = {
   getAvaSupporter: () => {
     return request("GET", "/supporter/get_ava");
   },
+  logout: () => {
+    return request("GET", "/supporter/logout");
+  },
 };
 
 export const Certificate = {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
-import Login from "../../Components/Login";
-import Register from "../../Components/Register";
+import Login from "../../../Components/Original/Login";
+import Register from "../../../Components/Original/Register";
 
 const AuthPage = ({ setIsLoggedIn }) => {
   const [authToggle, setAuthToggle] = useState(false);

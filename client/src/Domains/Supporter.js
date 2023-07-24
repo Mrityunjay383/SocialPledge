@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoadingScreen from "react-loading-screen";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SupporterAuth from "../Pages/SupporterAuth";
-import SupporterDashboard from "../Pages/SupporterDashboard";
+import SupporterAuth from "../Pages/Supporter/SupporterAuth";
+import SupporterDashboard from "../Pages/Supporter/SupporterDashboard";
 import { Supporter } from "../service";
 
 const SupporterSec = () => {
@@ -16,6 +16,7 @@ const SupporterSec = () => {
     supporter_id: "",
     name: "",
     logo: "",
+    userName: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -28,14 +29,18 @@ const SupporterSec = () => {
         supporter_id: res.data.supporter.supporter_id,
         name: res.data.supporter.name,
         logo: res.data.supporter.logo,
+        userName: res.data.supporter.userName,
       });
       await setIsLoggedIn(true);
     } else {
-      await setSupporterData({ supporter_id: "", name: "", logo: "" });
+      await setSupporterData({
+        supporter_id: "",
+        name: "",
+        logo: "",
+        userName: "",
+      });
       await setIsLoggedIn(false);
     }
-
-    await setIsLoading(false);
   };
 
   const authFunc = async () => {
@@ -73,13 +78,25 @@ const SupporterSec = () => {
             />
 
             <Route
+              path="/profile"
+              element={
+                <div>
+                  <h1>Profile Page</h1>
+                </div>
+              }
+            />
+
+            <Route
               path="/:supporterUserName"
               element={
                 <div>
                   {isLoggedIn ? (
-                    <SupporterDashboard />
+                    <SupporterDashboard
+                      supporterData={supporterData}
+                      setIsLoggedIn={setIsLoggedIn}
+                    />
                   ) : (
-                    <SupporterAuth setIsLoggedIn={setIsLoggedIn} />
+                    <SupporterAuth />
                   )}
                 </div>
               }

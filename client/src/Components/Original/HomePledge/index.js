@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CtaBtn from "../CtaBtn";
 import "./index.css";
-import { Pledge } from "../../service";
+import { Pledge } from "../../../service";
 import { useNavigate } from "react-router-dom";
 import { BallTriangle } from "react-loader-spinner";
 import { toast } from "react-toastify";

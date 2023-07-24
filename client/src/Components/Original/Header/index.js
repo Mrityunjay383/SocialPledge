@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import "./index.css";
-import { Auth } from "../../service";
+import { Auth } from "../../../service";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [click, setClick] = React.useState(false);

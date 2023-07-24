@@ -8,12 +8,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Auth } from "../service";
-import Home from "../Pages/Home";
-import AuthPage from "../Pages/Auth";
-import Header from "../Components/Header";
-import IndiePledge from "../Pages/IndiePlege";
-import About from "../Pages/About";
-import Footer from "../Components/Footer";
+import Home from "../Pages/Original/Home";
+import AuthPage from "../Pages/Original/Auth";
+import Header from "../Components/Original/Header";
+import IndiePledge from "../Pages/Original/IndiePlege";
+import About from "../Pages/Original/About";
+import Footer from "../Components/Original/Footer";
 
 const Original = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

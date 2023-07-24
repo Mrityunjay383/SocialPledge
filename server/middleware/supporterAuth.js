@@ -23,6 +23,7 @@ const valSupToken = async (req, res, next) => {
     } else {
       req.supporterData.name = supporter.name;
       req.supporterData.logo = supporter.logo;
+      req.supporterData.userName = supporter.userName;
     }
 
     next();

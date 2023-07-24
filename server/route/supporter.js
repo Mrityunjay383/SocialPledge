@@ -9,5 +9,6 @@ router.get("/", valSupToken, controller.root);
 router.post("/login", controller.login);
 router.post("/create_new", controller.createNew);
 router.get("/get_ava", valToken, controller.getAvaSup);
+router.get("/logout", controller.logout);
 
 module.exports = router;

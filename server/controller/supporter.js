@@ -115,3 +115,12 @@ exports.getAvaSup = async (req, res) => {
     res.status(400).json({ success: false });
   }
 };
+
+exports.logout = async (req, res) => {
+  res
+    .clearCookie("supToken", {
+      secure: true,
+      sameSite: "none",
+    })
+    .json({ success: true });
+};

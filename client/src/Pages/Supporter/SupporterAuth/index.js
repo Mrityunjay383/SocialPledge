@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { Supporter } from "../../service";
+import { Supporter } from "../../../service";
 import { ColorRing } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
 import "./index.css";
 
-const SupporterAuth = ({ setIsLoggedIn }) => {
+const SupporterAuth = () => {
   const { supporterUserName } = useParams();
 
   const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ const SupporterAuth = ({ setIsLoggedIn }) => {
 
       toast.dismiss();
       if (res.status === 200) {
-        setIsLoggedIn(true);
+        window.location = `/${supporterUserName}`;
         toast.success("Login Successful!!");
       } else {
         toast.error(res.data);

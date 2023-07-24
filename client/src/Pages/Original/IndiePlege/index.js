@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { toast } from "react-toastify";
 
-import Canvas from "../../Components/Canvas";
-import { Certificate, Pledge, Supporter } from "../../service";
+import Canvas from "../../../Components/Original/Canvas";
+import { Certificate, Pledge, Supporter } from "../../../service";
 import "./index.css";
-import CtaBtn from "../../Components/CtaBtn";
+import CtaBtn from "../../../Components/Original/CtaBtn";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;

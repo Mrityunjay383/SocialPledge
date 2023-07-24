@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CtaBtn from "../CtaBtn";
 import { toast } from "react-toastify";
-import { Auth } from "../../service";
+import { Auth } from "../../../service";
 import { useNavigate, useParams } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 

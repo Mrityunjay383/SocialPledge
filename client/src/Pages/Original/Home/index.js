@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
-import CtaBtn from "../../Components/CtaBtn";
-import HomePledge from "../../Components/HomePledge";
+import CtaBtn from "../../../Components/Original/CtaBtn";
+import HomePledge from "../../../Components/Original/HomePledge";
 
 const Home = () => {
   return (
