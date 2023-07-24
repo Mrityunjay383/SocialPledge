@@ -47,7 +47,7 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
     background.onload = function () {
       context.drawImage(background, 0, 0, width, height);
 
-      context.drawImage(qrCode, 70, 600, 100, 100);
+      context.drawImage(qrCode, 70, 570, 100, 100);
       context.drawImage(logo, 60, 50, logo.width / 6, logo.height / 6);
 
       const dimRatio = supporterLogo.width / supporterLogo.height;
@@ -56,8 +56,8 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
       context.font = `43px Roboto`;
       context.fillText(userName, xPos, height / 2.19);
 
-      context.font = `26px Roboto`;
-      context.fillText(dateStr, 460, 570);
+      context.font = `22px Roboto`;
+      context.fillText(dateStr, 70, 695);
 
       context.font = `22px Roboto`;
       context.fillText(supporter, xSup, 700);

@@ -14,6 +14,14 @@ const pledgeSchema = new mongoose.Schema({
   previewURL: {
     type: String,
   },
+  live: {
+    type: Boolean,
+    default: true,
+  },
+  liveDate: {
+    type: Number,
+    default: null,
+  },
 });
 
 module.exports = mongoose.model("Pledge", pledgeSchema);

@@ -134,6 +134,13 @@ article div h3 {
     margin-top: 20px;
 }
 
+.CoSo{
+    color: #FF5A60;
+    opacity: 0.5;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
 .unShow{
     display: none;
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:5000";
-// const baseUrl = "https://socialpledge.cyclic.app";
+// const baseUrl = "http://localhost:5000";
+const baseUrl = "https://socialpledge.cyclic.app";
 
 const request = async (method, url, data) => {
   if (method === "GET") {
@@ -45,6 +45,9 @@ export const Pledge = {
 };
 
 export const Supporter = {
+  root: () => {
+    return request("GET", "/supporter");
+  },
   getAvaSupporter: () => {
     return request("GET", "/supporter/get_ava");
   },

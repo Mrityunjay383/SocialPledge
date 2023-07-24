@@ -1,5 +1,9 @@
 const Supporter = require("../model/supporter");
 
+exports.root = async (req, res) => {
+  res.status(200).json({ supporter: req.supporterData });
+};
+
 exports.createNew = async (req, res) => {
   try {
     const { name, logo, newLimit, repLimit, priority } = req.body;

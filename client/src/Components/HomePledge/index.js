@@ -64,11 +64,21 @@ const HomePledge = () => {
                     <h3>{pledge.name}</h3>
                     <p>{pledge.about}</p>
 
-                    <CtaBtn
-                      Text={"Take this Pledge"}
-                      fontSize={14}
-                      onClick={() => navigate(`/pledge/${pledge._id}`)}
-                    />
+                    {pledge.live &&
+                    pledge.liveDate * 1000 < new Date().getTime() ? (
+                      <CtaBtn
+                        Text={"Take this Pledge"}
+                        fontSize={14}
+                        onClick={() => navigate(`/pledge/${pledge._id}`)}
+                      />
+                    ) : (
+                      <div className={"CoSo"}>
+                        Coming soon... <br /> Live on{" "}
+                        {new Date(pledge.liveDate * 1000).toLocaleDateString(
+                          "en-GB"
+                        )}
+                      </div>
+                    )}
                   </div>
                 </article>
               </div>

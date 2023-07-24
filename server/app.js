@@ -20,7 +20,12 @@ app.use(cookieParser());
 // middleware using cors with options
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://socialpledge.in"], //change origin based on domain main of the application
+    origin: [
+      "http://localhost:3000",
+      "http://supporter.localhost:3000",
+      "https://supporter.socialpledge.in",
+      "https://socialpledge.in",
+    ], //change origin based on domain main of the application
     optionsSuccessStatus: 200,
     credentials: true,
   })

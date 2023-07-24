@@ -2,7 +2,7 @@ const Pledge = require("../model/pledge");
 
 exports.createNew = async (req, res) => {
   try {
-    const { name, about, url, previewURL } = req.body;
+    const { name, about, url, previewURL, live, liveDate } = req.body;
 
     if (!(name && about && url && previewURL)) {
       return res.status(404).send("All fields are required");
@@ -13,6 +13,8 @@ exports.createNew = async (req, res) => {
       about,
       url,
       previewURL,
+      live,
+      liveDate,
     });
 
     res.status(201).json({ success: true });
