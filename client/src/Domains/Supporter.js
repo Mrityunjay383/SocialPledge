@@ -10,6 +10,7 @@ import SupporterAuth from "../Pages/Supporter/SupporterAuth";
 import SupporterDashboard from "../Pages/Supporter/SupporterDashboard";
 import { Supporter } from "../service";
 import SupporterProfile from "../Pages/Supporter/SupporterProfile";
+import SupHome from "../Pages/Supporter/Home";
 
 const SupporterSec = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -73,7 +74,7 @@ const SupporterSec = () => {
               path="/"
               element={
                 <div>
-                  <h1>Supporter Home</h1>
+                  <SupHome />
                 </div>
               }
             />
