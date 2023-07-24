@@ -4,21 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./index.css";
 import { Supporter } from "../../../service";
 import { toast } from "react-toastify";
-import { ColorRing } from "react-loader-spinner";
-
-const Spinner = () => {
-  return (
-    <ColorRing
-      visible={true}
-      height="40"
-      width="40"
-      ariaLabel="blocks-loading"
-      wrapperStyle={{}}
-      wrapperClass="blocks-wrapper"
-      colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
-    />
-  );
-};
+import TopDashboard from "../../../Components/Supporter/TopDashboard";
+import DoughnutChart from "../../../Components/Supporter/Doughnut";
 
 const SupporterDashboard = ({ supporterData, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -41,7 +28,6 @@ const SupporterDashboard = ({ supporterData, setIsLoggedIn }) => {
     });
 
     if (res.status === 200) {
-      console.log(`#202320633619217 res.data.supporter`, res.data);
       setFetchedSupporterData(res.data.supporter);
       setIsTopDataLoaded(true);
     } else {
@@ -57,75 +43,34 @@ const SupporterDashboard = ({ supporterData, setIsLoggedIn }) => {
     <div>
       <SupHeader setIsLoggedIn={setIsLoggedIn} supporterData={supporterData} />
 
+      <TopDashboard
+        fetchedSupporterData={fetchedSupporterData}
+        isTopDataLoaded={isTopDataLoaded}
+      />
+
       <div className="container pt-5">
         <div className="row align-items-stretch">
-          <div className="c-dashboardInfo col-lg-3 col-md-6">
+          <div className="c-dashboardInfo col-lg-6 col-md-6">
             <div className="wrap">
-              <h4 className="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
-                Total Limit
-              </h4>
-              {isTopDataLoaded ? (
-                <span className="hind-font caption-12 c-dashboardInfo__count">
-                  {fetchedSupporterData.newLimit}
-                </span>
-              ) : (
-                <Spinner />
-              )}
+              <div className="chartLabel">New Downloads</div>
 
-              <span className="hind-font caption-12 c-dashboardInfo__subInfo">
-                New Downloads
-              </span>
+              <DoughnutChart
+                type={"New"}
+                total={fetchedSupporterData.newLimit}
+                used={fetchedSupporterData.newCount}
+              />
             </div>
           </div>
-          <div className="c-dashboardInfo col-lg-3 col-md-6">
+
+          <div className="c-dashboardInfo col-lg-6 col-md-6">
             <div className="wrap">
-              <h4 className="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
-                Total Limit
-              </h4>
-              {isTopDataLoaded ? (
-                <span className="hind-font caption-12 c-dashboardInfo__count">
-                  {fetchedSupporterData.repLimit}
-                </span>
-              ) : (
-                <Spinner />
-              )}
-              <span className="hind-font caption-12 c-dashboardInfo__subInfo">
-                Repeat Downloads
-              </span>
-            </div>
-          </div>
-          <div className="c-dashboardInfo col-lg-3 col-md-6">
-            <div className="wrap">
-              <h4 className="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
-                New Users
-              </h4>
-              {isTopDataLoaded ? (
-                <span className="hind-font caption-12 c-dashboardInfo__count">
-                  {fetchedSupporterData.newCount}
-                </span>
-              ) : (
-                <Spinner />
-              )}
-              <span className="hind-font caption-12 c-dashboardInfo__subInfo">
-                Downloads
-              </span>
-            </div>
-          </div>
-          <div className="c-dashboardInfo col-lg-3 col-md-6">
-            <div className="wrap">
-              <h4 className="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
-                Repeat Users
-              </h4>
-              {isTopDataLoaded ? (
-                <span className="hind-font caption-12 c-dashboardInfo__count">
-                  {fetchedSupporterData.repCount}
-                </span>
-              ) : (
-                <Spinner />
-              )}
-              <span className="hind-font caption-12 c-dashboardInfo__subInfo">
-                Downloads
-              </span>
+              <div className="chartLabel">Repeat Downloads</div>
+
+              <DoughnutChart
+                type={"Rep"}
+                total={fetchedSupporterData.repLimit}
+                used={fetchedSupporterData.repCount}
+              />
             </div>
           </div>
         </div>
