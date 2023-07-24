@@ -119,6 +119,8 @@
 
     .nav-item{
         font-size: 1.1rem;
+        border-bottom: 1px solid #fff;
+        margin-right: 0;
     }
 
     .nav-links {

@@ -23,7 +23,7 @@ const SupHeader = ({ setIsLoggedIn, supporterData }) => {
       <nav className="navbar" onClick={(e) => e.stopPropagation()}>
         <div className="nav-container">
           <NavLink to={`/${supporterData.userName}`} className="nav-logo">
-            <img src={supporterData.logo} alt={"SocialPledgeLogo"} />
+            <img src={supporterData.logo} alt={"SupporterLogo"} />
           </NavLink>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
@@ -38,7 +38,7 @@ const SupHeader = ({ setIsLoggedIn, supporterData }) => {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/profile"
+                to={`/${supporterData.userName}/profile`}
                 activeclassname="active"
                 className="nav-links"
                 onClick={click ? handleClick : null}

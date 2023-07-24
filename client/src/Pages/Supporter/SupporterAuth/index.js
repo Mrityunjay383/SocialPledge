@@ -27,7 +27,7 @@ const SupporterAuth = () => {
 
       toast.dismiss();
       if (res.status === 200) {
-        window.location = `/${supporterUserName}`;
+        window.location = window.location.href;
         toast.success("Login Successful!!");
       } else {
         toast.error(res.data);

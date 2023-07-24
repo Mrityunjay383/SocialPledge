@@ -51,6 +51,9 @@ export const Supporter = {
   login: (data) => {
     return request("POST", "/supporter/login", data);
   },
+  indieSup: (data) => {
+    return request("POST", "/supporter/indieSup", data);
+  },
   getAvaSupporter: () => {
     return request("GET", "/supporter/get_ava");
   },

@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SupporterAuth from "../Pages/Supporter/SupporterAuth";
 import SupporterDashboard from "../Pages/Supporter/SupporterDashboard";
 import { Supporter } from "../service";
+import SupporterProfile from "../Pages/Supporter/SupporterProfile";
 
 const SupporterSec = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -78,20 +79,27 @@ const SupporterSec = () => {
             />
 
             <Route
-              path="/profile"
-              element={
-                <div>
-                  <h1>Profile Page</h1>
-                </div>
-              }
-            />
-
-            <Route
               path="/:supporterUserName"
               element={
                 <div>
                   {isLoggedIn ? (
                     <SupporterDashboard
+                      supporterData={supporterData}
+                      setIsLoggedIn={setIsLoggedIn}
+                    />
+                  ) : (
+                    <SupporterAuth />
+                  )}
+                </div>
+              }
+            />
+
+            <Route
+              path="/:supporterUserName/profile"
+              element={
+                <div>
+                  {isLoggedIn ? (
+                    <SupporterProfile
                       supporterData={supporterData}
                       setIsLoggedIn={setIsLoggedIn}
                     />

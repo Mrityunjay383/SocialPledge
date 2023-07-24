@@ -73,6 +73,19 @@ exports.createNew = async (req, res) => {
   }
 };
 
+exports.indieSup = async (req, res) => {
+  try {
+    const { userName } = req.body;
+
+    const supporter = await Supporter.findOne({ userName });
+
+    res.status(200).json({ supporter });
+  } catch (err) {
+    console.log(`#20232063273211 err`, err);
+    res.status(400);
+  }
+};
+
 exports.getAvaSup = async (req, res) => {
   try {
     const allPrioritySupporters = await Supporter.find({ priority: true });
