@@ -25,7 +25,7 @@ function getAnimationSettings(originXA, originXB) {
   return {
     startVelocity: 30,
     spread: 360,
-    ticks: 300,
+    ticks: 200,
     zIndex: 10,
     particleCount: 350,
     origin: {

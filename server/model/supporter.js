@@ -5,6 +5,13 @@ const supporterSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  userName: {
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+  },
   logo: {
     type: String,
   },

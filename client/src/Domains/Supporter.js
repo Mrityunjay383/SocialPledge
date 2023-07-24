@@ -7,8 +7,10 @@ import LoadingScreen from "react-loading-screen";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SupporterAuth from "../Pages/SupporterAuth";
+import SupporterDashboard from "../Pages/SupporterDashboard";
+import { Supporter } from "../service";
 
-const Supporter = () => {
+const SupporterSec = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [supporterData, setSupporterData] = useState({
     supporter_id: "",
@@ -17,6 +19,34 @@ const Supporter = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const valLogin = async () => {
+    const res = await Supporter.root();
+
+    if (res.status === 200) {
+      await setSupporterData({
+        supporter_id: res.data.supporter.supporter_id,
+        name: res.data.supporter.name,
+        logo: res.data.supporter.logo,
+      });
+      await setIsLoggedIn(true);
+    } else {
+      await setSupporterData({ supporter_id: "", name: "", logo: "" });
+      await setIsLoggedIn(false);
+    }
+
+    await setIsLoading(false);
+  };
+
+  const authFunc = async () => {
+    await setIsLoading(true);
+    await valLogin();
+    await setIsLoading(false);
+  };
+
+  useEffect(() => {
+    authFunc();
+  }, [isLoggedIn]);
 
   return (
     <Router>
@@ -37,7 +67,20 @@ const Supporter = () => {
               path="/"
               element={
                 <div>
-                  <SupporterAuth />
+                  <h1>Supporter Home</h1>
+                </div>
+              }
+            />
+
+            <Route
+              path="/:supporterUserName"
+              element={
+                <div>
+                  {isLoggedIn ? (
+                    <SupporterDashboard />
+                  ) : (
+                    <SupporterAuth setIsLoggedIn={setIsLoggedIn} />
+                  )}
                 </div>
               }
             />
@@ -48,4 +91,4 @@ const Supporter = () => {
   );
 };
 
-export default Supporter;
+export default SupporterSec;

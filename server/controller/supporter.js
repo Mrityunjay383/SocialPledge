@@ -1,19 +1,65 @@
 const Supporter = require("../model/supporter");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.root = async (req, res) => {
   res.status(200).json({ supporter: req.supporterData });
 };
 
+exports.login = async (req, res) => {
+  try {
+    const { userName, password } = req.body;
+
+    const supporter = await Supporter.findOne({ userName });
+
+    if (!supporter) {
+      return res.status(400).send("Supporter Username not found!");
+    }
+
+    if (supporter && (await bcrypt.compare(password, supporter.password))) {
+      //token
+      const token = jwt.sign(
+        { supporter_id: supporter._id },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: 24 * 60 * 60,
+        }
+      );
+
+      // Setting Up cookies
+      const options = {
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      };
+
+      return res.status(200).cookie("supToken", token, options).json({
+        success: true,
+      });
+    }
+
+    res.status(400).send("Password incorrect");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 exports.createNew = async (req, res) => {
   try {
-    const { name, logo, newLimit, repLimit, priority } = req.body;
+    const { name, userName, password, logo, newLimit, repLimit, priority } =
+      req.body;
 
-    if (!(name && logo && newLimit && repLimit)) {
+    if (!(name && userName && logo && newLimit && repLimit)) {
       return res.status(404).send("All fields are required");
     }
 
+    const encPassword = await bcrypt.hash(password, 10);
+
     await Supporter.create({
       name,
+      userName,
+      password: encPassword,
       logo,
       newLimit: Number(newLimit),
       repLimit: Number(repLimit),
