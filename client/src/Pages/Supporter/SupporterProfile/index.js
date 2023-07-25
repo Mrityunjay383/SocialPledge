@@ -43,7 +43,15 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
   };
 
   const updateChange = async () => {
-    console.log(`#202320617450196 changeVar`, changeVar);
+    if (changeVar.type === "Name") {
+      if (supporterData.name === changeVar.updatedVal) {
+        return toast.error("Updated Name can't be same as previous one");
+      }
+    } else if (changeVar.type === "UserName") {
+      if (supporterData.userName === changeVar.updatedVal) {
+        return toast.error("Updated UserName can't be same as previous one");
+      }
+    }
 
     const res = await Supporter.updateSup({
       supporter_id: supporterData.supporter_id,
@@ -103,7 +111,11 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
                   placeholder={`Enter new ${changeVar.type}`}
                   value={changeVar.updatedVal}
                   autoFocus={true}
-                  style={{ width: "100%", border: "1px solid #FF5A60" }}
+                  style={{
+                    width: "100%",
+                    border: "1px solid gray",
+                    color: "gray",
+                  }}
                   onChange={(e) => {
                     setChangeVar((curr) => {
                       return { ...curr, updatedVal: e.target.value };
