@@ -96,10 +96,7 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
                   }}
                 >
                   {supporterData.name}
-                  <span
-                    className="color__gray"
-                    style={{ marginLeft: "10px", marginTop: "5px" }}
-                  >
+                  <span className="color__gray" style={{ marginTop: "5px" }}>
                     {supporterData.userName}
                   </span>
                 </div>
