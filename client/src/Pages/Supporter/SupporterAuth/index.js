@@ -63,7 +63,9 @@ const SupporterAuth = () => {
               colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
             />
           ) : (
-            <button onClick={loginSubmit}>Login</button>
+            <button className={"authBtn"} onClick={loginSubmit}>
+              Login
+            </button>
           )}
         </div>
       </div>

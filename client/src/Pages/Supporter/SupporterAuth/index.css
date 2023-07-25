@@ -43,7 +43,7 @@
     width: 100%;
 }
 
-.card button {
+.authBtn {
     padding: 10px;
     background: linear-gradient(to bottom right, #FF5A60, #498ffc);
     color: #fff;
@@ -53,7 +53,7 @@
     width: 100%;
 }
 
-.card button:hover {
+.authBtn:hover {
     background: linear-gradient(to bottom right, #498ffc, #FF5A60);
 }
 

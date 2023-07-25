@@ -112,7 +112,10 @@ const SupporterSec = () => {
               element={
                 <div>
                   {isLoggedIn ? (
-                    <SupporterProfile supporterData={supporterData} />
+                    <SupporterProfile
+                      supporterData={supporterData}
+                      setIsLoggedIn={setIsLoggedIn}
+                    />
                   ) : (
                     <SupporterAuth />
                   )}

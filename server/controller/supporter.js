@@ -86,6 +86,30 @@ exports.indieSup = async (req, res) => {
   }
 };
 
+exports.updateSup = async (req, res) => {
+  try {
+    const { supporter_id, type, updatedVal } = req.body;
+
+    const supporter = await Supporter.findOne({ _id: supporter_id });
+
+    if (!supporter) {
+      return res.status(404).send("Supporter Not Found!");
+    }
+
+    if (type === "Name") {
+      supporter.name = updatedVal;
+    } else if (type === "UserName") {
+      supporter.userName = updatedVal;
+    }
+    await supporter.save();
+
+    res.status(200).json({ type, updatedVal });
+  } catch (err) {
+    console.log(`#2023206171443163 err`, err);
+    res.status(400).send("Some Error occurred!");
+  }
+};
+
 exports.getAvaSup = async (req, res) => {
   try {
     const allPrioritySupporters = await Supporter.find({ priority: true });
