@@ -20,6 +20,7 @@
 
 .pledgeImg{
     width: 100%;
+    pointer-events: none;
 }
 .pledgeTextCon{
     position: sticky;

@@ -75,28 +75,30 @@ const IndiePledge = ({ userData }) => {
   //
   const [pledgeData, setPledgeData] = useState({});
   const [supporterData, setSupporterData] = useState({});
-  const [dataLoaded, setDataLoaded] = useState(false);
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
 
+  const [pledgeDataLoaded, setPledgeDataLoaded] = useState(false);
   const getPledgeData = async () => {
     const res = await Pledge.getIndiePledge({ pledgeId });
 
     if (res.status === 200) {
       await setPledgeData(res.data.pledge);
-      await getSupporter();
+      setPledgeDataLoaded(true);
     }
   };
 
+  const [supporterDataLoaded, setSupporterDataLoaded] = useState(false);
   const getSupporter = async () => {
     const res = await Supporter.getAvaSupporter();
     if (res.status === 200) {
       await setSupporterData(res.data.supporter);
-      setDataLoaded(true);
+      setSupporterDataLoaded(true);
     }
   };
 
   useEffect(() => {
     getPledgeData();
+    getSupporter();
   }, []);
 
   const downloadPledge = async () => {
@@ -138,7 +140,7 @@ const IndiePledge = ({ userData }) => {
 
   return (
     <div className={"pledgeSection"}>
-      {dataLoaded && (
+      {pledgeDataLoaded && supporterDataLoaded ? (
         <div className={"row mainSection"}>
           <div className={"col-lg-8 pledgeImgCon"}>
             {isCanvasMounted ? (
@@ -208,6 +210,20 @@ const IndiePledge = ({ userData }) => {
           </div>
 
           <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
+        </div>
+      ) : (
+        <div className={"loadingCon"}>
+          <Dna
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+          <p>
+            Generating a personalize pledge certificate for you, please wait
+          </p>
         </div>
       )}
     </div>
