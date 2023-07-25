@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
 import HomePledge from "../../../Components/Original/HomePledge";
+import CountUp from "react-countup";
 
 const Home = () => {
   return (
@@ -54,6 +55,13 @@ const Home = () => {
 
       {/*Pledge Section*/}
       <HomePledge />
+
+      <div className={"countCon"}>
+        <div>
+          <CountUp end={121} enableScrollSpy={true} scrollSpyDelay={200} />+
+        </div>
+        <p>Pledges has been already taken</p>
+      </div>
     </div>
   );
 };
