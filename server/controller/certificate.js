@@ -20,6 +20,7 @@ exports.newDownload = async (req, res) => {
     }
 
     const supporter = await Supporter.findOne({ _id: supporterId });
+    console.log(`#202320655622633 new Date().getTime()`, new Date().getTime());
 
     const userSupporterCertificateExist = await Certificate.findOne({
       userId,
@@ -32,6 +33,7 @@ exports.newDownload = async (req, res) => {
         pledgeId,
         supporterId,
         type: "repeat",
+        createdAt: new Date().getTime(),
       });
 
       supporter.repCount++;
@@ -45,6 +47,7 @@ exports.newDownload = async (req, res) => {
       pledgeId,
       supporterId,
       type: "new",
+      createdAt: new Date().getTime(),
     });
 
     supporter.newCount++;

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import TopDashboard from "../../../Components/Supporter/TopDashboard";
 import DoughnutChart from "../../../Components/Supporter/Doughnut";
 
-const SupporterDashboard = ({ supporterData, setIsLoggedIn }) => {
+const SupporterDashboard = ({ supporterData }) => {
   const navigate = useNavigate();
   const { supporterUserName } = useParams();
 
@@ -40,8 +40,8 @@ const SupporterDashboard = ({ supporterData, setIsLoggedIn }) => {
   }, []);
 
   return (
-    <div>
-      <SupHeader setIsLoggedIn={setIsLoggedIn} supporterData={supporterData} />
+    <div className={"centerCon"}>
+      <SupHeader supporterData={supporterData} />
 
       <TopDashboard
         fetchedSupporterData={fetchedSupporterData}

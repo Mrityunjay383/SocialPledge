@@ -1,21 +1,12 @@
 import React from "react";
 import "./index.css";
-import { Supporter } from "../../../service";
 import { NavLink } from "react-router-dom";
 
-const SupHeader = ({ setIsLoggedIn, supporterData }) => {
+const SupHeader = ({ supporterData }) => {
   const [click, setClick] = React.useState(false);
 
   const handleClick = () => setClick(!click);
   const Close = () => setClick(false);
-
-  const logout = async () => {
-    const res = await Supporter.logout();
-
-    if (res.data.success) {
-      setIsLoggedIn(false);
-    }
-  };
 
   return (
     <div>
@@ -36,6 +27,18 @@ const SupHeader = ({ setIsLoggedIn, supporterData }) => {
                 Dashboard
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink
+                to={`/${supporterData.userName}/reports`}
+                activeclassname="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                Reports
+              </NavLink>
+            </li>
+
             <li className="nav-item">
               <NavLink
                 to={`/${supporterData.userName}/profile`}
@@ -44,17 +47,6 @@ const SupHeader = ({ setIsLoggedIn, supporterData }) => {
                 onClick={click ? handleClick : null}
               >
                 Profile
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink
-                to={`/${supporterData.userName}`}
-                activeclassname="active"
-                className="nav-links"
-                onClick={logout}
-              >
-                LogOut
               </NavLink>
             </li>
           </ul>

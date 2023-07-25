@@ -11,6 +11,8 @@ import SupporterDashboard from "../Pages/Supporter/SupporterDashboard";
 import { Supporter } from "../service";
 import SupporterProfile from "../Pages/Supporter/SupporterProfile";
 import SupHome from "../Pages/Supporter/Home";
+import SupReports from "../Pages/Supporter/SupporterReports";
+import Footer from "../Components/Original/Footer";
 
 const SupporterSec = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -84,10 +86,20 @@ const SupporterSec = () => {
               element={
                 <div>
                   {isLoggedIn ? (
-                    <SupporterDashboard
-                      supporterData={supporterData}
-                      setIsLoggedIn={setIsLoggedIn}
-                    />
+                    <SupporterDashboard supporterData={supporterData} />
+                  ) : (
+                    <SupporterAuth />
+                  )}
+                </div>
+              }
+            />
+
+            <Route
+              path="/:supporterUserName/reports"
+              element={
+                <div>
+                  {isLoggedIn ? (
+                    <SupReports supporterData={supporterData} />
                   ) : (
                     <SupporterAuth />
                   )}
@@ -100,10 +112,7 @@ const SupporterSec = () => {
               element={
                 <div>
                   {isLoggedIn ? (
-                    <SupporterProfile
-                      supporterData={supporterData}
-                      setIsLoggedIn={setIsLoggedIn}
-                    />
+                    <SupporterProfile supporterData={supporterData} />
                   ) : (
                     <SupporterAuth />
                   )}
@@ -111,6 +120,7 @@ const SupporterSec = () => {
               }
             />
           </Routes>
+          <Footer />
         </LoadingScreen>
       </div>
     </Router>

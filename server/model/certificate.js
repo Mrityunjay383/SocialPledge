@@ -16,6 +16,9 @@ const certificateSchema = new mongoose.Schema({
   type: {
     type: String,
   },
+  createdAt: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("Certificate", certificateSchema);

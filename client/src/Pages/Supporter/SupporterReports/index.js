@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import SupHeader from "../../../Components/Supporter/Header";
 import { useNavigate, useParams } from "react-router-dom";
+import SupHeader from "../../../Components/Supporter/Header";
 
-const SupporterProfile = ({ supporterData }) => {
+const SupReports = ({ supporterData }) => {
   const navigate = useNavigate();
   const { supporterUserName } = useParams();
 
@@ -11,10 +11,9 @@ const SupporterProfile = ({ supporterData }) => {
       supporterUserName !== supporterData.userName &&
       supporterData.userName !== ""
     ) {
-      navigate(`/${supporterData.userName}/profile`);
+      navigate(`/${supporterData.userName}`);
     }
   }, []);
-
   return (
     <div>
       <SupHeader supporterData={supporterData} />
@@ -22,4 +21,4 @@ const SupporterProfile = ({ supporterData }) => {
   );
 };
 
-export default SupporterProfile;
+export default SupReports;

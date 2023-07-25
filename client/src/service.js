@@ -4,16 +4,15 @@ const baseUrl = "http://localhost:5000";
 // const baseUrl = "https://socialpledge.cyclic.app";
 
 const request = async (method, url, data) => {
+  const config = {
+    validateStatus: false,
+    withCredentials: true,
+  };
+
   if (method === "GET") {
-    return await axios.get(`${baseUrl}${url}`, {
-      validateStatus: false,
-      withCredentials: true,
-    });
+    return await axios.get(`${baseUrl}${url}`, config);
   } else if (method === "POST") {
-    return await axios.post(`${baseUrl}${url}`, data, {
-      validateStatus: false,
-      withCredentials: true,
-    });
+    return await axios.post(`${baseUrl}${url}`, data, config);
   }
 };
 
