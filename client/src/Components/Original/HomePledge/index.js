@@ -73,7 +73,11 @@ const HomePledge = () => {
                       <CtaBtn
                         Text={"Learn More"}
                         fontSize={14}
-                        onClick={() => navigate(`/pledge/${pledge._id}`)}
+                        onClick={() =>
+                          navigate(
+                            `/pledge/${pledge.name.replaceAll(" ", "_")}`
+                          )
+                        }
                       />
                     ) : (
                       <div className={"CoSo"}>

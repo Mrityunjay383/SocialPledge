@@ -38,7 +38,9 @@ function getAnimationSettings(originXA, originXB) {
 }
 
 const IndiePledge = ({ userData }) => {
-  const { pledgeId } = useParams();
+  const { pledgeName } = useParams();
+
+  console.log(`#202320619832843 pledgeName`, pledgeName);
 
   //Animation
   const refAnimationInstance = useRef(null);
@@ -79,7 +81,7 @@ const IndiePledge = ({ userData }) => {
 
   const [pledgeDataLoaded, setPledgeDataLoaded] = useState(false);
   const getPledgeData = async () => {
-    const res = await Pledge.getIndiePledge({ pledgeId });
+    const res = await Pledge.getIndiePledge({ pledgeName });
 
     if (res.status === 200) {
       await setPledgeData(res.data.pledge);
@@ -104,7 +106,7 @@ const IndiePledge = ({ userData }) => {
   const downloadPledge = async () => {
     const res = await Certificate.newDownload({
       userId: userData.user_id,
-      pledgeId,
+      pledgeId: pledgeData._id,
       supporterId: supporterData.id,
     });
 
@@ -174,7 +176,7 @@ const IndiePledge = ({ userData }) => {
               <Typewriter
                 options={{
                   autoStart: true,
-                  delay: 40,
+                  delay: 30,
                   cursor: ".",
                 }}
                 onInit={(typewriter) => {
@@ -186,12 +188,12 @@ const IndiePledge = ({ userData }) => {
               <Typewriter
                 options={{
                   autoStart: true,
-                  delay: 25,
+                  delay: 15,
                   cursor: ".",
                 }}
                 onInit={(typewriter) => {
                   typewriter
-                    .pauseFor(1200)
+                    .pauseFor(900)
                     .typeString(
                       pledgeData.about.substring(0, pledgeData.about.length - 1)
                     )

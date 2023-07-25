@@ -36,9 +36,11 @@ exports.getHomePledges = async (req, res) => {
 
 exports.getIndiePledge = async (req, res) => {
   try {
-    const { pledgeId } = req.body;
+    const { pledgeName } = req.body;
 
-    const pledge = await Pledge.findOne({ _id: pledgeId });
+    const pledge = await Pledge.findOne({
+      name: pledgeName.replaceAll("_", " "),
+    });
     res.status(200).json({ pledge });
   } catch (err) {
     console.log(`#2023197132616177 err`, err);

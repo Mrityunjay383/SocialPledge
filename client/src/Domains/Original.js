@@ -99,7 +99,7 @@ const Original = () => {
 
             {/* Indie Pledge Route*/}
             <Route
-              path="/pledge/:pledgeId"
+              path="/pledge/:pledgeName"
               element={
                 <div>
                   {!isLoggedIn ? (
