@@ -108,10 +108,7 @@ const Original = () => {
                       setIsLoading={setIsLoading}
                     />
                   ) : (
-                    <IndiePledge
-                      userData={userData}
-                      setIsLoading={setIsLoading}
-                    />
+                    <IndiePledge userData={userData} />
                   )}
                 </div>
               }

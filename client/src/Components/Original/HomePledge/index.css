@@ -55,19 +55,6 @@ article figure {
 
 }
 
-/*article figure:before {*/
-/*    !* add a border around the figure matching the color of the background, faking the clip *!*/
-/*    content: "";*/
-/*    border-radius: inherit;*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    border: 1rem solid hsl(250, 85%, 97%);*/
-/*    !*box-shadow: 0 1px hsla(0, 0%, 0%, 0.1);*!*/
-/*}*/
 
 article figure img {
     /* stretch the image to cover the size of the wrapping container */
@@ -86,41 +73,24 @@ article div {
 }
 
 article div p {
-    color: hsl(250, 5%, 45%);
     font-weight: 200;
-    font-style: italic;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin: 0.5rem 0 1.5rem;
-    font-family: "Noticia Text", serif;
-    /* position relative for the pseudo element */
-    position: relative;
-    z-index: 5;
+
 }
 
-article div p:before {
-    /* with SVG elements include two icons for the quote */
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    z-index: -5;
-    opacity: 0.05;
-}
 
 article div h3 {
     /* considerably reduce the size of the heading */
     color: hsl(260, 5%, 55%);
     font-weight: 400;
     /*font-family: "Lato", sans-serif;*/
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
 }
 
-.loadingCon{
+.loadingCon {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,46 +99,52 @@ article div h3 {
     opacity: 0.5;
     margin-top: 8vh;
 }
-.loadingCon p{
+
+.loadingCon p {
     color: #FF5A60;
     margin-top: 20px;
 }
 
-.CoSo{
+.CoSo {
     color: #FF5A60;
     opacity: 0.5;
     margin-bottom: 0;
     margin-top: 20px;
 }
 
-.unShow{
+.unShow {
     display: none;
 }
 
 @media screen and (max-width: 991px) {
-    article figure{
+    article figure {
         width: 70%;
     }
-    article div h3{
+
+    article div h3 {
         font-size: 1.5rem;
     }
-    article div p{
+
+    article div p {
         font-size: 1.1rem;
     }
 }
 
 @media screen and (max-width: 560px) {
-    .pledge h2{
+    .pledge h2 {
         font-size: 3.5rem;
     }
-    .pledgeSubHead{
+
+    .pledgeSubHead {
         width: 90%;
         font-size: 1rem;
     }
-    article div h3{
+
+    article div h3 {
         font-size: 1.2rem;
     }
-    article div p{
+
+    article div p {
         font-size: 0.9rem;
     }
 
@@ -176,18 +152,21 @@ article div h3 {
 
 @media screen and (max-width: 400px) {
 
-    .pledge h2{
+    .pledge h2 {
         font-size: 2.5rem;
         margin-top: 30px;
     }
-    .pledgeSubHead{
+
+    .pledgeSubHead {
         width: 100%;
         font-size: 0.9rem;
     }
-    article div h3{
+
+    article div h3 {
         font-size: 1rem;
     }
-    article div p{
+
+    article div p {
         font-size: 0.8rem;
     }
 

@@ -62,12 +62,16 @@ const HomePledge = () => {
 
                   <div>
                     <h3>{pledge.name}</h3>
-                    <p>{pledge.about}</p>
+                    <p>
+                      {pledge.about.length >= 105
+                        ? `${pledge.about.substring(0, 105)}...`
+                        : pledge.about}
+                    </p>
 
                     {pledge.live &&
                     pledge.liveDate * 1000 < new Date().getTime() ? (
                       <CtaBtn
-                        Text={"Take this Pledge"}
+                        Text={"Learn More"}
                         fontSize={14}
                         onClick={() => navigate(`/pledge/${pledge._id}`)}
                       />

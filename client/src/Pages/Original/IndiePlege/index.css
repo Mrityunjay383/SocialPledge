@@ -1,21 +1,26 @@
 .pledgeSection{
     min-height: 80vh;
     padding: 10vh 6% 20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.pledgeSection div{
-    margin-top: 10vh;
-}
+/*.mainSection{*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
 
 .unShow{
     display: none;
 }
 
 .pledgeImg{
-    width: 80%;
+    width: 100%;
+}
+.pledgeTextCon{
+    position: sticky;
+    top: 25px;
+    height: 50%;
+    margin-top: 20px
 }
 
 @media screen and (max-width: 768px) {

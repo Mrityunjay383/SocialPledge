@@ -7,6 +7,7 @@ import Canvas from "../../../Components/Original/Canvas";
 import { Certificate, Pledge, Supporter } from "../../../service";
 import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
+import Typewriter from "typewriter-effect";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -25,7 +26,7 @@ function getAnimationSettings(originXA, originXB) {
   return {
     startVelocity: 30,
     spread: 360,
-    ticks: 200,
+    ticks: 150,
     zIndex: 10,
     particleCount: 350,
     origin: {
@@ -35,7 +36,7 @@ function getAnimationSettings(originXA, originXB) {
   };
 }
 
-const IndiePledge = ({ userData, setIsLoading }) => {
+const IndiePledge = ({ userData }) => {
   const { pledgeId } = useParams();
 
   //Animation
@@ -77,7 +78,7 @@ const IndiePledge = ({ userData, setIsLoading }) => {
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
 
   const getPledgeData = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const res = await Pledge.getIndiePledge({ pledgeId });
 
     if (res.status === 200) {
@@ -132,22 +133,57 @@ const IndiePledge = ({ userData, setIsLoading }) => {
       let canvas = document.getElementById("myCanvas");
       let dataURL = canvas.toDataURL("image/jpeg", 1.0);
       setImgSrc(dataURL);
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   }, [isCanvasMounted]);
 
   return (
-    <div>
+    <div className={"pledgeSection"}>
       {dataLoaded && (
-        <div className={"pledgeSection"}>
-          <Canvas
-            pledgeData={pledgeData}
-            userName={userData.name}
-            setIsCanvasMount={setIsCanvasMount}
-            supporterData={supporterData}
-          />
-          <img src={imgSrc} className={"pledgeImg"} alt="" />
-          <CtaBtn Text={"Download"} fontSize={16} onClick={downloadPledge} />
+        <div className={"row mainSection"}>
+          <div className={"col-lg-8"}>
+            <Canvas
+              pledgeData={pledgeData}
+              userName={userData.name}
+              setIsCanvasMount={setIsCanvasMount}
+              supporterData={supporterData}
+            />
+            <img src={imgSrc} className={"pledgeImg"} alt="" />
+          </div>
+
+          <div className={"col-lg-4 pledgeTextCon"}>
+            <h3>
+              <Typewriter
+                options={{
+                  autoStart: true,
+                  delay: 40,
+                  cursor: ".",
+                }}
+                onInit={(typewriter) => {
+                  typewriter.typeString(pledgeData.name).start();
+                }}
+              />
+            </h3>
+            <p>
+              <Typewriter
+                options={{
+                  autoStart: true,
+                  delay: 25,
+                  cursor: ".",
+                }}
+                onInit={(typewriter) => {
+                  typewriter
+                    .pauseFor(1200)
+                    .typeString(
+                      pledgeData.about.substring(0, pledgeData.about.length - 1)
+                    )
+                    .start();
+                }}
+              />
+            </p>
+
+            <CtaBtn Text={"Download"} fontSize={16} onClick={downloadPledge} />
+          </div>
 
           <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
         </div>
