@@ -3,14 +3,19 @@
     padding: 10vh 6% 20vh;
 }
 
-/*.mainSection{*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
+.mainSection{
+    height: 100%;
+}
 
 
 .unShow{
     display: none;
+}
+
+.pledgeImgCon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pledgeImg{

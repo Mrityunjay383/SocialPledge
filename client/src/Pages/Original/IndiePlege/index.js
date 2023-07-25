@@ -8,6 +8,7 @@ import { Certificate, Pledge, Supporter } from "../../../service";
 import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
 import Typewriter from "typewriter-effect";
+import { Dna } from "react-loader-spinner";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -78,7 +79,6 @@ const IndiePledge = ({ userData }) => {
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
 
   const getPledgeData = async () => {
-    // setIsLoading(true);
     const res = await Pledge.getIndiePledge({ pledgeId });
 
     if (res.status === 200) {
@@ -133,7 +133,6 @@ const IndiePledge = ({ userData }) => {
       let canvas = document.getElementById("myCanvas");
       let dataURL = canvas.toDataURL("image/jpeg", 1.0);
       setImgSrc(dataURL);
-      // setIsLoading(false);
     }
   }, [isCanvasMounted]);
 
@@ -141,14 +140,31 @@ const IndiePledge = ({ userData }) => {
     <div className={"pledgeSection"}>
       {dataLoaded && (
         <div className={"row mainSection"}>
-          <div className={"col-lg-8"}>
+          <div className={"col-lg-8 pledgeImgCon"}>
+            {isCanvasMounted ? (
+              <img src={imgSrc} className={"pledgeImg"} alt="" />
+            ) : (
+              <div className={"loadingCon"}>
+                <Dna
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="dna-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="dna-wrapper"
+                />
+                <p>
+                  Generating a personalize pledge certificate for you, please
+                  wait
+                </p>
+              </div>
+            )}
             <Canvas
               pledgeData={pledgeData}
               userName={userData.name}
               setIsCanvasMount={setIsCanvasMount}
               supporterData={supporterData}
             />
-            <img src={imgSrc} className={"pledgeImg"} alt="" />
           </div>
 
           <div className={"col-lg-4 pledgeTextCon"}>
@@ -182,7 +198,13 @@ const IndiePledge = ({ userData }) => {
               />
             </p>
 
-            <CtaBtn Text={"Download"} fontSize={16} onClick={downloadPledge} />
+            {isCanvasMounted && (
+              <CtaBtn
+                Text={"I Accept"}
+                fontSize={16}
+                onClick={downloadPledge}
+              />
+            )}
           </div>
 
           <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
