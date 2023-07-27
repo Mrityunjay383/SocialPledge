@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 
 const Register = ({ setAuthToggle, setIsLoggedIn }) => {
-  const { pledgeId } = useParams();
+  const { pledgeName } = useParams();
 
   const navigate = useNavigate();
 
@@ -57,8 +57,8 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
           if (res.status === 200) {
             setIsLoggedIn(true);
             toast.success("Account Created Successfully!!!");
-            if (pledgeId) {
-              navigate(`/pledge/${pledgeId}`);
+            if (pledgeName) {
+              navigate(`/pledge/${pledgeName}`);
             } else {
               navigate("/");
             }

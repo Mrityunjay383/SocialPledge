@@ -7,7 +7,7 @@ import { ColorRing } from "react-loader-spinner";
 
 const Login = ({ setAuthToggle, setIsLoggedIn }) => {
   const navigate = useNavigate();
-  const { pledgeId } = useParams();
+  const { pledgeName } = useParams();
 
   const [loginFormData, setLoginFormData] = useState({
     mobNo: "",
@@ -29,8 +29,8 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
       if (res.status === 200) {
         setIsLoggedIn(true);
         toast.success("Login Successful!!");
-        if (pledgeId) {
-          navigate(`/pledge/${pledgeId}`);
+        if (pledgeName) {
+          navigate(`/pledge/${pledgeName}`);
         } else {
           navigate("/");
         }
