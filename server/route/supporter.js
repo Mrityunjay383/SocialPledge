@@ -8,7 +8,7 @@ const { valSupToken } = require("../middleware/supporterAuth"); //Requiring Cont
 router.get("/", valSupToken, controller.root);
 router.post("/login", controller.login);
 router.post("/create_new", controller.createNew);
-router.post("/indieSup", valSupToken, controller.indieSup);
+router.get("/indieSup", valSupToken, controller.indieSup);
 router.post("/updateSup", valSupToken, controller.updateSup);
 router.get("/get_ava", valToken, controller.getAvaSup);
 router.get("/logout", valSupToken, controller.logout);

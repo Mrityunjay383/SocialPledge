@@ -1,5 +1,6 @@
 const Certificate = require("../model/certificate");
 const Supporter = require("../model/supporter");
+const { genLabels } = require("../helpers/genLabels");
 
 exports.newDownload = async (req, res) => {
   try {
@@ -56,5 +57,30 @@ exports.newDownload = async (req, res) => {
   } catch (err) {
     console.log(`#2023203213951903 err`, err);
     res.status(400).json({ success: false });
+  }
+};
+
+exports.reportData = async (req, res) => {
+  try {
+    const { supporter_id } = req.supporterData;
+
+    const { period } = req.body;
+
+    const labels = genLabels(period);
+
+    // const newCertificates = await Certificate.find({
+    //   supporterId: supporter_id,
+    //   type: "new",
+    // });
+    //
+    // const repCertificates = await Certificate.find({
+    //   supporterId: supporter_id,
+    //   type: "repeat",
+    // });
+
+    res.status(200).json({ labels });
+  } catch (err) {
+    console.log(`#2023208145118705 err`, err);
+    res.status(400);
   }
 };

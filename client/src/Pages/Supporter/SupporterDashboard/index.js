@@ -23,9 +23,7 @@ const SupporterDashboard = ({ supporterData }) => {
   const [fetchedSupporterData, setFetchedSupporterData] = useState({});
   const [isTopDataLoaded, setIsTopDataLoaded] = useState(false);
   const fetchSupporterData = async () => {
-    const res = await Supporter.indieSup({
-      userName: supporterData.userName,
-    });
+    const res = await Supporter.indieSup();
 
     if (res.status === 200) {
       setFetchedSupporterData(res.data.supporter);
@@ -50,7 +48,7 @@ const SupporterDashboard = ({ supporterData }) => {
 
       <div className="container pt-5">
         <div className="row align-items-stretch">
-          <div className="c-dashboardInfo col-lg-6 col-md-6">
+          <div className="c-dashboardInfo col-lg-6">
             <div className="wrap">
               <div className="chartLabel">New Downloads</div>
 
@@ -62,7 +60,7 @@ const SupporterDashboard = ({ supporterData }) => {
             </div>
           </div>
 
-          <div className="c-dashboardInfo col-lg-6 col-md-6">
+          <div className="c-dashboardInfo col-lg-6">
             <div className="wrap">
               <div className="chartLabel">Repeat Downloads</div>
 

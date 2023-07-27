@@ -75,7 +75,7 @@ exports.createNew = async (req, res) => {
 
 exports.indieSup = async (req, res) => {
   try {
-    const { userName } = req.body;
+    const { userName } = req.supporterData;
 
     const supporter = await Supporter.findOne({ userName });
 
@@ -88,7 +88,8 @@ exports.indieSup = async (req, res) => {
 
 exports.updateSup = async (req, res) => {
   try {
-    const { supporter_id, type, updatedVal } = req.body;
+    const { supporter_id } = req.supporterData;
+    const { type, updatedVal } = req.body;
 
     const supporter = await Supporter.findOne({ _id: supporter_id });
 

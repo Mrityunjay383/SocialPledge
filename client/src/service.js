@@ -50,8 +50,8 @@ export const Supporter = {
   login: (data) => {
     return request("POST", "/supporter/login", data);
   },
-  indieSup: (data) => {
-    return request("POST", "/supporter/indieSup", data);
+  indieSup: () => {
+    return request("GET", "/supporter/indieSup");
   },
   updateSup: (data) => {
     return request("POST", "/supporter/updateSup", data);
@@ -67,5 +67,8 @@ export const Supporter = {
 export const Certificate = {
   newDownload: (data) => {
     return request("POST", "/certificate/new_download", data);
+  },
+  reportData: (data) => {
+    return request("POST", "/certificate/report_Data", data);
   },
 };

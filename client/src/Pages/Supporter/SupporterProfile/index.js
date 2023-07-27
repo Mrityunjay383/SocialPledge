@@ -53,10 +53,7 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
       }
     }
 
-    const res = await Supporter.updateSup({
-      supporter_id: supporterData.supporter_id,
-      ...changeVar,
-    });
+    const res = await Supporter.updateSup(changeVar);
 
     if (res.status === 200) {
       window.location.reload();
