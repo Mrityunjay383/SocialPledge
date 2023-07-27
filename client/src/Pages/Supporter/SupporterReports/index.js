@@ -77,7 +77,7 @@ const SupReports = ({ supporterData }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className={"loadingCon"}>
+                  <div className={"loadingCon repLodCon"}>
                     <Dna
                       visible={true}
                       height="80"
