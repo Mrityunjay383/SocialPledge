@@ -14,6 +14,7 @@ import Header from "../Components/Original/Header";
 import IndiePledge from "../Pages/Original/IndiePlege";
 import About from "../Pages/Original/About";
 import Footer from "../Components/Original/Footer";
+import ContactUs from "../Pages/Original/ContactUs";
 
 const Original = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -93,6 +94,15 @@ const Original = () => {
               element={
                 <div>
                   <AuthPage setIsLoggedIn={setIsLoggedIn} />
+                </div>
+              }
+            />
+
+            <Route
+              path="/contact_us"
+              element={
+                <div>
+                  <ContactUs />
                 </div>
               }
             />
