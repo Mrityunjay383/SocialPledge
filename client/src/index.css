@@ -4,3 +4,10 @@
         color-scheme: light;
     }
 }
+
+@media print {
+    html,
+    body {
+        display: none;
+    }
+}

@@ -176,7 +176,7 @@ const IndiePledge = ({ userData }) => {
               <Typewriter
                 options={{
                   autoStart: true,
-                  delay: 30,
+                  delay: 40,
                   cursor: ".",
                 }}
                 onInit={(typewriter) => {
@@ -188,7 +188,7 @@ const IndiePledge = ({ userData }) => {
               <Typewriter
                 options={{
                   autoStart: true,
-                  delay: 15,
+                  delay: 25,
                   cursor: ".",
                 }}
                 onInit={(typewriter) => {
