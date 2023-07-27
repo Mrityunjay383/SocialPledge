@@ -104,6 +104,7 @@ const IndiePledge = ({ userData }) => {
   const [qrURL, setQrURL] = useState("");
 
   const downloadPledge = async () => {
+    setIsCanvasMount(false);
     const res = await Certificate.newDownload({
       userId: userData.user_id,
       pledgeId: pledgeData._id,
@@ -113,6 +114,7 @@ const IndiePledge = ({ userData }) => {
     if (res.status === 200) {
       await setQrURL(res.data.qrURL);
       startAnimation();
+      setIsCanvasMount(true);
       setTimeout(() => {
         let canvas = document.getElementById("myCanvas");
         let dataURL = canvas.toDataURL("image/jpeg", 1.0);
