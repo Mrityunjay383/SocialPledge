@@ -13,6 +13,7 @@ const ReportExcel = ({ certiIds, fileName }) => {
   const fileExtension = ".xlsx";
 
   const getExcelData = async () => {
+    toast.success("Generating Report, please wait");
     const res = await Report.genReport({ certiIds });
 
     if (res.status === 200) {
@@ -35,6 +36,7 @@ const ReportExcel = ({ certiIds, fileName }) => {
 
     const data = new Blob([excelBuffer], { type: fileType });
     FileSaver.saveAs(data, fileName + fileExtension);
+    toast.success("Reported Generated");
   };
 
   return (
