@@ -13,6 +13,9 @@ const certificateSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  uid: {
+    type: String,
+  },
   type: {
     type: String,
   },

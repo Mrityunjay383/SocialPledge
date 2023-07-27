@@ -40,8 +40,6 @@ function getAnimationSettings(originXA, originXB) {
 const IndiePledge = ({ userData }) => {
   const { pledgeName } = useParams();
 
-  console.log(`#202320619832843 pledgeName`, pledgeName);
-
   //Animation
   const refAnimationInstance = useRef(null);
   const [intervalId, setIntervalId] = useState();
@@ -103,6 +101,8 @@ const IndiePledge = ({ userData }) => {
     getSupporter();
   }, []);
 
+  const [qrURL, setQrURL] = useState("");
+
   const downloadPledge = async () => {
     const res = await Certificate.newDownload({
       userId: userData.user_id,
@@ -111,11 +111,14 @@ const IndiePledge = ({ userData }) => {
     });
 
     if (res.status === 200) {
+      await setQrURL(res.data.qrURL);
       startAnimation();
-      let canvas = document.getElementById("myCanvas");
-      let dataURL = canvas.toDataURL("image/jpeg", 1.0);
-      downloadImage(dataURL, `${userData.name}_${pledgeData.name}`);
-      toast.success("Your Certificate has been downloaded!!!");
+      setTimeout(() => {
+        let canvas = document.getElementById("myCanvas");
+        let dataURL = canvas.toDataURL("image/jpeg", 1.0);
+        downloadImage(dataURL, `${userData.name}_${pledgeData.name}`);
+        toast.success("Your Certificate has been downloaded!!!");
+      }, 50);
     } else {
       toast.error("Some Error occurred, please try again");
     }
@@ -132,11 +135,14 @@ const IndiePledge = ({ userData }) => {
 
   const [imgSrc, setImgSrc] = useState();
 
+  const buildImg = () => {
+    let canvas = document.getElementById("myCanvas");
+    let dataURL = canvas.toDataURL("image/jpeg", 1.0);
+    setImgSrc(dataURL);
+  };
   useEffect(() => {
     if (isCanvasMounted) {
-      let canvas = document.getElementById("myCanvas");
-      let dataURL = canvas.toDataURL("image/jpeg", 1.0);
-      setImgSrc(dataURL);
+      buildImg();
     }
   }, [isCanvasMounted]);
 
@@ -166,6 +172,7 @@ const IndiePledge = ({ userData }) => {
             <Canvas
               pledgeData={pledgeData}
               userName={userData.name}
+              qrURL={qrURL}
               setIsCanvasMount={setIsCanvasMount}
               supporterData={supporterData}
             />

@@ -1,6 +1,12 @@
 import React, { useRef, useEffect } from "react";
 
-const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
+const Canvas = ({
+  userName,
+  pledgeData,
+  qrURL,
+  setIsCanvasMount,
+  supporterData,
+}) => {
   const canvasRef = useRef(null);
 
   const getDate = () => {
@@ -17,14 +23,14 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
   };
 
   useEffect(() => {
+    setIsCanvasMount(false);
+
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
     let background = getImage(pledgeData.url);
 
-    let qrCode = getImage(
-      "https://res.cloudinary.com/ddb1evz5g/image/upload/v1690035710/frame_vyvnun.png"
-    );
+    let qrCode = getImage(qrURL);
 
     let logo = getImage(
       "https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png"
@@ -64,7 +70,7 @@ const Canvas = ({ userName, pledgeData, setIsCanvasMount, supporterData }) => {
 
       setIsCanvasMount(true);
     };
-  }, []);
+  }, [qrURL]);
 
   return <canvas id={"myCanvas"} ref={canvasRef} className={"unShow"} />;
 };
