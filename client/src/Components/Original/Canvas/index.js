@@ -53,7 +53,7 @@ const Canvas = ({
     background.onload = function () {
       context.drawImage(background, 0, 0, width, height);
 
-      context.drawImage(qrCode, 70, 570, 100, 100);
+      context.drawImage(qrCode, 55, 550, 130, 130);
       context.drawImage(logo, 60, 50, logo.width / 6, logo.height / 6);
 
       const dimRatio = supporterLogo.width / supporterLogo.height;
