@@ -27,6 +27,7 @@ const SupReports = ({ supporterData }) => {
   const [period, setPeriod] = useState("7L");
 
   const getReportData = async () => {
+    setIsDataLoaded(false);
     const res = await Certificate.reportData({ period });
 
     if (res.status === 200) {
