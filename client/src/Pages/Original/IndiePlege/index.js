@@ -114,8 +114,8 @@ const IndiePledge = ({ userData }) => {
     if (res.status === 200) {
       await setQrURL(res.data.qrURL);
       startAnimation();
-      setIsCanvasMount(true);
       setTimeout(() => {
+        setIsCanvasMount(true);
         let canvas = document.getElementById("myCanvas");
         let dataURL = canvas.toDataURL("image/jpeg", 1.0);
         downloadImage(dataURL, `${userData.name}_${pledgeData.name}`);
