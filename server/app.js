@@ -11,6 +11,7 @@ const authRouter = require("./route/auth");
 const pledgeRouter = require("./route/pledge");
 const supporterRouter = require("./route/supporter");
 const certificateRouter = require("./route/certificate");
+const reportRouter = require("./route/report");
 
 const app = express();
 app.use(express.json());
@@ -47,5 +48,6 @@ app.use("/auth", authRouter);
 app.use("/pledge", pledgeRouter);
 app.use("/supporter", supporterRouter);
 app.use("/certificate", certificateRouter);
+app.use("/report", reportRouter);
 
 module.exports = app;

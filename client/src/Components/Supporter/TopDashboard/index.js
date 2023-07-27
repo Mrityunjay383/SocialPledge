@@ -1,20 +1,6 @@
 import React from "react";
-import { ColorRing } from "react-loader-spinner";
 import "./index.css";
-
-const Spinner = () => {
-  return (
-    <ColorRing
-      visible={true}
-      height="40"
-      width="40"
-      ariaLabel="blocks-loading"
-      wrapperStyle={{}}
-      wrapperClass="blocks-wrapper"
-      colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
-    />
-  );
-};
+import Spinner from "../Spinner";
 
 const convertNums = (num) => {
   num = num.toString().replace(/[^0-9.]/g, "");
