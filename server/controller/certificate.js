@@ -66,19 +66,52 @@ exports.reportData = async (req, res) => {
 
     const { period } = req.body;
 
-    const labels = genLabels(period);
+    const { labels, tsArr } = genLabels(period);
 
-    // const newCertificates = await Certificate.find({
-    //   supporterId: supporter_id,
-    //   type: "new",
-    // });
-    //
-    // const repCertificates = await Certificate.find({
-    //   supporterId: supporter_id,
-    //   type: "repeat",
-    // });
+    const newCertificates = await Certificate.find({
+      supporterId: supporter_id,
+      type: "new",
+    });
 
-    res.status(200).json({ labels });
+    const repCertificates = await Certificate.find({
+      supporterId: supporter_id,
+      type: "repeat",
+    });
+
+    const newDLArr = Array(labels.length).fill(0);
+    const repDLArr = Array(labels.length).fill(0);
+    let totalNewCount = 0;
+    let totalRepCount = 0;
+
+    for (let i = 0; i < tsArr.length - 1; i++) {
+      for (let certificate of newCertificates) {
+        if (
+          certificate.createdAt <= tsArr[i] &&
+          certificate.createdAt >= tsArr[i + 1]
+        ) {
+          newDLArr[i]++;
+          totalNewCount++;
+        }
+      }
+
+      for (let certificate of repCertificates) {
+        if (
+          certificate.createdAt <= tsArr[i] &&
+          certificate.createdAt >= tsArr[i + 1]
+        ) {
+          repDLArr[i]++;
+          totalRepCount++;
+        }
+      }
+    }
+
+    res.status(200).json({
+      labels: labels.reverse(),
+      newDLArr: newDLArr.reverse(),
+      totalNewCount,
+      repDLArr: repDLArr.reverse(),
+      totalRepCount,
+    });
   } catch (err) {
     console.log(`#2023208145118705 err`, err);
     res.status(400);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,7 +25,7 @@ export const options = {
   responsive: true,
 };
 
-function LineChart({ labels }) {
+function LineChart({ labels, repDLArr, newDLArr }) {
   // useEffect(() => {
   //   setLabels(genLabels(period));
   // }, []);
@@ -35,13 +35,13 @@ function LineChart({ labels }) {
     datasets: [
       {
         label: "New Downloads",
-        data: [],
+        data: newDLArr,
         borderColor: "#4EFFB5",
         backgroundColor: "#4EFFB5",
       },
       {
         label: "Repeat Downloads",
-        data: [],
+        data: repDLArr,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgb(53, 162, 235)",
       },

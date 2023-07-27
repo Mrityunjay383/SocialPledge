@@ -30,6 +30,8 @@ const SupReports = ({ supporterData }) => {
 
     if (res.status === 200) {
       setLabels(res.data.labels);
+      setNewDLArr(res.data.newDLArr);
+      setRepDLArr(res.data.repDLArr);
       // setNewCertificates(setLabels.newCertificates);
       // setRepCertificates(res.data.repCertificates);
     } else {
@@ -60,9 +62,8 @@ const SupReports = ({ supporterData }) => {
                 </div>
 
                 <LineChart
-                  // newCertificates={newCertificates}
-                  // repCertificates={repCertificates}
-                  // period={"Last 7 Days"}
+                  newDLArr={newDLArr}
+                  repDLArr={repDLArr}
                   labels={labels}
                 />
                 <div className={"reportBtnCon"}>
