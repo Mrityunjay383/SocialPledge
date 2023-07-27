@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import LineChart from "../../../Components/Supporter/LineChart";
 import CtaBtn from "../../../Components/Original/CtaBtn";
 import "./index.css";
+import { Dna } from "react-loader-spinner";
 
 const SupReports = ({ supporterData }) => {
   const navigate = useNavigate();
@@ -31,13 +32,15 @@ const SupReports = ({ supporterData }) => {
     if (res.status === 200) {
       setLabels(res.data.labels);
       setNewDLArr(res.data.newDLArr);
-      setRepDLArr(res.data.repDLArr);
-      // setNewCertificates(setLabels.newCertificates);
-      // setRepCertificates(res.data.repCertificates);
+      await setRepDLArr(res.data.repDLArr);
+      setIsDataLoaded(true);
     } else {
       toast.error("Some Error occurred!");
     }
   };
+
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
   useEffect(() => {
     getReportData();
   }, [period]);
@@ -61,14 +64,30 @@ const SupReports = ({ supporterData }) => {
                   </select>
                 </div>
 
-                <LineChart
-                  newDLArr={newDLArr}
-                  repDLArr={repDLArr}
-                  labels={labels}
-                />
-                <div className={"reportBtnCon"}>
-                  <CtaBtn Text={"Download Report"} fontSize={16} />
-                </div>
+                {isDataLoaded ? (
+                  <div>
+                    <LineChart
+                      newDLArr={newDLArr}
+                      repDLArr={repDLArr}
+                      labels={labels}
+                    />
+                    <div className={"reportBtnCon"}>
+                      <CtaBtn Text={"Download Report"} fontSize={16} />
+                    </div>
+                  </div>
+                ) : (
+                  <div className={"loadingCon"}>
+                    <Dna
+                      visible={true}
+                      height="80"
+                      width="80"
+                      ariaLabel="dna-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="dna-wrapper"
+                    />
+                    <p>Generating report data for you, please wait</p>
+                  </div>
+                )}
               </div>
             </div>
 
