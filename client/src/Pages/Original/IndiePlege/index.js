@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { toast } from "react-toastify";
 
@@ -38,6 +38,7 @@ function getAnimationSettings(originXA, originXB) {
 }
 
 const IndiePledge = ({ userData }) => {
+  const navigate = useNavigate();
   const { pledgeName } = useParams();
 
   //Animation
@@ -77,13 +78,22 @@ const IndiePledge = ({ userData }) => {
   const [supporterData, setSupporterData] = useState({});
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
 
+  const [isPledgeLive, setIsPledgeLive] = useState(false);
+
   const [pledgeDataLoaded, setPledgeDataLoaded] = useState(false);
   const getPledgeData = async () => {
     const res = await Pledge.getIndiePledge({ pledgeName });
 
     if (res.status === 200) {
-      await setPledgeData(res.data.pledge);
-      setPledgeDataLoaded(true);
+      if (res.data.pledge.liveDate * 1000 < new Date().getTime()) {
+        await setIsPledgeLive(true);
+        setPledgeData(res.data.pledge);
+        getSupporter();
+        setPledgeDataLoaded(true);
+      } else {
+        toast.error(`Sorry, ${res.data.pledge.name} is not live yet`);
+        navigate("/");
+      }
     }
   };
 
@@ -98,7 +108,6 @@ const IndiePledge = ({ userData }) => {
 
   useEffect(() => {
     getPledgeData();
-    getSupporter();
   }, []);
 
   const [qrURL, setQrURL] = useState("");
@@ -150,93 +159,100 @@ const IndiePledge = ({ userData }) => {
 
   return (
     <div className={"pledgeSection"}>
-      {pledgeDataLoaded && supporterDataLoaded ? (
-        <div className={"row mainSection"}>
-          <div className={"col-lg-8 pledgeImgCon"}>
-            {isCanvasMounted ? (
-              <img src={imgSrc} className={"pledgeImg"} alt="" />
-            ) : (
-              <div className={"loadingCon"}>
-                <Dna
-                  visible={true}
-                  height="80"
-                  width="80"
-                  ariaLabel="dna-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="dna-wrapper"
+      {isPledgeLive &&
+        (pledgeDataLoaded && supporterDataLoaded ? (
+          <div className={"row mainSection"}>
+            <div className={"col-lg-8 pledgeImgCon"}>
+              {isCanvasMounted ? (
+                <img src={imgSrc} className={"pledgeImg"} alt="" />
+              ) : (
+                <div className={"loadingCon"}>
+                  <Dna
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="dna-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="dna-wrapper"
+                  />
+                  <p>
+                    Generating a personalize pledge certificate for you, please
+                    wait
+                  </p>
+                </div>
+              )}
+              <Canvas
+                pledgeData={pledgeData}
+                userName={userData.name}
+                qrURL={qrURL}
+                setIsCanvasMount={setIsCanvasMount}
+                supporterData={supporterData}
+              />
+            </div>
+
+            <div className={"col-lg-4 pledgeTextCon"}>
+              <h3>
+                <Typewriter
+                  options={{
+                    autoStart: true,
+                    delay: 40,
+                    cursor: ".",
+                  }}
+                  onInit={(typewriter) => {
+                    typewriter.typeString(pledgeData.name).start();
+                  }}
                 />
-                <p>
-                  Generating a personalize pledge certificate for you, please
-                  wait
-                </p>
-              </div>
-            )}
-            <Canvas
-              pledgeData={pledgeData}
-              userName={userData.name}
-              qrURL={qrURL}
-              setIsCanvasMount={setIsCanvasMount}
-              supporterData={supporterData}
+              </h3>
+              <p>
+                <Typewriter
+                  options={{
+                    autoStart: true,
+                    delay: 25,
+                    cursor: ".",
+                  }}
+                  onInit={(typewriter) => {
+                    typewriter
+                      .pauseFor(900)
+                      .typeString(
+                        pledgeData.about.substring(
+                          0,
+                          pledgeData.about.length - 1
+                        )
+                      )
+                      .start();
+                  }}
+                />
+              </p>
+
+              {isCanvasMounted && (
+                <CtaBtn
+                  Text={"I Accept"}
+                  fontSize={16}
+                  onClick={downloadPledge}
+                />
+              )}
+            </div>
+
+            <ReactCanvasConfetti
+              refConfetti={getInstance}
+              style={canvasStyles}
             />
           </div>
-
-          <div className={"col-lg-4 pledgeTextCon"}>
-            <h3>
-              <Typewriter
-                options={{
-                  autoStart: true,
-                  delay: 40,
-                  cursor: ".",
-                }}
-                onInit={(typewriter) => {
-                  typewriter.typeString(pledgeData.name).start();
-                }}
-              />
-            </h3>
+        ) : (
+          <div className={"loadingCon"}>
+            <Dna
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+            />
             <p>
-              <Typewriter
-                options={{
-                  autoStart: true,
-                  delay: 25,
-                  cursor: ".",
-                }}
-                onInit={(typewriter) => {
-                  typewriter
-                    .pauseFor(900)
-                    .typeString(
-                      pledgeData.about.substring(0, pledgeData.about.length - 1)
-                    )
-                    .start();
-                }}
-              />
+              Generating a personalize pledge certificate for you, please wait
             </p>
-
-            {isCanvasMounted && (
-              <CtaBtn
-                Text={"I Accept"}
-                fontSize={16}
-                onClick={downloadPledge}
-              />
-            )}
           </div>
-
-          <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-        </div>
-      ) : (
-        <div className={"loadingCon"}>
-          <Dna
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper"
-          />
-          <p>
-            Generating a personalize pledge certificate for you, please wait
-          </p>
-        </div>
-      )}
+        ))}
     </div>
   );
 };

@@ -68,8 +68,7 @@ const HomePledge = () => {
                         : pledge.about}
                     </p>
 
-                    {pledge.live &&
-                    pledge.liveDate * 1000 < new Date().getTime() ? (
+                    {pledge.liveDate * 1000 < new Date().getTime() ? (
                       <CtaBtn
                         Text={"Learn More"}
                         fontSize={14}

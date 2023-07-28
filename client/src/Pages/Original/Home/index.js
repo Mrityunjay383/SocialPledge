@@ -60,7 +60,7 @@ const Home = () => {
         <div>
           <CountUp end={121} enableScrollSpy={true} scrollSpyDelay={200} />+
         </div>
-        <p>Pledges has been already taken</p>
+        <p>Pledges have already been taken.</p>
       </div>
     </div>
   );
