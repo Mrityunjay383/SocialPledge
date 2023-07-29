@@ -129,14 +129,7 @@ const Original = () => {
               path="/certificate/:certificateUid"
               element={
                 <div>
-                  {!isLoggedIn ? (
-                    <AuthPage
-                      setIsLoggedIn={setIsLoggedIn}
-                      setIsLoading={setIsLoading}
-                    />
-                  ) : (
-                    <IndieCertificate />
-                  )}
+                  <IndieCertificate />
                 </div>
               }
             />
