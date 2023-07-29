@@ -23,8 +23,53 @@
     font-size: 20px;
 }
 
-.contactUs{}
+.user-box {
+    position: relative;
+    margin-top: 20px;
+}
 
+.user-box input, .user-box textarea {
+    /*width: 100%;*/
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    margin-right: 20px;
+}
+
+.user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.user-box input:focus, .user-box textarea:focus {
+    border-bottom: 1px solid #FF5A60;
+    border-right: 1px solid #FF5A60;
+}
+
+.user-box input:focus ~ label, .user-box textarea:focus ~ label{
+    top: -20px;
+    left: 0;
+    color: #FF5A60;
+    font-size: 12px;
+}
+
+.upLabel{
+    top: -20px !important;
+    left: 0 !important;
+    color: #FF5A60 !important;
+    font-size: 12px !important;
+}
 
 @media screen and (max-width: 991px) {
 
@@ -61,6 +106,10 @@
         width: 60vw;
     }
 
+    .contactUs{
+        width: 100%;
+        margin: 50px 0 80px;
+    }
 }
 
 @media screen and (max-width: 400px) {
