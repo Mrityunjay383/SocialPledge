@@ -1,5 +1,8 @@
 const Certificate = require("../model/certificate");
 const Supporter = require("../model/supporter");
+const User = require("../model/user");
+const Pledge = require("../model/pledge");
+
 const ShortUniqueId = require("short-unique-id");
 const QRCode = require("qrcode");
 
@@ -77,5 +80,32 @@ exports.newDownload = async (req, res) => {
   } catch (err) {
     console.log(`#2023203213951903 err`, err);
     res.status(400).json({ success: false });
+  }
+};
+
+exports.indieCertificate = async (req, res) => {
+  try {
+    const { certificateUid } = req.body;
+
+    const certificate = await Certificate.findOne({ uid: certificateUid });
+
+    if (!certificate) {
+      return res.status(200).json({ success: false });
+    }
+
+    const user = await User.findOne({ _id: certificate.userId });
+    const pledge = await Pledge.findOne({ _id: certificate.pledgeId });
+
+    const certificateData = {
+      userName: user.name,
+      issuedDate: certificate.createdAt,
+      pledgeName: pledge.name,
+      pledgePreview: pledge.previewURL,
+    };
+
+    res.status(200).json({ certificateData, success: true });
+  } catch (err) {
+    console.log(`#2023210175225231 err`, err);
+    res.status(400);
   }
 };

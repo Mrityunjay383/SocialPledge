@@ -1,0 +1,16 @@
+.MainCon{
+    min-height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.validCon{
+    background: #4EFFB5;
+    padding: 10px 25px 7px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #fff
+}
+.invalidCon{
+    background: #FF5A60;
+}

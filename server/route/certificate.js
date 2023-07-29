@@ -5,6 +5,6 @@ const controller = require("../controller/certificate");
 const { valToken } = require("../middleware/auth");
 
 router.post("/new_download", valToken, controller.newDownload);
-// router.get("/get_ava", valToken, controller.getAvaSup);
+router.post("/get_indie_certificate", controller.indieCertificate);
 
 module.exports = router;

@@ -63,7 +63,7 @@ const SupReports = ({ supporterData }) => {
       <SupHeader supporterData={supporterData} />
 
       <div className={"midCon"}>
-        <div className="container pt-2">
+        <div className="graphCon">
           <div className="row align-items-stretch">
             <div className="c-dashboardInfo col-lg-12">
               <div className="wrap">

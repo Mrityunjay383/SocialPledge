@@ -29,7 +29,7 @@ const convertNums = (num) => {
 
 const TopDashboard = ({ fetchedSupporterData, isTopDataLoaded }) => {
   return (
-    <div className="container pt-5">
+    <div className="graphCon pt-5">
       <div className="row align-items-stretch">
         <div className="c-dashboardInfo col-lg-3 col-md-6">
           <div className="wrap">

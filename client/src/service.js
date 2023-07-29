@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseUrl = "http://localhost:5000";
-const baseUrl = "https://socialpledge.cyclic.app";
+const baseUrl = "http://localhost:5000";
+// const baseUrl = "https://socialpledge.cyclic.app";
 
 const request = async (method, url, data) => {
   const config = {
@@ -67,6 +67,9 @@ export const Supporter = {
 export const Certificate = {
   newDownload: (data) => {
     return request("POST", "/certificate/new_download", data);
+  },
+  indieCertificate: (data) => {
+    return request("POST", "/certificate/get_indie_certificate", data);
   },
 };
 
