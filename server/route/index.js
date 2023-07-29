@@ -9,18 +9,19 @@ router.get("/", valToken, (req, res) => {
 });
 
 router.post("/contact_us", async (req, res) => {
-  const { name, email, message } = req.body;
+  try {
+    const { name, email, message } = req.body;
 
-  const result = await sendMail({
-    userName: name,
-    userEmail: email,
-    message,
-  });
+    await sendMail({
+      userName: name,
+      userEmail: email,
+      message,
+    });
 
-  if (result) {
-    res.status(200);
-  } else {
-    res.status(401);
+    res.status(200).send("Message Sent");
+  } catch (err) {
+    console.log(`#2023210211220801 err`, err);
+    res.status(401).send("Something went wrong");
   }
 });
 

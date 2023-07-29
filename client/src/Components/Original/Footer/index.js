@@ -15,12 +15,13 @@ const Footer = () => {
 
   const sendMail = async () => {
     if (contactData.name !== "" && contactData.email !== "") {
+      toast.success("Sending Message, please wait...");
       const res = await Index.contactUs(contactData);
 
       if (res.status === 200) {
-        toast.success("Message sent");
+        toast.success(res.data);
       } else {
-        toast.error("Something went wrong");
+        toast.error(res.data);
       }
     } else {
       toast.error("Name as well as email is required");
