@@ -27,9 +27,9 @@ function getAnimationSettings(originXA, originXB) {
   return {
     startVelocity: 30,
     spread: 360,
-    ticks: 150,
+    ticks: 200,
     zIndex: 10,
-    particleCount: 350,
+    particleCount: 150,
     origin: {
       x: randomInRange(originXA, originXB),
       y: Math.random() - 0.2,
