@@ -56,7 +56,9 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
               });
             }}
           />
-          <label>Mobile Number</label>
+          <label className={loginFormData.mobNo !== "" && "upLabel"}>
+            Mobile Number
+          </label>
         </div>
         <div className="user-box">
           <input
@@ -67,7 +69,9 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
               });
             }}
           />
-          <label>Password</label>
+          <label className={loginFormData.password !== "" && "upLabel"}>
+            Password
+          </label>
         </div>
 
         {btnClick ? (

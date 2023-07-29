@@ -14,7 +14,6 @@ import Header from "../Components/Original/Header";
 import IndiePledge from "../Pages/Original/IndiePlege";
 import About from "../Pages/Original/About";
 import Footer from "../Components/Original/Footer";
-import ContactUs from "../Pages/Original/ContactUs";
 import IndieCertificate from "../Pages/Original/IndieCertificate";
 
 const Original = () => {
@@ -95,15 +94,6 @@ const Original = () => {
               element={
                 <div>
                   <AuthPage setIsLoggedIn={setIsLoggedIn} />
-                </div>
-              }
-            />
-
-            <Route
-              path="/contact_us"
-              element={
-                <div>
-                  <ContactUs />
                 </div>
               }
             />

@@ -88,7 +88,9 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
               });
             }}
           />
-          <label>Full Name</label>
+          <label className={regFormData.name !== "" && "upLabel"}>
+            Full Name
+          </label>
         </div>
         <div className="user-box">
           <input
@@ -99,7 +101,9 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
               });
             }}
           />
-          <label>Mobile Number</label>
+          <label className={regFormData.mobNo !== "" && "upLabel"}>
+            Mobile Number
+          </label>
         </div>
 
         {regBtnText === "Submit" && (
@@ -113,7 +117,7 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
                   });
                 }}
               />
-              <label>OTP</label>
+              <label className={regFormData.otp !== "" && "upLabel"}>OTP</label>
             </div>
             <div className="user-box">
               <input
@@ -124,7 +128,9 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
                   });
                 }}
               />
-              <label>Password</label>
+              <label className={regFormData.password !== "" && "upLabel"}>
+                Password
+              </label>
             </div>
             {/*<div className="user-box">*/}
             {/*  <input type="password" />*/}

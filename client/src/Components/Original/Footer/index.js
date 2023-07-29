@@ -44,6 +44,10 @@ const Footer = () => {
         </div>
       </div>
 
+      <div className="contactUs">
+        <h4>Contact Us</h4>
+      </div>
+
       <div className="copy-input">
         <div className="copy-text">Copyright 2023. All Rights Reserved</div>
       </div>
