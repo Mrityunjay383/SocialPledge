@@ -7,8 +7,11 @@ import { toast } from "react-toastify";
 
 const Rocket = () => {
   const [isLaunched, setIsLaunched] = useState(false);
+  const [screenChange, setScreenChange] = useState(false);
 
   const launch = async () => {
+    setScreenChange(true);
+
     const res = await Pledge.launch();
 
     console.log(`#2023212235537271 res.data`, res.status);
@@ -22,7 +25,7 @@ const Rocket = () => {
 
   return (
     <div>
-      {!isLaunched ? (
+      {!screenChange ? (
         <div className="header">
           <div className={"logoCon"}>
             <img
@@ -101,7 +104,7 @@ const Rocket = () => {
           />
         </div>
       ) : (
-        <Launched />
+        <Launched isLaunched={isLaunched} />
       )}
     </div>
   );

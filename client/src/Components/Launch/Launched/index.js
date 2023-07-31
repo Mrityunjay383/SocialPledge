@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import CtaBtn from "../../Original/CtaBtn";
 import ReactCanvasConfetti from "react-canvas-confetti";
+import { ColorRing } from "react-loader-spinner";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -29,7 +30,7 @@ function getAnimationSettings(originXA, originXB) {
   };
 }
 
-const Launched = () => {
+const Launched = ({ isLaunched }) => {
   //Animation
   const refAnimationInstance = useRef(null);
   const [intervalId, setIntervalId] = useState();
@@ -63,9 +64,10 @@ const Launched = () => {
   }, [intervalId]);
 
   useEffect(() => {
-    console.log(`#2023212234716816 working`);
-    startAnimation();
-  }, []);
+    if (isLaunched) {
+      startAnimation();
+    }
+  }, [isLaunched]);
 
   return (
     <div className="header">
@@ -79,14 +81,29 @@ const Launched = () => {
       </div>
 
       <div className={"LaunchedText"}>
-        <h1>Congratulation!!</h1>
-        <h1>The Pledges are Lunched</h1>
-        <CtaBtn
-          Text={"Home"}
-          fontSize={16}
-          onClick={() => (window.location = "https://socialpledge.in")}
-        />
+        {isLaunched ? (
+          <div>
+            <h1>Congratulation!!</h1>
+            <h1>The Pledges are Lunched</h1>
+            <CtaBtn
+              Text={"Home"}
+              fontSize={16}
+              onClick={() => (window.location = "https://socialpledge.in")}
+            />
+          </div>
+        ) : (
+          <ColorRing
+            visible={true}
+            height="40"
+            width="40"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
+          />
+        )}
       </div>
+
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
     </div>
   );

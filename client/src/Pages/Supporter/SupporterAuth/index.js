@@ -47,6 +47,11 @@ const SupporterAuth = () => {
             type="password"
             id="password"
             placeholder="Enter your password"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                loginSubmit();
+              }
+            }}
             onChange={(e) => {
               setPassword(e.target.value);
             }}

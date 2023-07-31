@@ -7,8 +7,6 @@ const LaunchLogin = ({ setIsLoggedIn }) => {
 
   const loginSubmit = async () => {
     if (password === "SocialPledge@launch0101") {
-      toast.success("Login Successful");
-
       setIsLoggedIn(true);
     } else {
       toast.error("Incorrect Password!!");
@@ -25,6 +23,11 @@ const LaunchLogin = ({ setIsLoggedIn }) => {
             placeholder="Enter the password"
             onChange={(e) => {
               setPassword(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                loginSubmit();
+              }
             }}
           />
 

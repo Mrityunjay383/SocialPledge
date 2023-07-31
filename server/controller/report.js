@@ -13,14 +13,12 @@ exports.reportData = async (req, res) => {
 
     const { labels, tsArr } = genLabels(period);
 
-    const newCertificates = await Certificate.find({
+    const allCertificates = await Certificate.find({
       supporterId: supporter_id,
-      type: "new",
     });
 
-    const repCertificates = await Certificate.find({
-      supporterId: supporter_id,
-      type: "repeat",
+    allCertificates.sort((a, b) => {
+      return b.createdAt - a.createdAt;
     });
 
     const newDLArr = Array(labels.length).fill(0);
@@ -30,25 +28,19 @@ exports.reportData = async (req, res) => {
     const certificateIds = [];
 
     for (let i = 0; i < tsArr.length - 1; i++) {
-      for (let certificate of newCertificates) {
+      for (let certificate of allCertificates) {
         if (
           certificate.createdAt <= tsArr[i] &&
           certificate.createdAt >= tsArr[i + 1]
         ) {
           certificateIds.push(certificate._id);
-          newDLArr[i]++;
-          totalNewCount++;
-        }
-      }
 
-      for (let certificate of repCertificates) {
-        if (
-          certificate.createdAt <= tsArr[i] &&
-          certificate.createdAt >= tsArr[i + 1]
-        ) {
-          certificateIds.push(certificate._id);
-          repDLArr[i]++;
-          totalRepCount++;
+          if (certificate.type === "new") {
+            newDLArr[i]++;
+          } else if (certificate.type === "repeat") {
+            repDLArr[i]++;
+          }
+          totalNewCount++;
         }
       }
     }
@@ -72,6 +64,7 @@ exports.generateReport = async (req, res) => {
     const { certiIds } = req.body;
 
     const reportData = [];
+
     for (let certiId of certiIds) {
       const certificate = await Certificate.findOne({ _id: certiId });
 
@@ -84,6 +77,7 @@ exports.generateReport = async (req, res) => {
         "Download Type": certificate.type,
         Date: getDate(certificate.createdAt),
         Time: getTime(certificate.createdAt),
+        Link: `https://socialpledge.in/certificate/${certificate.uid}`,
       });
     }
 
