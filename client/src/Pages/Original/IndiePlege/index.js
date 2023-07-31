@@ -85,11 +85,16 @@ const IndiePledge = ({ userData }) => {
     const res = await Pledge.getIndiePledge({ pledgeName });
 
     if (res.status === 200) {
-      if (res.data.pledge.liveDate * 1000 < new Date().getTime()) {
-        await setIsPledgeLive(true);
-        setPledgeData(res.data.pledge);
-        getSupporter();
-        setPledgeDataLoaded(true);
+      if (res.data.pledge.live) {
+        if (res.data.pledge.endDate * 1000 > new Date().getTime()) {
+          await setIsPledgeLive(true);
+          setPledgeData(res.data.pledge);
+          getSupporter();
+          setPledgeDataLoaded(true);
+        } else {
+          toast.error(`Sorry, ${res.data.pledge.name} is closed`);
+          navigate("/");
+        }
       } else {
         toast.error(`Sorry, ${res.data.pledge.name} is not live yet`);
         navigate("/");

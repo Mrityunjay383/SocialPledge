@@ -47,9 +47,6 @@ const Canvas = ({
 
     const dateStr = getDate();
 
-    const supporter = `This cause is supported by: ${supporterData.name}`;
-    let xSup = width / 2 - supporter.length * 4.5;
-
     background.onload = function () {
       context.drawImage(background, 0, 0, width, height);
 
@@ -60,13 +57,10 @@ const Canvas = ({
       context.drawImage(supporterLogo, 870, 60, 100, 100 / dimRatio);
 
       context.font = `43px Roboto`;
-      context.fillText(userName, xPos, height / 2.19);
+      context.fillText(userName, xPos, 309);
 
       context.font = `22px Roboto`;
-      context.fillText(dateStr, 70, 695);
-
-      context.font = `22px Roboto`;
-      context.fillText(supporter, xSup, 700);
+      context.fillText(dateStr, 70, 700);
 
       setIsCanvasMount(true);
     };
