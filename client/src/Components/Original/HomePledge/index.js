@@ -68,7 +68,7 @@ const HomePledge = () => {
                         : pledge.about}
                     </p>
 
-                    {pledge.liveDate * 1000 < new Date().getTime() ? (
+                    {pledge.live ? (
                       <CtaBtn
                         Text={"Learn More"}
                         fontSize={14}
@@ -78,10 +78,13 @@ const HomePledge = () => {
                           )
                         }
                       />
+                    ) : new Date().getTime() < pledge.endDate * 1000 ||
+                      !pledge.endDate ? (
+                      <div className={"CoSo"}>Coming soon...</div>
                     ) : (
                       <div className={"CoSo"}>
-                        Coming soon... <br /> Live on{" "}
-                        {new Date(pledge.liveDate * 1000).toLocaleDateString(
+                        Closed on{" "}
+                        {new Date(pledge.endDate * 1000).toLocaleDateString(
                           "en-GB"
                         )}
                       </div>

@@ -18,7 +18,7 @@ const pledgeSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  liveDate: {
+  endDate: {
     type: Number,
     default: null,
   },
