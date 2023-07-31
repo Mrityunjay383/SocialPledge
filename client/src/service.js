@@ -47,6 +47,9 @@ export const Pledge = {
   getIndiePledge: (data) => {
     return request("POST", "/pledge/get_indie_pledge", data);
   },
+  launch: () => {
+    return request("GET", "/pledge/launch");
+  },
 };
 
 export const Supporter = {

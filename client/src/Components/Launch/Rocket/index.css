@@ -1,0 +1,248 @@
+/*Start Header*/
+.header {
+    background-image: linear-gradient(to left top, rgb(63, 2, 168), rgb(139, 63, 174));
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.logoCon{
+    height: 15vh;
+    text-align: center;
+}
+
+.logoCon img{
+    height: 100%
+}
+
+.header .modal-footer button {
+    background-color: #290856;
+    border-color: #2b0a56;
+}
+
+.header .wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    background: url(https://res.cloudinary.com/rocket-landing-page/image/upload/v1549206068/wave.png) no-repeat bottom;
+    background-size: cover;
+    animation: wave 1.4s linear infinite;
+}
+
+.header .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    background: url(https://res.cloudinary.com/rocket-landing-page/image/upload/v1549206065/stars.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+    animation: starwave 8s linear infinite;
+}
+
+.big-rocket {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 16%;
+    display: flex;
+    justify-content: center;
+    animation: rocket 5s linear infinite;
+    transform-origin: bottom;
+
+}
+
+.big-rocket:after {
+    content: "";
+    width: 100px;
+    height: 100px;
+    display: block;
+    background: url(https://res.cloudinary.com/rocket-landing-page/image/upload/v1549206064/fire-rock.png) no-repeat;
+    top: 95%;
+    position: absolute;
+    margin-left: 15px;
+}
+
+.shine {
+    top: -9%;
+    position: relative;
+    animation: shine 4s linear infinite;
+    left: -31%;
+}
+
+.shine-2 {
+    animation: shine 4s linear infinite 2s;
+}
+
+.moon {
+    position: absolute;
+    top: 20%;
+    right: 25%;
+    animation: swing 5s ease infinite;
+}
+
+.moon-1 {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    animation: moon 7s ease infinite;
+}
+
+.LaunchBtn{
+    position: absolute;
+    top: 90%;
+    left: 46vw;
+}
+
+.LaunchedText{
+    text-align: center;
+    margin: 30vh 0 0;
+    color: #fff;
+}
+
+.LaunchedText h1{
+    margin-bottom: 25px;
+}
+
+/*Start Responsive*/
+@media (min-width: 1024px) {
+    .main-menu .navbar {
+        padding: 2.5rem 1rem;
+    }
+
+    .main-menu .logo:before {
+        content: "";
+        background-size: contain;
+        background: url(https://res.cloudinary.com/rocket-landing-page/image/upload/v1549206064/rock-3.png) no-repeat center;
+        display: block;
+        width: 69px;
+        height: 50px;
+        line-height: 50px;
+        margin-bottom: 5px;
+    }
+
+    .main-menu {
+        display: flex;
+
+
+    }
+
+    .big-rocket {
+        bottom: 23%;
+    }
+
+}
+
+@media (max-width:1024px) {
+    .header .wave {
+        background: url(https://res.cloudinary.com/rocket-landing-page/image/upload/v1549206068/wave.png) no-repeat;
+        background-position: bottom center;
+        background-size: contain;
+    }
+
+    .header .stars {
+        background: url(https://res.cloudinary.com/rocket-landing-page/image/upload/v1549206065/stars.png);
+        background-position: center;
+        background-size: cover;
+    }
+
+
+}
+
+@media (max-width:768px) {
+    .main-menu div#navbarNavAltMarkup {
+        background: rgba(0, 0, 0, .3);
+    }
+
+}
+
+/*End Responsive*/
+/*..................................................................................*/
+/*Start animation 3d*/
+
+@keyframes shine {
+    from {
+        top: -35%;
+        left: 0;
+
+    }
+
+    to {
+        top: 100%;
+        left: 100%;
+    }
+}
+
+@keyframes wave {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    25% {
+        transform: translateY(5px);
+    }
+
+
+
+}
+
+@keyframes rocket {
+
+    0%,
+    100% {
+        transform: rotate(10deg);
+    ;
+
+    }
+
+    50% {
+        transform: rotate(-10deg);
+
+    }
+}
+
+@keyframes starwave {
+
+    0% {
+        transform: translateY(-500px);
+    }
+
+
+    95% {
+        transform: translateY(400px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+
+
+
+}
+@keyframes swing {
+
+    0%,
+    100% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes moon {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+

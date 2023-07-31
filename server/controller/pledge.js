@@ -46,3 +46,19 @@ exports.getIndiePledge = async (req, res) => {
     console.log(`#2023197132616177 err`, err);
   }
 };
+
+exports.launch = async (req, res) => {
+  try {
+    const allPledges = await Pledge.find({});
+
+    for (let pledge of allPledges) {
+      pledge.live = true;
+      await pledge.save();
+    }
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.log(`#202319712556255 err`, err);
+    res.status(400).json({ success: false });
+  }
+};

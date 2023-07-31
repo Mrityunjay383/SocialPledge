@@ -24,7 +24,9 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://supporter.localhost:3000",
+      "http://launch.localhost:3000",
       "https://supporter.socialpledge.in",
+      "https://launch.socialpledge.in",
       "https://socialpledge.in",
     ], //change origin based on domain main of the application
     optionsSuccessStatus: 200,

@@ -1,10 +1,10 @@
 import React from "react";
 import "./index.css";
 
-const CtaBtn = ({ Text, fontSize, onClick }) => {
+const CtaBtn = ({ Text, fontSize, onClick, className }) => {
   return (
     <button
-      className="button-3d"
+      className={`button-3d ${className}`}
       style={{ fontSize: `${fontSize}px` }}
       onClick={onClick}
     >
