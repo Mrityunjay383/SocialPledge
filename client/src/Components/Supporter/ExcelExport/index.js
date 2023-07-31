@@ -39,13 +39,15 @@ const ReportExcel = ({ certiIds, fileName }) => {
         r: i,
       });
 
-      cw.push({ wch: 23 });
-
       ws[cellName].l = { Target: reportData[i - 1].Link };
       ws[cellName].s = { font: { color: { rgb: "0645AD" } } };
     }
 
     cw.push({ wch: 23 });
+    cw.push({ wch: 23 });
+    cw.push({ wch: 16 });
+    cw.push({ wch: 12 });
+    cw.push({ wch: 12 });
     cw.push({ wch: 40 });
 
     ws["!cols"] = cw;

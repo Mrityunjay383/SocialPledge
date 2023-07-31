@@ -8,8 +8,12 @@
     font-family: 'Averia Serif Libre', cursive;
 }
 
+.logo-social{
+    width: 20%;
+}
+
 .logo-social img{
-    width: 15vw;
+    width: 100%;
 }
 
 .social-icon-list {
@@ -29,7 +33,7 @@
 }
 
 .user-box input, .user-box textarea {
-    /*width: 100%;*/
+    width: 90%;
     padding: 10px 0;
     font-size: 16px;
     color: #fff;
@@ -77,6 +81,11 @@
         align-items: center;
     }
 
+    .logo-social{
+        width: 33%;
+
+    }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -89,22 +98,19 @@
     }
 
     .logo-social{
-        margin-bottom: 40px;
-    }
+        margin-top: 40px;
+        width: 50%;
 
-    .logo-social img{
-        width: 30vw;
     }
 
 }
 
 @media screen and (max-width: 560px) {
     .logo-social{
-        margin-bottom: 20px;
+        margin-top: 20px;
+        width: 80%;
     }
-    .logo-social img{
-        width: 60vw;
-    }
+
 
     .contactUs{
         width: 100%;
