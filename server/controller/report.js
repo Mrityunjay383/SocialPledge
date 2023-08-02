@@ -61,10 +61,11 @@ exports.reportData = async (req, res) => {
 
 exports.generateReport = async (req, res) => {
   try {
-    const { certiIds } = req.body;
+    const { certiIds, totalCount } = req.body;
 
     const reportData = [];
 
+    let first = true;
     for (let certiId of certiIds) {
       const certificate = await Certificate.findOne({ _id: certiId });
 
@@ -78,7 +79,11 @@ exports.generateReport = async (req, res) => {
         Date: getDate(certificate.createdAt),
         Time: getTime(certificate.createdAt),
         Link: `https://socialpledge.in/certificate/${certificate.uid}`,
+        "Total New Downloads": first ? totalCount.new : null,
+        "Total Repeat Downloads": first ? totalCount.repeat : null,
       });
+
+      first = false;
     }
 
     res.status(200).json({ reportData });

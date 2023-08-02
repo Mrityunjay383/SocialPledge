@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Report } from "../../../service";
 import { toast } from "react-toastify";
 
-const ReportExcel = ({ certiIds, fileName }) => {
+const ReportExcel = ({ certiIds, totalCount, fileName }) => {
   const [reportData, setReportData] = useState([]);
 
   const fileType =
@@ -14,7 +14,7 @@ const ReportExcel = ({ certiIds, fileName }) => {
 
   const getExcelData = async () => {
     toast.success("Building the Report, please wait");
-    const res = await Report.genReport({ certiIds });
+    const res = await Report.genReport({ certiIds, totalCount });
 
     if (res.status === 200) {
       setReportData(res.data.reportData);
@@ -49,6 +49,8 @@ const ReportExcel = ({ certiIds, fileName }) => {
     cw.push({ wch: 12 });
     cw.push({ wch: 12 });
     cw.push({ wch: 40 });
+    cw.push({ wch: 20 });
+    cw.push({ wch: 20 });
 
     ws["!cols"] = cw;
 

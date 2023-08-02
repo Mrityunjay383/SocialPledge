@@ -128,6 +128,7 @@ const SupReports = ({ supporterData }) => {
                     <div className={"reportBtnCon"}>
                       <ReportExcel
                         certiIds={certiIds}
+                        totalCount={totalCount}
                         fileName={`SocialPledgeReport_${labels[0]}_${
                           labels[labels.length - 1]
                         }`}
