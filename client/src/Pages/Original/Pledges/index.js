@@ -23,8 +23,16 @@ const Pledges = () => {
     }
   };
 
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const changeFilter = async () => {
+    await setDataLoaded(false);
+    await fetchPledges();
+    await setDataLoaded(true);
+  };
+
   useEffect(() => {
-    fetchPledges();
+    changeFilter();
   }, [activeFilter]);
 
   const [showClass, setShowClass] = useState("unShow");
@@ -66,7 +74,7 @@ const Pledges = () => {
           </div>
         )}
 
-        {showClass === "unShow" && (
+        {!dataLoaded ? (
           <div className={"loadingCon"}>
             <BallTriangle
               height={100}
@@ -83,7 +91,7 @@ const Pledges = () => {
               wait
             </p>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

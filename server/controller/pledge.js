@@ -91,7 +91,7 @@ exports.launch = async (req, res) => {
     const allPledges = await Pledge.find({});
 
     for (let pledge of allPledges) {
-      pledge.live = true;
+      pledge.liveDate = new Date().getTime() / 1000;
       await pledge.save();
     }
 
