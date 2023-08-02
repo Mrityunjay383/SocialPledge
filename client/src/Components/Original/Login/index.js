@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import CtaBtn from "../CtaBtn";
 import { toast } from "react-toastify";
 import { Auth } from "../../../service";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 
 const Login = ({ setAuthToggle, setIsLoggedIn }) => {
   const navigate = useNavigate();
-  const { pledgeName } = useParams();
 
   const [loginFormData, setLoginFormData] = useState({
     mobNo: "",
@@ -29,11 +28,7 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
       if (res.status === 200) {
         setIsLoggedIn(true);
         toast.success("Login Successful!!");
-        if (pledgeName) {
-          navigate(`/pledge/${pledgeName}`);
-        } else {
-          navigate("/");
-        }
+        navigate(-1);
       } else {
         toast.error(res.data);
         setBtnClick(false);
@@ -50,6 +45,11 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="number"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                loginSubmit();
+              }
+            }}
             onChange={(e) => {
               setLoginFormData((curr) => {
                 return { ...curr, mobNo: e.target.value };
@@ -63,6 +63,11 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="password"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                loginSubmit();
+              }
+            }}
             onChange={(e) => {
               setLoginFormData((curr) => {
                 return { ...curr, password: e.target.value };

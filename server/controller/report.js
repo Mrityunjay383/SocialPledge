@@ -83,7 +83,9 @@ exports.generateReport = async (req, res) => {
         "Total Repeat Downloads": first ? totalCount.repeat : null,
       });
 
-      first = false;
+      if (first) {
+        first = false;
+      }
     }
 
     res.status(200).json({ reportData });

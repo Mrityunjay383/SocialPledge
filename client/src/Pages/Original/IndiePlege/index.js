@@ -37,7 +37,7 @@ function getAnimationSettings(originXA, originXB) {
   };
 }
 
-const IndiePledge = ({ userData }) => {
+const IndiePledge = ({ userData, isLoggedIn }) => {
   const navigate = useNavigate();
   const { pledgeName } = useParams();
 
@@ -85,8 +85,11 @@ const IndiePledge = ({ userData }) => {
     const res = await Pledge.getIndiePledge({ pledgeName });
 
     if (res.status === 200) {
-      if (res.data.pledge.live) {
-        if (res.data.pledge.endDate * 1000 > new Date().getTime()) {
+      if (res.data.pledge.liveDate * 1000 < new Date().getTime()) {
+        if (
+          res.data.pledge.endDate * 1000 > new Date().getTime() ||
+          !res.data.pledge.endDate
+        ) {
           await setIsPledgeLive(true);
           setPledgeData(res.data.pledge);
           getSupporter();
@@ -112,8 +115,12 @@ const IndiePledge = ({ userData }) => {
   };
 
   useEffect(() => {
-    getPledgeData();
-  }, []);
+    if (isLoggedIn) {
+      getPledgeData();
+    } else {
+      navigate("/auth");
+    }
+  }, [isLoggedIn]);
 
   const [qrURL, setQrURL] = useState("");
 

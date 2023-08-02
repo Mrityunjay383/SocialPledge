@@ -16,9 +16,10 @@ import About from "../Pages/Original/About";
 import Footer from "../Components/Original/Footer";
 import IndieCertificate from "../Pages/Original/IndieCertificate";
 import Pledges from "../Pages/Original/Pledges";
+import Profile from "../Pages/Original/Profile";
 
 const Original = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userData, setUserData] = useState({
     user_id: "",
     name: "",
@@ -45,6 +46,7 @@ const Original = () => {
       await setIsLoading(false);
     } catch (err) {
       console.log(`#202321419122932 err`, err);
+      await setIsLoggedIn(false);
       await setIsLoading(false);
       setInternetIssue(true);
     }
@@ -117,16 +119,24 @@ const Original = () => {
                   }
                 />
 
+                <Route
+                  path="/profile"
+                  element={
+                    <div>
+                      <Profile isLoggedIn={isLoggedIn} />
+                    </div>
+                  }
+                />
+
                 {/* Indie Pledge Route*/}
                 <Route
                   path="/pledge/:pledgeName"
                   element={
                     <div>
-                      {!isLoggedIn ? (
-                        <AuthPage setIsLoggedIn={setIsLoggedIn} />
-                      ) : (
-                        <IndiePledge userData={userData} />
-                      )}
+                      <IndiePledge
+                        isLoggedIn={isLoggedIn}
+                        userData={userData}
+                      />
                     </div>
                   }
                 />

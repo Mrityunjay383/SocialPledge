@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import CtaBtn from "../CtaBtn";
 import { Auth } from "../../../service";
 import { toast } from "react-toastify";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
 
 const Register = ({ setAuthToggle, setIsLoggedIn }) => {
-  const { pledgeName } = useParams();
-
   const navigate = useNavigate();
 
   const [regBtnText, srtRegBtnText] = useState("Send OTP");
@@ -57,11 +55,7 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
           if (res.status === 200) {
             setIsLoggedIn(true);
             toast.success("Account Created Successfully!!!");
-            if (pledgeName) {
-              navigate(`/pledge/${pledgeName}`);
-            } else {
-              navigate("/");
-            }
+            navigate(-1);
           } else {
             toast.error(res.data);
             setBtnClick(false);
@@ -82,6 +76,11 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="text"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                regSubmit();
+              }
+            }}
             onChange={(e) => {
               setRegFormData((curr) => {
                 return { ...curr, name: e.target.value };
@@ -95,6 +94,11 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="number"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                regSubmit();
+              }
+            }}
             onChange={(e) => {
               setRegFormData((curr) => {
                 return { ...curr, mobNo: e.target.value };
@@ -111,6 +115,11 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
             <div className="user-box">
               <input
                 type="number"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    regSubmit();
+                  }
+                }}
                 onChange={(e) => {
                   setRegFormData((curr) => {
                     return { ...curr, otp: e.target.value };
@@ -122,6 +131,11 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
             <div className="user-box">
               <input
                 type="password"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    regSubmit();
+                  }
+                }}
                 onChange={(e) => {
                   setRegFormData((curr) => {
                     return { ...curr, password: e.target.value };

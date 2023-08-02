@@ -1,0 +1,40 @@
+.ProfileSec{
+    padding: 10vh 6% 20vh;
+}
+.sidebar div{
+    align-items: flex-start !important;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    cursor: pointer
+}
+
+.profileCom{
+    padding: 0 !important;
+    height: 70vh;
+}
+.ComLine{
+    width: 50%;
+    background: #4effb5;
+    border-radius: 15px 0 0 0;
+    position: relative;
+    top: 0;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.DetailCom{
+    overflow-y: scroll;
+    min-height: 91%
+}
+
+.DetailCom::-webkit-scrollbar {
+    border-radius: 10px;
+    background: #FFF0EC;
+    width: 10px;
+}
+
+.DetailCom::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+    background: #FF5A60;
+}

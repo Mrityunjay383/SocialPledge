@@ -80,17 +80,30 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 </NavLink>
               </li>
             ) : (
-              <li className="nav-item">
-                <NavLink
-                  exact
-                  // to="/"
-                  activeclassname="active"
-                  className="nav-links"
-                  onClick={logout}
-                >
-                  LogOut
-                </NavLink>
-              </li>
+              <>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    to="/profile"
+                    activeclassname="active"
+                    className="nav-links"
+                    onClick={click ? handleClick : null}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    // to="/"
+                    activeclassname="active"
+                    className="nav-links"
+                    onClick={logout}
+                  >
+                    LogOut
+                  </NavLink>
+                </li>
+              </>
             )}
           </ul>
           <div className="nav-icon" onClick={handleClick}>

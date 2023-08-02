@@ -3,7 +3,7 @@ import CtaBtn from "../CtaBtn";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-const PledgeCon = ({ pledge, index, showClass, onLoad }) => {
+const PledgeCon = ({ pledge, showClass, onLoad }) => {
   const navigate = useNavigate();
 
   const Bottom = () => {
@@ -33,11 +33,11 @@ const PledgeCon = ({ pledge, index, showClass, onLoad }) => {
   };
 
   return (
-    <div className={`col-lg-3 indiePledgeCon ${showClass}`} key={index}>
+    <div className={`col-lg-3 indiePledgeCon ${showClass}`}>
       <article>
         <figure>
           {/*certificate logo*/}
-          <img src={pledge.previewURL} onLoad={() => onLoad(index)} alt="" />
+          <img src={pledge.previewURL} onLoad={() => onLoad()} alt="" />
         </figure>
 
         <div>

@@ -36,10 +36,12 @@ const Pledges = () => {
   }, [activeFilter]);
 
   const [showClass, setShowClass] = useState("unShow");
-  const onLoad = async (index) => {
-    if (index === pledgesData.length - 1) {
+  let imgLoadIndex = 0;
+  const onLoad = async () => {
+    if (imgLoadIndex === pledgesData.length - 1) {
       setShowClass("");
     }
+    imgLoadIndex++;
   };
 
   return (
@@ -62,6 +64,7 @@ const Pledges = () => {
             pledgesData.map((pledge, index) => {
               return (
                 <PledgeCon
+                  key={index}
                   pledge={pledge}
                   index={index}
                   onLoad={onLoad}

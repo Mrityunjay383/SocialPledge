@@ -23,10 +23,12 @@ const HomePledge = () => {
   };
 
   const [showClass, setShowClass] = useState("unShow");
-  const onLoad = async (index) => {
-    if (index === allPledgeData.length - 1) {
+  let imgLoadIndex = 0;
+  const onLoad = async () => {
+    if (imgLoadIndex === allPledgeData.length - 1) {
       setShowClass("");
     }
+    imgLoadIndex++;
   };
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const HomePledge = () => {
             return (
               <PledgeCon
                 pledge={pledge}
-                index={index}
+                key={index}
                 onLoad={onLoad}
                 showClass={showClass}
               />
