@@ -26,7 +26,11 @@ exports.createNew = async (req, res) => {
 
 exports.getHomePledges = async (req, res) => {
   try {
-    const allPledges = await Pledge.find({}).limit(4);
+    let allPledges = await Pledge.find({}).sort({
+      liveDate: -1,
+    });
+
+    allPledges = await allPledges.slice(0, 4);
 
     res.status(200).json({ allPledges });
   } catch (err) {
@@ -90,8 +94,10 @@ exports.launch = async (req, res) => {
   try {
     const allPledges = await Pledge.find({});
 
+    const currTime = Math.floor(new Date().getTime() / 1000);
+
     for (let pledge of allPledges) {
-      pledge.liveDate = new Date().getTime() / 1000;
+      pledge.liveDate = currTime;
       await pledge.save();
     }
 

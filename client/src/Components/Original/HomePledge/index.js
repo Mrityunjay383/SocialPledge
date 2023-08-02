@@ -4,8 +4,12 @@ import { Pledge } from "../../../service";
 import { BallTriangle } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import PledgeCon from "../PledgeCon";
+import CtaBtn from "../CtaBtn";
+import { useNavigate } from "react-router-dom";
 
 const HomePledge = () => {
+  const navigate = useNavigate();
+
   const [allPledgeData, setAllPledgeData] = useState([]);
 
   const getPledges = async () => {
@@ -68,6 +72,14 @@ const HomePledge = () => {
           </div>
         )}
       </div>
+
+      {showClass !== "unShow" && (
+        <CtaBtn
+          Text={"Show More"}
+          fontSize={17}
+          onClick={() => navigate("/pledges")}
+        />
+      )}
     </div>
   );
 };

@@ -26,21 +26,28 @@ const Original = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [internetIssue, setInternetIssue] = useState(false);
   const valLogin = async () => {
-    const res = await Auth.root();
+    try {
+      const res = await Auth.root();
 
-    if (res.status === 200) {
-      await setUserData({
-        user_id: res.data.user.user_id,
-        name: res.data.user.name,
-      });
-      await setIsLoggedIn(true);
-    } else {
-      await setUserData({ user_id: "", name: "" });
-      await setIsLoggedIn(false);
+      if (res.status === 200) {
+        await setUserData({
+          user_id: res.data.user.user_id,
+          name: res.data.user.name,
+        });
+        await setIsLoggedIn(true);
+      } else {
+        await setUserData({ user_id: "", name: "" });
+        await setIsLoggedIn(false);
+      }
+
+      await setIsLoading(false);
+    } catch (err) {
+      console.log(`#202321419122932 err`, err);
+      await setIsLoading(false);
+      setInternetIssue(true);
     }
-
-    await setIsLoading(false);
   };
 
   const authFunc = async () => {
@@ -66,73 +73,90 @@ const Original = () => {
         >
           <ToastContainer />
 
-          <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          {!internetIssue ? (
+            <div>
+              <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
-          <Routes>
-            {/*Home Route have Landing Page */}
-            <Route
-              path="/"
-              element={
-                <div>
-                  <Home />
-                </div>
-              }
-            />
+              <Routes>
+                {/*Home Route have Landing Page */}
+                <Route
+                  path="/"
+                  element={
+                    <div>
+                      <Home />
+                    </div>
+                  }
+                />
 
-            {/*Home Route have Landing Page */}
-            <Route
-              path="/about"
-              element={
-                <div>
-                  <About />
-                </div>
-              }
-            />
+                {/*Home Route have Landing Page */}
+                <Route
+                  path="/about"
+                  element={
+                    <div>
+                      <About />
+                    </div>
+                  }
+                />
 
-            {/*Auth Route have Login Register */}
-            <Route
-              path="/auth"
-              element={
-                <div>
-                  <AuthPage setIsLoggedIn={setIsLoggedIn} />
-                </div>
-              }
-            />
+                {/*Auth Route have Login Register */}
+                <Route
+                  path="/auth"
+                  element={
+                    <div>
+                      <AuthPage setIsLoggedIn={setIsLoggedIn} />
+                    </div>
+                  }
+                />
 
-            <Route
-              path="/pledges"
-              element={
-                <div>
-                  <Pledges />
-                </div>
-              }
-            />
+                <Route
+                  path="/pledges"
+                  element={
+                    <div>
+                      <Pledges />
+                    </div>
+                  }
+                />
 
-            {/* Indie Pledge Route*/}
-            <Route
-              path="/pledge/:pledgeName"
-              element={
-                <div>
-                  {!isLoggedIn ? (
-                    <AuthPage setIsLoggedIn={setIsLoggedIn} />
-                  ) : (
-                    <IndiePledge userData={userData} />
-                  )}
-                </div>
-              }
-            />
+                {/* Indie Pledge Route*/}
+                <Route
+                  path="/pledge/:pledgeName"
+                  element={
+                    <div>
+                      {!isLoggedIn ? (
+                        <AuthPage setIsLoggedIn={setIsLoggedIn} />
+                      ) : (
+                        <IndiePledge userData={userData} />
+                      )}
+                    </div>
+                  }
+                />
 
-            <Route
-              path="/certificate/:certificateUid"
-              element={
-                <div>
-                  <IndieCertificate />
-                </div>
-              }
-            />
-          </Routes>
+                <Route
+                  path="/certificate/:certificateUid"
+                  element={
+                    <div>
+                      <IndieCertificate />
+                    </div>
+                  }
+                />
+              </Routes>
 
-          <Footer />
+              <Footer />
+            </div>
+          ) : (
+            <div className={"rootSup"}>
+              <img
+                src={
+                  "https://res.cloudinary.com/ddb1evz5g/image/upload/v1689918515/SocialPledgeLogo_usyssj.png"
+                }
+                alt={"SocialPledgeLogo"}
+              />
+
+              <p className={"fiChild"}>There is some internal server issue.</p>
+
+              <p className={"SecChild"}>Please try again in some time</p>
+            </div>
+          )}
         </LoadingScreen>
       </div>
     </Router>
