@@ -15,6 +15,7 @@ import IndiePledge from "../Pages/Original/IndiePlege";
 import About from "../Pages/Original/About";
 import Footer from "../Components/Original/Footer";
 import IndieCertificate from "../Pages/Original/IndieCertificate";
+import Pledges from "../Pages/Original/Pledges";
 
 const Original = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -98,16 +99,22 @@ const Original = () => {
               }
             />
 
+            <Route
+              path="/pledges"
+              element={
+                <div>
+                  <Pledges />
+                </div>
+              }
+            />
+
             {/* Indie Pledge Route*/}
             <Route
               path="/pledge/:pledgeName"
               element={
                 <div>
                   {!isLoggedIn ? (
-                    <AuthPage
-                      setIsLoggedIn={setIsLoggedIn}
-                      setIsLoading={setIsLoading}
-                    />
+                    <AuthPage setIsLoggedIn={setIsLoggedIn} />
                   ) : (
                     <IndiePledge userData={userData} />
                   )}

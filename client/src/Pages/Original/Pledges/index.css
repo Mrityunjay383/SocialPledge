@@ -1,0 +1,30 @@
+.filterCon{
+    display: flex;
+    overflow-x: scroll;
+}
+
+.filterCon::-webkit-scrollbar {
+    width: 10px;
+}
+
+.filterCon div{
+    /*background: #FFF0EC;*/
+    background: #ECECEC;
+    color: #444;
+    margin-right: 20px;
+    padding: 12px 20px 10px;
+    cursor: pointer;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.filterCon div:hover{
+    background: #FFF0EC;
+    color: #FF5A60;
+}
+
+.active{
+    background: #FFF0EC !important;
+    color: #FF5A60 !important;
+}

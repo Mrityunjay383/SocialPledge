@@ -26,12 +26,16 @@ exports.createNew = async (req, res) => {
 
 exports.getHomePledges = async (req, res) => {
   try {
-    const allPledges = await Pledge.find({});
+    const allPledges = await Pledge.find({}).limit(4);
 
     res.status(200).json({ allPledges });
   } catch (err) {
     console.log(`#202319712556255 err`, err);
   }
+};
+
+exports.fetchPledges = async (req, res) => {
+  const { filter } = req.body;
 };
 
 exports.getIndiePledge = async (req, res) => {
