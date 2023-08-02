@@ -57,22 +57,24 @@ const Pledges = () => {
       </div>
 
       <div className="row pledgeCon">
-        {pledgesData.length !== 0 ? (
-          pledgesData.map((pledge, index) => {
-            return (
-              <PledgeCon
-                pledge={pledge}
-                index={index}
-                onLoad={onLoad}
-                showClass={showClass}
-              />
-            );
-          })
-        ) : (
-          <div className={"loadingCon CoSo"}>
-            No {filters[activeFilter]} Pledge Found!
-          </div>
-        )}
+        {dataLoaded ? (
+          pledgesData.length !== 0 ? (
+            pledgesData.map((pledge, index) => {
+              return (
+                <PledgeCon
+                  pledge={pledge}
+                  index={index}
+                  onLoad={onLoad}
+                  showClass={showClass}
+                />
+              );
+            })
+          ) : (
+            <div className={"loadingCon CoSo"}>
+              No {filters[activeFilter]} Pledge Found!
+            </div>
+          )
+        ) : null}
 
         {!dataLoaded ? (
           <div className={"loadingCon"}>
