@@ -70,7 +70,7 @@ const HomePledge = () => {
 
                     {pledge.live ? (
                       <CtaBtn
-                        Text={"Learn More"}
+                        Text={"Take this Pledge"}
                         fontSize={14}
                         onClick={() =>
                           navigate(
