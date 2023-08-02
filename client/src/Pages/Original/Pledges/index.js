@@ -70,9 +70,7 @@ const Pledges = () => {
               );
             })
           ) : (
-            <div className={"loadingCon CoSo"}>
-              No {filters[activeFilter]} Pledge Found!
-            </div>
+            <div>No {filters[activeFilter]} Pledge Found !!</div>
           )
         ) : null}
 
