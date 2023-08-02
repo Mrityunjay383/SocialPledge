@@ -22,6 +22,36 @@ const Canvas = ({
     return image;
   };
 
+  function drawTextBG(ctx, txt, font, x, y) {
+    /// lets save current state as we make a lot of changes
+    ctx.save();
+
+    /// set font
+    ctx.font = font;
+
+    /// draw text from top - makes life easier at the moment
+    ctx.textBaseline = "top";
+
+    /// color for background
+    ctx.fillStyle = "#fff";
+
+    /// get width of text
+    let width = ctx.measureText(txt).width + 20;
+    let height = parseInt(font, 10) + 10;
+
+    /// draw background rect assuming height of font
+    ctx.fillRect(x, y, width, height);
+
+    /// text color
+    ctx.fillStyle = "#000";
+
+    /// draw text on top
+    ctx.fillText(txt, x + 10, y + 5);
+
+    /// restore original state
+    ctx.restore();
+  }
+
   useEffect(() => {
     setIsCanvasMount(false);
 
@@ -59,8 +89,7 @@ const Canvas = ({
       context.font = `43px Roboto`;
       context.fillText(userName, xPos, 309);
 
-      context.font = `22px Roboto`;
-      context.fillText(dateStr, 70, 700);
+      drawTextBG(context, dateStr, `24px Roboto`, 55, 685);
 
       setIsCanvasMount(true);
     };
