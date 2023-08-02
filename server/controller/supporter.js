@@ -97,10 +97,10 @@ exports.updateSup = async (req, res) => {
       return res.status(404).send("Supporter Not Found!");
     }
 
-    if (type === "Name") {
+    if (type === "UserName") {
       supporter.name = updatedVal;
-    } else if (type === "UserName") {
-      supporter.userName = updatedVal;
+    } else if (type === "Password") {
+      supporter.password = await bcrypt.hash(updatedVal, 10);
     }
     await supporter.save();
 

@@ -37,10 +37,11 @@ exports.reportData = async (req, res) => {
 
           if (certificate.type === "new") {
             newDLArr[i]++;
+            totalNewCount++;
           } else if (certificate.type === "repeat") {
             repDLArr[i]++;
+            totalRepCount++;
           }
-          totalNewCount++;
         }
       }
     }

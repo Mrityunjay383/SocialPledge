@@ -36,18 +36,13 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
       return {
         ...curr,
         type,
-        updatedVal:
-          type === "Name" ? supporterData.name : supporterData.userName,
+        updatedVal: type === "UserName" ? supporterData.userName : "",
       };
     });
   };
 
   const updateChange = async () => {
-    if (changeVar.type === "Name") {
-      if (supporterData.name === changeVar.updatedVal) {
-        return toast.error("Updated Name can't be same as previous one");
-      }
-    } else if (changeVar.type === "UserName") {
+    if (changeVar.type === "UserName") {
       if (supporterData.userName === changeVar.updatedVal) {
         return toast.error("Updated UserName can't be same as previous one");
       }
@@ -105,6 +100,7 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
                   placeholder={`Enter new ${changeVar.type}`}
                   value={changeVar.updatedVal}
                   autoFocus={true}
+                  type={changeVar.type === "Password" ? "password" : "text"}
                   style={{
                     width: "100%",
                     border: "1px solid gray",
@@ -124,16 +120,16 @@ const SupporterProfile = ({ supporterData, setIsLoggedIn }) => {
             <div className="inner">
               <div>
                 <CtaBtn
-                  Text={"Change Name"}
+                  Text={"Change Username"}
                   fontSize={13}
-                  onClick={() => changeUpdateCon("Name")}
+                  onClick={() => changeUpdateCon("UserName")}
                 />
               </div>
               <div>
                 <CtaBtn
-                  Text={"Change Username"}
+                  Text={"Change Password"}
                   fontSize={13}
-                  onClick={() => changeUpdateCon("UserName")}
+                  onClick={() => changeUpdateCon("Password")}
                 />
               </div>
             </div>
