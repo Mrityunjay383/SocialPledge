@@ -14,9 +14,8 @@ const pledgeSchema = new mongoose.Schema({
   previewURL: {
     type: String,
   },
-  live: {
-    type: Boolean,
-    default: true,
+  liveDate: {
+    type: Number,
   },
   endDate: {
     type: Number,

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import CtaBtn from "../CtaBtn";
 import "./index.css";
 import { Pledge } from "../../../service";
-import { useNavigate } from "react-router-dom";
 import { BallTriangle } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import PledgeCon from "../PledgeCon";
 
 const HomePledge = () => {
-  const navigate = useNavigate();
-
   const [allPledgeData, setAllPledgeData] = useState([]);
 
   const getPledges = async () => {
@@ -46,52 +43,12 @@ const HomePledge = () => {
         {allPledgeData.length !== 0 &&
           allPledgeData.map((pledge, index) => {
             return (
-              <div
-                className={`col-lg-3 indiePledgeCon ${showClass}`}
-                key={index}
-              >
-                <article>
-                  <figure>
-                    {/*certificate logo*/}
-                    <img
-                      src={pledge.previewURL}
-                      onLoad={() => onLoad(index)}
-                      alt=""
-                    />
-                  </figure>
-
-                  <div>
-                    <h3>{pledge.name}</h3>
-                    <p>
-                      {pledge.about.length >= 105
-                        ? `${pledge.about.substring(0, 105)}...`
-                        : pledge.about}
-                    </p>
-
-                    {pledge.live ? (
-                      <CtaBtn
-                        Text={"Take this Pledge"}
-                        fontSize={14}
-                        onClick={() =>
-                          navigate(
-                            `/pledge/${pledge.name.replaceAll(" ", "_")}`
-                          )
-                        }
-                      />
-                    ) : new Date().getTime() < pledge.endDate * 1000 ||
-                      !pledge.endDate ? (
-                      <div className={"CoSo"}>Coming soon...</div>
-                    ) : (
-                      <div className={"CoSo"}>
-                        Closed on{" "}
-                        {new Date(pledge.endDate * 1000).toLocaleDateString(
-                          "en-GB"
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </article>
-              </div>
+              <PledgeCon
+                pledge={pledge}
+                index={index}
+                onLoad={onLoad}
+                showClass={showClass}
+              />
             );
           })}
 

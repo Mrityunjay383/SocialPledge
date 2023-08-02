@@ -2,9 +2,9 @@ const Pledge = require("../model/pledge");
 
 exports.createNew = async (req, res) => {
   try {
-    const { name, about, url, previewURL, live, endDate } = req.body;
+    const { name, about, url, previewURL, liveDate, endDate } = req.body;
 
-    if (!(name && about && url && previewURL)) {
+    if (!(name && about && url && previewURL && liveDate)) {
       return res.status(404).send("All fields are required");
     }
 
@@ -13,7 +13,7 @@ exports.createNew = async (req, res) => {
       about,
       url,
       previewURL,
-      live,
+      liveDate,
       endDate: endDate ? endDate : null,
     });
 
@@ -35,7 +35,42 @@ exports.getHomePledges = async (req, res) => {
 };
 
 exports.fetchPledges = async (req, res) => {
-  const { filter } = req.body;
+  try {
+    const { filter } = req.body;
+
+    const currTime = new Date().getTime() / 1000;
+
+    let pledgesData = [];
+    if (filter === "All") {
+      pledgesData = await Pledge.find({}).sort({
+        liveDate: -1,
+      });
+    } else if (filter === "Live") {
+      pledgesData = await Pledge.find({
+        liveDate: { $lt: currTime },
+        $or: [{ endDate: { $gt: currTime } }, { endDate: null }],
+      }).sort({
+        liveDate: -1,
+      });
+    } else if (filter === "Coming Soon") {
+      pledgesData = await Pledge.find({
+        liveDate: { $gt: currTime },
+      }).sort({
+        liveDate: -1,
+      });
+    } else if (filter === "Closed") {
+      pledgesData = await Pledge.find({
+        $or: [{ endDate: { $lt: currTime } }, { endDate: !null }],
+      }).sort({
+        endDate: -1,
+      });
+    }
+
+    res.status(200).json({ pledgesData });
+  } catch (err) {
+    console.log(`#202321416422335 err`, err);
+    res.status(500).json({ success: false });
+  }
 };
 
 exports.getIndiePledge = async (req, res) => {
