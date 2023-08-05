@@ -75,14 +75,30 @@
     font-size: 12px !important;
 }
 
+/*.contactModel{*/
+/*    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
 .modelHead{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10vh;
     /*align-items: center;*/
+}
+
+.modelHead h3{
+    /*color: #FF5A60;*/
+    margin-bottom: 0;
 }
 
 .modelHead div{
     cursor: pointer;
+    font-size: 20px;
+}
+
+.modelHead div:hover{
+    color: #FF5A60;
+
 }
 
 @media screen and (max-width: 991px) {

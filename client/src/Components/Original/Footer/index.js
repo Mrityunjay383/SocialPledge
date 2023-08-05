@@ -21,7 +21,10 @@ const customStyles = {
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
+    zIndex: "100",
     transform: "translate(-50%, -50%)",
+    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+    padding: "5vh 10vh 10vh",
   },
 };
 
@@ -61,80 +64,82 @@ const Footer = () => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className={"modelHead"}>
-          <h3>Contact Us</h3>
-          <div onClick={() => setIsOpen(false)}>
-            <FaWindowClose />
+        <div className={"contactModel"}>
+          <div className={"modelHead"}>
+            <h3>Contact Us</h3>
+            <div onClick={() => setIsOpen(false)}>
+              <FaWindowClose />
+            </div>
           </div>
-        </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <div className="user-box">
-            <input
-              type="text"
-              onChange={(e) => {
-                setContactData((curr) => {
-                  return { ...curr, name: e.target.value };
-                });
-              }}
-            />
-            <label className={contactData.name !== "" && "upLabel"}>
-              Full Name
-            </label>
-          </div>
-          <div className="user-box">
-            <input
-              type="email"
-              onChange={(e) => {
-                setContactData((curr) => {
-                  return { ...curr, email: e.target.value };
-                });
-              }}
-            />
-            <label className={contactData.email !== "" && "upLabel"}>
-              Email
-            </label>
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-          }}
-        >
           <div
-            className="user-box"
             style={{
-              flex: 1,
-              marginRight: "20px",
               display: "flex",
-              // justifyContent: "space-between",
+              justifyContent: "space-between",
+            }}
+          >
+            <div className="user-box">
+              <input
+                type="text"
+                onChange={(e) => {
+                  setContactData((curr) => {
+                    return { ...curr, name: e.target.value };
+                  });
+                }}
+              />
+              <label className={contactData.name !== "" && "upLabel"}>
+                Full Name
+              </label>
+            </div>
+            <div className="user-box">
+              <input
+                type="email"
+                onChange={(e) => {
+                  setContactData((curr) => {
+                    return { ...curr, email: e.target.value };
+                  });
+                }}
+              />
+              <label className={contactData.email !== "" && "upLabel"}>
+                Email
+              </label>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
               alignItems: "flex-end",
             }}
           >
-            <textarea
+            <div
+              className="user-box"
               style={{
-                width: "100%",
+                flex: 1,
+                marginRight: "20px",
+                display: "flex",
+                // justifyContent: "space-between",
+                alignItems: "flex-end",
               }}
-              onChange={(e) => {
-                setContactData((curr) => {
-                  return { ...curr, message: e.target.value };
-                });
-              }}
-            />
-            <label className={contactData.message !== "" && "upLabel"}>
-              Message
-            </label>
-          </div>
+            >
+              <textarea
+                style={{
+                  width: "100%",
+                }}
+                onChange={(e) => {
+                  setContactData((curr) => {
+                    return { ...curr, message: e.target.value };
+                  });
+                }}
+              />
+              <label className={contactData.message !== "" && "upLabel"}>
+                Message
+              </label>
+            </div>
 
-          <CtaBtn Text={"Send"} onClick={sendMail} />
+            <CtaBtn Text={"Send"} onClick={sendMail} />
+          </div>
         </div>
       </Modal>
 
