@@ -1,15 +1,9 @@
 const nodemailer = require("nodemailer");
 
-exports.sendMail = async ({ userName, userEmail, message }) => {
+exports.sendMail = async ({ toEmail, subject, bodyMessage }) => {
   return new Promise((resolve, reject) => {
     //html mail template
-    const output = `
-          <div>
-            <h3>New Mail Revieved</h3>
-            <p>From: ${userName} ${userEmail}</p>
-            <p>Message: ${message}</p>
-          </div>
-        `;
+    const output = bodyMessage;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -26,9 +20,9 @@ exports.sendMail = async ({ userName, userEmail, message }) => {
     });
 
     let mailOptions = {
-      from: `Social Pledge<no-reply@socialpledge.in>`,
-      to: "socialpledge.in@gmail.com", //Change receiving email here
-      subject: `New Message Received`,
+      from: "Social Pledge<no-reply@socialpledge.in>",
+      to: toEmail, //Change receiving email here
+      subject,
       text: "",
       html: output,
     };

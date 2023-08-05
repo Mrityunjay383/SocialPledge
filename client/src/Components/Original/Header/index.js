@@ -44,18 +44,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               </NavLink>
             </li>
 
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/about"
-                activeclassname="active"
-                className="nav-links"
-                onClick={click ? handleClick : null}
-              >
-                About
-              </NavLink>
-            </li>
-
             {/*<li className="nav-item">*/}
             {/*  <NavLink*/}
             {/*    exact*/}
