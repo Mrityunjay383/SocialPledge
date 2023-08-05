@@ -13,6 +13,7 @@ import SupporterProfile from "../Pages/Supporter/SupporterProfile";
 import SupHome from "../Pages/Supporter/Home";
 import SupReports from "../Pages/Supporter/SupporterReports";
 import Footer from "../Components/Original/Footer";
+import ScrollToTop from "../ScrollToTop";
 
 const SupporterSec = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,6 +60,7 @@ const SupporterSec = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <LoadingScreen
           loading={isLoading}

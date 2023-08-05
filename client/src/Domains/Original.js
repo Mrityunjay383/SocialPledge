@@ -17,6 +17,7 @@ import Footer from "../Components/Original/Footer";
 import IndieCertificate from "../Pages/Original/IndieCertificate";
 import Pledges from "../Pages/Original/Pledges";
 import Profile from "../Pages/Original/Profile";
+import ScrollToTop from "../ScrollToTop";
 
 const Original = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -64,6 +65,7 @@ const Original = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <LoadingScreen
           loading={isLoading}
