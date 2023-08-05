@@ -1,12 +1,37 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./index.css";
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaWindowClose,
+  FaYoutube,
+} from "react-icons/fa";
 import CtaBtn from "../CtaBtn";
 import { toast } from "react-toastify";
 import { Index } from "../../../service";
 
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
+Modal.setAppElement("#root");
+
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
   const [contactData, setContactData] = useState({
     name: "",
     email: "",
@@ -15,6 +40,7 @@ const Footer = () => {
 
   const sendMail = async () => {
     if (contactData.name !== "" && contactData.email !== "") {
+      setIsOpen(false);
       toast.success("Sending Message, please wait...");
       const res = await Index.contactUs(contactData);
 
@@ -30,78 +56,95 @@ const Footer = () => {
 
   return (
     <div className="footer">
-      <div className="contactUs">
-        <h4>Contact Us</h4>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div className="user-box">
-              <input
-                type="text"
-                onChange={(e) => {
-                  setContactData((curr) => {
-                    return { ...curr, name: e.target.value };
-                  });
-                }}
-              />
-              <label className={contactData.name !== "" && "upLabel"}>
-                Full Name
-              </label>
-            </div>
-            <div className="user-box">
-              <input
-                type="email"
-                onChange={(e) => {
-                  setContactData((curr) => {
-                    return { ...curr, email: e.target.value };
-                  });
-                }}
-              />
-              <label className={contactData.email !== "" && "upLabel"}>
-                Email
-              </label>
-            </div>
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className={"modelHead"}>
+          <h3>Contact Us</h3>
+          <div onClick={() => setIsOpen(false)}>
+            <FaWindowClose />
           </div>
+        </div>
 
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <div className="user-box">
+            <input
+              type="text"
+              onChange={(e) => {
+                setContactData((curr) => {
+                  return { ...curr, name: e.target.value };
+                });
+              }}
+            />
+            <label className={contactData.name !== "" && "upLabel"}>
+              Full Name
+            </label>
+          </div>
+          <div className="user-box">
+            <input
+              type="email"
+              onChange={(e) => {
+                setContactData((curr) => {
+                  return { ...curr, email: e.target.value };
+                });
+              }}
+            />
+            <label className={contactData.email !== "" && "upLabel"}>
+              Email
+            </label>
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}
+        >
           <div
+            className="user-box"
             style={{
+              flex: 1,
+              marginRight: "20px",
               display: "flex",
-              justifyContent: "space-between",
+              // justifyContent: "space-between",
               alignItems: "flex-end",
             }}
           >
-            <div
-              className="user-box"
+            <textarea
               style={{
-                flex: 1,
-                marginRight: "20px",
-                display: "flex",
-                // justifyContent: "space-between",
-                alignItems: "flex-end",
+                width: "100%",
               }}
-            >
-              <textarea
-                style={{
-                  width: "100%",
-                }}
-                onChange={(e) => {
-                  setContactData((curr) => {
-                    return { ...curr, message: e.target.value };
-                  });
-                }}
-              />
-              <label className={contactData.message !== "" && "upLabel"}>
-                Message
-              </label>
-            </div>
-
-            <CtaBtn Text={"Send"} onClick={sendMail} />
+              onChange={(e) => {
+                setContactData((curr) => {
+                  return { ...curr, message: e.target.value };
+                });
+              }}
+            />
+            <label className={contactData.message !== "" && "upLabel"}>
+              Message
+            </label>
           </div>
+
+          <CtaBtn Text={"Send"} onClick={sendMail} />
         </div>
+      </Modal>
+
+      <div className="contactUs">
+        <h4 style={{ cursor: "pointer" }} onClick={() => setIsOpen(true)}>
+          Contact Us
+        </h4>
+        <h4 style={{ cursor: "pointer" }} onClick={() => navigate("/about")}>
+          About
+        </h4>
       </div>
 
       <div className="logo-social">

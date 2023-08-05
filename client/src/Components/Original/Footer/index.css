@@ -36,10 +36,10 @@
     width: 90%;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #333;
     border: none;
-    border-bottom: 1px solid #fff;
-    border-right: 1px solid #fff;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
     outline: none;
     background: transparent;
     margin-right: 20px;
@@ -51,7 +51,7 @@
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #333;
     pointer-events: none;
     transition: .5s;
 }
@@ -73,6 +73,16 @@
     left: 0 !important;
     color: #FF5A60 !important;
     font-size: 12px !important;
+}
+
+.modelHead{
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+}
+
+.modelHead div{
+    cursor: pointer;
 }
 
 @media screen and (max-width: 991px) {
