@@ -1,0 +1,7 @@
+.proRow{
+    width: 60%;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+}
+
+

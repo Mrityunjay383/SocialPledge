@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
 
-const sidebarArr = ["Personal Information", "Education", "Occupation"];
+const sidebarArr = ["Personal Details", "Education", "Address"];
 
 const Profile = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Profile = ({ isLoggedIn }) => {
       <div className={"col-lg-8 card profileCom"}>
         <div className={"ComLine"}></div>
         <div className={"DetailCom"}>
-          <div className={"ComDel"}> Test</div>
+          <ProfilePersonal />
         </div>
       </div>
     </div>
