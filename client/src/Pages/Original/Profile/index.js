@@ -4,6 +4,7 @@ import "./index.css";
 import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
 import { Index } from "../../../service";
 import { toast } from "react-toastify";
+import { MutatingDots } from "react-loader-spinner";
 
 const sidebarArr = ["Personal Details", "Education", "Address"];
 
@@ -95,7 +96,24 @@ const Profile = ({ isLoggedIn }) => {
       <div className={"col-lg-8 profileCom"}>
         <div className={"ComLine"}></div>
         <div className={"DetailCom"}>
-          {isDataLoaded && <DetailsComponent />}
+          {isDataLoaded ? (
+            <DetailsComponent />
+          ) : (
+            <div className={"loadingCon"}>
+              <MutatingDots
+                height="100"
+                width="100"
+                color="#FF5A60"
+                secondaryColor="#FF5A60"
+                radius="12.5"
+                ariaLabel="mutating-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+              <p>Fetching Profile Data, please wait...</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

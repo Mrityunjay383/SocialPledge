@@ -15,7 +15,7 @@
     border-radius: 0.2em 0.2em 0 0;
     padding: 0.4em;
     color: #555;
-    width: 200px;
+    width: 250px;
 }
 
 .delDate input {
@@ -23,7 +23,7 @@
     padding: 0.4em;
     border-radius: 0.2em 0.2em 0 0;
     color: #FF5A60;
-    width: 200px;
+    width: 250px;
 
 }
 
@@ -46,7 +46,7 @@
     appearance: none;
     border: none;
     outline: none;
-    width: 200px;
+    width: 250px;
     padding: 0.4em;
     background: #FFF0EC;
     color: #555;
