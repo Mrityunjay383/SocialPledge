@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
 import { Index } from "../../../service";
-import { MutatingDots } from "react-loader-spinner";
+import { MutatingDots, ThreeDots } from "react-loader-spinner";
 import ProfileEducation from "../../../Components/ProfileEducation";
 import ProfileAddress from "../../../Components/ProfileAddress";
 
@@ -101,11 +101,26 @@ const Profile = ({ isLoggedIn }) => {
         })}
       </div>
       <div className={"col-lg-8 profileCom"}>
-        <div className={"ComLine"}>
-          {stepsEle.map((ele) => {
-            return ele;
-          })}
-        </div>
+        {stepsEle.length !== 0 ? (
+          <div className={"ComLine"}>
+            {stepsEle.map((ele) => {
+              return ele;
+            })}
+          </div>
+        ) : (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="9"
+              color="#4effb5"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
+        )}
         <div className={"DetailCom"}>
           {isDataLoaded ? (
             <DetailsComponent />
