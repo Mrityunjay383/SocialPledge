@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
   address: {
     type: Object,
     default: {
+      title: "",
       country: "",
       state: "",
       city: "",

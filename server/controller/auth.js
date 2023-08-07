@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/user");
 const { sendOpt } = require("../helpers/genOtp");
 
+const OTPs = {};
 exports.otp = async (req, res) => {
   try {
     const { mobNo } = req.body;
@@ -19,7 +20,8 @@ exports.otp = async (req, res) => {
     const result = await sendOpt({ mobNo });
 
     if (result.success) {
-      res.status(200).json({ otp: result.otp });
+      OTPs[mobNo] = result.otp;
+      res.status(200).json({ success: true });
     }
   } catch (err) {
     console.log(`#2023197104341576 err`, err);
@@ -29,10 +31,16 @@ exports.otp = async (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const { name, mobNo, password } = req.body;
+    const { name, mobNo, password, otp } = req.body;
 
     if (!(name && mobNo && password)) {
       return res.status(404).send("All fields are required");
+    }
+
+    if (otp !== OTPs[mobNo]) {
+      return res.status(400).send("Invalid OTP");
+    } else {
+      delete OTPs[mobNo];
     }
 
     const existingUser = await User.findOne({ mobNo });

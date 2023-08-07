@@ -10,7 +10,6 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
 
   const [regBtnText, srtRegBtnText] = useState("Send OTP");
 
-  const [generatedOtp, setGeneratedOtp] = useState(0);
   const [regFormData, setRegFormData] = useState({
     name: "",
     mobNo: "",
@@ -32,7 +31,6 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
 
         if (res.status === 200) {
           toast.success("OTP Sent successfully!!!");
-          setGeneratedOtp(res.data.otp);
           srtRegBtnText("Submit");
         } else {
           toast.error(res.data);
@@ -41,31 +39,34 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
       }
     } else {
       if (regFormData.name !== "" && regFormData.password !== "") {
-        if (regFormData.otp === generatedOtp) {
-          setBtnClick(true);
-          toast.success("Registration in progress, please wait!");
+        setBtnClick(true);
+        toast.success("Registration in progress, please wait!");
 
-          const res = await Auth.register({
-            name: regFormData.name,
-            mobNo: regFormData.mobNo,
-            password: regFormData.password,
-          });
+        const res = await Auth.register({
+          name: regFormData.name,
+          mobNo: regFormData.mobNo,
+          password: regFormData.password,
+          otp: regFormData.otp,
+        });
 
-          toast.dismiss();
-          if (res.status === 200) {
-            setIsLoggedIn(true);
-            toast.success("Account Created Successfully!!!");
-            navigate(-1);
-          } else {
-            toast.error(res.data);
-            setBtnClick(false);
-          }
+        toast.dismiss();
+        if (res.status === 200) {
+          setIsLoggedIn(true);
+          toast.success("Account Created Successfully!!!");
+          navigate(-1);
         } else {
-          toast.error("Invalid OTP!!");
+          toast.error(res.data);
+          setBtnClick(false);
         }
       } else {
         toast.error("All Fields are required!!");
       }
+    }
+  };
+
+  const keyPress = async (e) => {
+    if (e.key === "Enter") {
+      regSubmit();
     }
   };
 
@@ -76,16 +77,13 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="text"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                regSubmit();
-              }
-            }}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setRegFormData((curr) => {
                 return { ...curr, name: e.target.value };
               });
             }}
+            disabled={regBtnText === "Submit"}
           />
           <label className={regFormData.name !== "" && "upLabel"}>
             Full Name
@@ -94,16 +92,13 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="number"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                regSubmit();
-              }
-            }}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setRegFormData((curr) => {
                 return { ...curr, mobNo: e.target.value };
               });
             }}
+            disabled={regBtnText === "Submit"}
           />
           <label className={regFormData.mobNo !== "" && "upLabel"}>
             Mobile Number
@@ -115,11 +110,7 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
             <div className="user-box">
               <input
                 type="number"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    regSubmit();
-                  }
-                }}
+                onKeyDown={keyPress}
                 onChange={(e) => {
                   setRegFormData((curr) => {
                     return { ...curr, otp: e.target.value };
@@ -131,11 +122,7 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
             <div className="user-box">
               <input
                 type="password"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    regSubmit();
-                  }
-                }}
+                onKeyDown={keyPress}
                 onChange={(e) => {
                   setRegFormData((curr) => {
                     return { ...curr, password: e.target.value };
@@ -146,10 +133,6 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
                 Password
               </label>
             </div>
-            {/*<div className="user-box">*/}
-            {/*  <input type="password" />*/}
-            {/*  <label>Confirm Password</label>*/}
-            {/*</div>*/}
           </div>
         )}
 
@@ -166,14 +149,6 @@ const Register = ({ setAuthToggle, setIsLoggedIn }) => {
         ) : (
           <CtaBtn Text={regBtnText} fontSize={16} onClick={regSubmit} />
         )}
-
-        {/*< id="otpBtn" href="#">*/}
-        {/*  <span></span>*/}
-        {/*  <span></span>*/}
-        {/*  <span></span>*/}
-        {/*  <span></span>*/}
-        {/*  {regBtnText}*/}
-        {/*</>*/}
 
         <p className="shift">
           Already have an account,{" "}
