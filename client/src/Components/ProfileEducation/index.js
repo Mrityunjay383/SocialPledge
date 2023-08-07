@@ -4,15 +4,18 @@ import CtaBtn from "../Original/CtaBtn";
 import { Index } from "../../service";
 import { toast } from "react-toastify";
 
-const ProfileEducation = ({ fUserData }) => {
+const ProfileEducation = ({ fUserData, fetchSteps }) => {
   const [formData, setFormData] = useState(fUserData);
 
   const [btnClick, setBtnClick] = useState(false);
 
-  const saveNewDetails = async (newUserDel) => {
+  const saveNewDetails = async () => {
     setBtnClick(true);
 
-    const res = await Index.saveDel({ newUserDel, type: "Education" });
+    const res = await Index.saveDel({
+      newUserDel: formData,
+      type: "Education",
+    });
 
     if (res.status === 200) {
       toast.success("Details Updated");
@@ -21,6 +24,13 @@ const ProfileEducation = ({ fUserData }) => {
     }
 
     setBtnClick(false);
+    fetchSteps();
+  };
+
+  const keyPress = async (e) => {
+    if (e.key === "Enter") {
+      saveNewDetails();
+    }
   };
 
   return (
@@ -32,6 +42,7 @@ const ProfileEducation = ({ fUserData }) => {
           <input
             type="text"
             placeholder={"Title"}
+            onKeyDown={keyPress}
             value={formData.title}
             onChange={(e) => {
               setFormData((curr) => {
@@ -59,6 +70,7 @@ const ProfileEducation = ({ fUserData }) => {
           <input
             type="number"
             placeholder={"Start Date"}
+            onKeyDown={keyPress}
             value={formData.startDate}
             onChange={(e) => {
               setFormData((curr) => {
@@ -72,6 +84,7 @@ const ProfileEducation = ({ fUserData }) => {
             <input
               type="number"
               placeholder={"End Date"}
+              onKeyDown={keyPress}
               value={formData.endDate}
               onChange={(e) => {
                 setFormData((curr) => {
@@ -87,6 +100,7 @@ const ProfileEducation = ({ fUserData }) => {
           <input
             type="text"
             placeholder={"Institute"}
+            onKeyDown={keyPress}
             value={formData.institute}
             onChange={(e) => {
               setFormData((curr) => {
@@ -108,11 +122,7 @@ const ProfileEducation = ({ fUserData }) => {
           colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
         />
       ) : (
-        <CtaBtn
-          Text={"Save"}
-          fontSize={14}
-          onClick={() => saveNewDetails(formData)}
-        />
+        <CtaBtn Text={"Save"} fontSize={14} onClick={saveNewDetails} />
       )}
     </div>
   );

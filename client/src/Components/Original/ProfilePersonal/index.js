@@ -4,15 +4,18 @@ import { ColorRing } from "react-loader-spinner";
 import { Index } from "../../../service";
 import { toast } from "react-toastify";
 
-const ProfilePersonal = ({ fUserData }) => {
+const ProfilePersonal = ({ fUserData, fetchSteps }) => {
   const [formData, setFormData] = useState(fUserData);
 
   const [btnClick, setBtnClick] = useState(false);
 
-  const saveNewDetails = async (newUserDel) => {
+  const saveNewDetails = async () => {
     setBtnClick(true);
 
-    const res = await Index.saveDel({ newUserDel, type: "Personal Details" });
+    const res = await Index.saveDel({
+      newUserDel: formData,
+      type: "Personal Details",
+    });
 
     if (res.status === 200) {
       toast.success("Details Updated");
@@ -21,6 +24,13 @@ const ProfilePersonal = ({ fUserData }) => {
     }
 
     setBtnClick(false);
+    fetchSteps();
+  };
+
+  const keyPress = async (e) => {
+    if (e.key === "Enter") {
+      saveNewDetails();
+    }
   };
 
   return (
@@ -31,6 +41,7 @@ const ProfilePersonal = ({ fUserData }) => {
           <input
             type="text"
             placeholder={"Name"}
+            onKeyDown={keyPress}
             value={formData.name}
             onChange={(e) => {
               setFormData((curr) => {
@@ -43,12 +54,15 @@ const ProfilePersonal = ({ fUserData }) => {
           <input
             type="number"
             placeholder={"Mobile Number"}
+            onKeyDown={keyPress}
             value={formData.mobNo}
+            style={{ background: "#F3F1FE" }}
             onChange={(e) => {
               setFormData((curr) => {
                 return { ...curr, mobNo: e.target.value };
               });
             }}
+            disabled={true}
           />
         </div>
       </div>
@@ -57,6 +71,7 @@ const ProfilePersonal = ({ fUserData }) => {
           <input
             type="email"
             placeholder={"Email"}
+            onKeyDown={keyPress}
             value={formData.email}
             onChange={(e) => {
               setFormData((curr) => {
@@ -69,6 +84,7 @@ const ProfilePersonal = ({ fUserData }) => {
           <input
             type="date"
             placeholder={"Date of Birth"}
+            onKeyDown={keyPress}
             value={formData.dob}
             onChange={(e) => {
               setFormData((curr) => {
@@ -81,6 +97,7 @@ const ProfilePersonal = ({ fUserData }) => {
       <div className={"proRow"}>
         <select
           value={formData.gender}
+          onKeyDown={keyPress}
           className={"genSelector"}
           onChange={(e) => {
             setFormData((curr) => {
@@ -106,11 +123,7 @@ const ProfilePersonal = ({ fUserData }) => {
           colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
         />
       ) : (
-        <CtaBtn
-          Text={"Save"}
-          fontSize={14}
-          onClick={() => saveNewDetails(formData)}
-        />
+        <CtaBtn Text={"Save"} fontSize={14} onClick={saveNewDetails} />
       )}
     </div>
   );

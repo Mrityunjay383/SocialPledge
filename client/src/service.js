@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseUrl = "http://localhost:5000";
-const baseUrl = "https://socialpledge.cyclic.app";
+const baseUrl = "http://localhost:5000";
+// const baseUrl = "https://socialpledge.cyclic.app";
 
 const request = async (method, url, data) => {
   const config = {
@@ -25,6 +25,9 @@ export const Index = {
   },
   saveDel: (data) => {
     return request("POST", "/saveDel", data);
+  },
+  profileSteps: () => {
+    return request("GET", "/profile_step");
   },
 };
 

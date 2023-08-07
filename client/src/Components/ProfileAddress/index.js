@@ -12,15 +12,15 @@ import VirtualizedSelect from "react-virtualized-select";
 
 import { Country, State, City } from "country-state-city";
 
-const ProfileAddress = ({ fUserData }) => {
+const ProfileAddress = ({ fUserData, fetchSteps }) => {
   const [formData, setFormData] = useState(fUserData);
 
   const [btnClick, setBtnClick] = useState(false);
 
-  const saveNewDetails = async (newUserDel) => {
+  const saveNewDetails = async () => {
     setBtnClick(true);
 
-    const res = await Index.saveDel({ newUserDel, type: "Address" });
+    const res = await Index.saveDel({ newUserDel: formData, type: "Address" });
 
     if (res.status === 200) {
       toast.success("Details Updated");
@@ -29,6 +29,7 @@ const ProfileAddress = ({ fUserData }) => {
     }
 
     setBtnClick(false);
+    fetchSteps();
   };
 
   const [countriesOption, setCountriesOption] = useState([]);
@@ -72,6 +73,12 @@ const ProfileAddress = ({ fUserData }) => {
     }
   }, [formData.state]);
 
+  const keyPress = async (e) => {
+    if (e.key === "Enter") {
+      saveNewDetails();
+    }
+  };
+
   return (
     <div className={"personalCon"}>
       <p>Where are you from</p>
@@ -81,6 +88,7 @@ const ProfileAddress = ({ fUserData }) => {
           <VirtualizedSelect
             options={countriesOption}
             placeholder={"Select Country"}
+            onKeyDown={keyPress}
             onChange={(selectValue) =>
               setFormData((curr) => {
                 return {
@@ -97,6 +105,7 @@ const ProfileAddress = ({ fUserData }) => {
           <VirtualizedSelect
             options={statesOption}
             placeholder={"Select State"}
+            onKeyDown={keyPress}
             onChange={(selectValue) =>
               setFormData((curr) => {
                 return {
@@ -115,6 +124,7 @@ const ProfileAddress = ({ fUserData }) => {
           <VirtualizedSelect
             options={citiesOption}
             placeholder={"Select City"}
+            onKeyDown={keyPress}
             onChange={(selectValue) =>
               setFormData((curr) => {
                 return {
@@ -132,6 +142,7 @@ const ProfileAddress = ({ fUserData }) => {
             type="number"
             placeholder={"Zip Code"}
             value={formData.zipCode}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setFormData((curr) => {
                 return { ...curr, zipCode: e.target.value };
@@ -147,6 +158,7 @@ const ProfileAddress = ({ fUserData }) => {
             type="text"
             placeholder={"Address Line 1"}
             value={formData.line1}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setFormData((curr) => {
                 return { ...curr, line1: e.target.value };
@@ -159,6 +171,7 @@ const ProfileAddress = ({ fUserData }) => {
             type="text"
             placeholder={"Address Line 2"}
             value={formData.line2}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setFormData((curr) => {
                 return { ...curr, line2: e.target.value };
@@ -179,11 +192,7 @@ const ProfileAddress = ({ fUserData }) => {
           colors={["#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60", "#FF5A60"]}
         />
       ) : (
-        <CtaBtn
-          Text={"Save"}
-          fontSize={14}
-          onClick={() => saveNewDetails(formData)}
-        />
+        <CtaBtn Text={"Save"} fontSize={14} onClick={saveNewDetails} />
       )}
     </div>
   );

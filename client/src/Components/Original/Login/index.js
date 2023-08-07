@@ -38,6 +38,12 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
     }
   };
 
+  const keyPress = async (e) => {
+    if (e.key === "Enter") {
+      loginSubmit();
+    }
+  };
+
   return (
     <div id="loginCon" className="login-box">
       <h2>Login</h2>
@@ -45,11 +51,7 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="number"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                loginSubmit();
-              }
-            }}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setLoginFormData((curr) => {
                 return { ...curr, mobNo: e.target.value };
@@ -63,11 +65,7 @@ const Login = ({ setAuthToggle, setIsLoggedIn }) => {
         <div className="user-box">
           <input
             type="password"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                loginSubmit();
-              }
-            }}
+            onKeyDown={keyPress}
             onChange={(e) => {
               setLoginFormData((curr) => {
                 return { ...curr, password: e.target.value };

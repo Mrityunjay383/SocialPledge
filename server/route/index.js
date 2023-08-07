@@ -64,6 +64,59 @@ router.post("/saveDel", valToken, async (req, res) => {
   }
 });
 
+router.get("/profile_step", valToken, async (req, res) => {
+  const { user_id } = req.userData;
+
+  const user = await User.findOne({ _id: user_id });
+
+  let totalSteps = 13;
+  let filledSteps = 2;
+
+  if (user.email !== "") {
+    filledSteps++;
+  }
+
+  if (user.dob !== "") {
+    filledSteps++;
+  }
+
+  if (user.gender !== "") {
+    filledSteps++;
+  }
+
+  if (user.education.title !== "") {
+    filledSteps++;
+  }
+
+  if (user.education.startDate !== "") {
+    filledSteps++;
+  }
+
+  if (user.education.institute !== "") {
+    filledSteps++;
+  }
+
+  if (user.address.line1 !== "") {
+    filledSteps++;
+  }
+
+  if (user.address.country !== "") {
+    filledSteps++;
+  }
+  if (user.address.state !== "") {
+    filledSteps++;
+  }
+
+  if (user.address.city !== "") {
+    filledSteps++;
+  }
+  if (user.address.zipCode !== "") {
+    filledSteps++;
+  }
+
+  res.status(200).json({ totalSteps, filledSteps });
+});
+
 router.post("/contact_us", async (req, res) => {
   try {
     const { name, email, message } = req.body;

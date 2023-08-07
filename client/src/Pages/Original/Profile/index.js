@@ -29,11 +29,38 @@ const Profile = ({ isLoggedIn }) => {
     }
   };
 
+  const [stepsEle, setStepsEle] = useState([]);
+  const fetchSteps = async () => {
+    console.log(`#20232201225113 steps`);
+
+    const res = await Index.profileSteps();
+
+    if (res.status === 200) {
+      const { filledSteps, totalSteps } = res.data;
+
+      let stepsEleTemp = [];
+
+      for (let i = 0; i < filledSteps; i++) {
+        stepsEleTemp.push(<div key={i} className={"gr"}></div>);
+      }
+
+      for (let i = 0; i < totalSteps - filledSteps; i++) {
+        stepsEleTemp.push(<div key={filledSteps + i} className={"gy"}></div>);
+      }
+
+      setStepsEle(stepsEleTemp);
+    }
+  };
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/auth");
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    fetchSteps();
+  }, []);
 
   const activeFFunc = () => {
     setIsDataLoaded(false);
@@ -41,7 +68,7 @@ const Profile = ({ isLoggedIn }) => {
   };
   useEffect(() => {
     activeFFunc();
-  }, [activeFilter]);
+  }, [activeFilter, stepsEle]);
 
   const changeActive = (e) => {
     const index = sidebarArr.indexOf(e.target.innerText);
@@ -50,11 +77,11 @@ const Profile = ({ isLoggedIn }) => {
 
   const DetailsComponent = () => {
     if (activeFilter === 0) {
-      return <ProfilePersonal fUserData={fUserData} />;
+      return <ProfilePersonal fUserData={fUserData} fetchSteps={fetchSteps} />;
     } else if (activeFilter === 1) {
-      return <ProfileEducation fUserData={fUserData} />;
+      return <ProfileEducation fUserData={fUserData} fetchSteps={fetchSteps} />;
     } else if (activeFilter === 2) {
-      return <ProfileAddress fUserData={fUserData} />;
+      return <ProfileAddress fUserData={fUserData} fetchSteps={fetchSteps} />;
     }
   };
 
@@ -74,7 +101,11 @@ const Profile = ({ isLoggedIn }) => {
         })}
       </div>
       <div className={"col-lg-8 profileCom"}>
-        <div className={"ComLine"}></div>
+        <div className={"ComLine"}>
+          {stepsEle.map((ele) => {
+            return ele;
+          })}
+        </div>
         <div className={"DetailCom"}>
           {isDataLoaded ? (
             <DetailsComponent />
