@@ -31,8 +31,6 @@ const Profile = ({ isLoggedIn }) => {
 
   const [stepsEle, setStepsEle] = useState([]);
   const fetchSteps = async () => {
-    console.log(`#20232201225113 steps`);
-
     const res = await Index.profileSteps();
 
     if (res.status === 200) {
@@ -41,11 +39,25 @@ const Profile = ({ isLoggedIn }) => {
       let stepsEleTemp = [];
 
       for (let i = 0; i < filledSteps; i++) {
-        stepsEleTemp.push(<div key={i} className={"gr"}></div>);
+        stepsEleTemp.push(
+          <div
+            key={i}
+            data-title={`${filledSteps}/${totalSteps} Details Filled`}
+            className={"gr"}
+          ></div>
+        );
       }
 
       for (let i = 0; i < totalSteps - filledSteps; i++) {
-        stepsEleTemp.push(<div key={filledSteps + i} className={"gy"}></div>);
+        stepsEleTemp.push(
+          <div
+            key={filledSteps + i}
+            data-title={`${
+              totalSteps - filledSteps
+            }/${totalSteps} Details Unfilled`}
+            className={"gy"}
+          ></div>
+        );
       }
 
       setStepsEle(stepsEleTemp);
@@ -108,7 +120,13 @@ const Profile = ({ isLoggedIn }) => {
             })}
           </div>
         ) : (
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              height: "40px",
+            }}
+          >
             <ThreeDots
               height="80"
               width="80"
