@@ -37,9 +37,10 @@ const userSchema = new mongoose.Schema({
   education: {
     type: Object,
     default: {
+      currStudying: null,
       title: "",
-      startDate: "",
-      endDate: "",
+      startDate: null,
+      endDate: null,
       institute: "",
     },
   },

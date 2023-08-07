@@ -25,6 +25,8 @@ const ProfileEducation = ({ fUserData }) => {
 
   return (
     <div className={"personalCon"}>
+      <p>Where did you studied (Highest Study)</p>
+
       <div className={"proRow"}>
         <div className="delText">
           <input
@@ -38,6 +40,21 @@ const ProfileEducation = ({ fUserData }) => {
             }}
           />
         </div>
+
+        <div className="checkbox">
+          Currently Studying
+          <input
+            checked={formData.currStudying}
+            type="checkbox"
+            onChange={(e) => {
+              setFormData((curr) => {
+                return { ...curr, currStudying: e.target.checked };
+              });
+            }}
+          />
+        </div>
+      </div>
+      <div className={"proRow"}>
         <div className="delText">
           <input
             type="number"
@@ -50,20 +67,22 @@ const ProfileEducation = ({ fUserData }) => {
             }}
           />
         </div>
+        {!formData.currStudying && (
+          <div className="delText">
+            <input
+              type="number"
+              placeholder={"End Date"}
+              value={formData.endDate}
+              onChange={(e) => {
+                setFormData((curr) => {
+                  return { ...curr, endDate: Number(e.target.value) };
+                });
+              }}
+            />
+          </div>
+        )}
       </div>
       <div className={"proRow"}>
-        <div className="delText">
-          <input
-            type="number"
-            placeholder={"End Date"}
-            value={formData.endDate}
-            onChange={(e) => {
-              setFormData((curr) => {
-                return { ...curr, endDate: Number(e.target.value) };
-              });
-            }}
-          />
-        </div>
         <div className="delText">
           <input
             type="text"

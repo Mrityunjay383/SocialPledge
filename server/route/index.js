@@ -39,8 +39,6 @@ router.post("/saveDel", valToken, async (req, res) => {
 
     const user = await User.findOne({ _id: user_id });
 
-    console.log(`#2023219221857998 type`, type);
-
     if (type === "Personal Details") {
       user.name = newUserDel.name;
       user.email = newUserDel.email;
@@ -49,9 +47,10 @@ router.post("/saveDel", valToken, async (req, res) => {
       user.mobNo = newUserDel.mobNo;
     } else if (type === "Education") {
       user.education = newUserDel;
+      if (newUserDel.currStudying) {
+        user.education.endDate = null;
+      }
     }
-
-    console.log(`#2023219222013199 user`, user);
 
     await user.save();
 

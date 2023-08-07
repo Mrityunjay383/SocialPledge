@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./index.css";
 import CtaBtn from "../CtaBtn";
 import { ColorRing } from "react-loader-spinner";
 import { Index } from "../../../service";
@@ -26,6 +25,7 @@ const ProfilePersonal = ({ fUserData }) => {
 
   return (
     <div className={"personalCon"}>
+      <p>Let's talk about you</p>
       <div className={"proRow"}>
         <div className="delText">
           <input
