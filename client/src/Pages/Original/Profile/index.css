@@ -51,7 +51,7 @@
     margin: 5px 10vw 50px 0;
 }
 
-.delText {
+.delText, .delDate {
     width: 250px;
 }
 
@@ -74,6 +74,7 @@
     padding: 0.4em;
     border-radius: 0.2em 0.2em 0 0;
     color: #FF5A60;
+    width: 100%;
 
 }
 
