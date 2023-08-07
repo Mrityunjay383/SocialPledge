@@ -62,7 +62,7 @@ const ProfileEducation = ({ fUserData }) => {
             value={formData.startDate}
             onChange={(e) => {
               setFormData((curr) => {
-                return { ...curr, startDate: Number(e.target.value) };
+                return { ...curr, startDate: e.target.value };
               });
             }}
           />
@@ -75,7 +75,7 @@ const ProfileEducation = ({ fUserData }) => {
               value={formData.endDate}
               onChange={(e) => {
                 setFormData((curr) => {
-                  return { ...curr, endDate: Number(e.target.value) };
+                  return { ...curr, endDate: e.target.value };
                 });
               }}
             />

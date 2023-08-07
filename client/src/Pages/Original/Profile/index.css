@@ -1,20 +1,22 @@
-.ProfileSec{
+.ProfileSec {
     padding: 10vh 6% 20vh;
 }
-.sidebar div{
+
+.sidebar div {
     align-items: flex-start !important;
     margin-bottom: 10px;
     padding: 10px 20px;
     cursor: pointer
 }
 
-.profileCom{
+.profileCom {
     padding: 0 !important;
     height: 70vh;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 }
-.ComLine{
+
+.ComLine {
     width: 50%;
     background: #4effb5;
     border-radius: 15px 0 0 0;
@@ -24,7 +26,7 @@
     margin-bottom: 25px;
 }
 
-.DetailCom{
+.DetailCom {
     overflow-y: scroll;
     min-height: 91%;
     display: block !important;
@@ -49,6 +51,10 @@
     margin: 5px 10vw 50px 0;
 }
 
+.delText {
+    width: 250px;
+}
+
 .delText input {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -60,7 +66,7 @@
     border-radius: 0.2em 0.2em 0 0;
     padding: 0.4em;
     color: #555;
-    width: 250px;
+    width: 100%;
 }
 
 .delDate input {
@@ -68,7 +74,6 @@
     padding: 0.4em;
     border-radius: 0.2em 0.2em 0 0;
     color: #FF5A60;
-    width: 250px;
 
 }
 
@@ -99,11 +104,11 @@
 
 }
 
-.checkbox{
+.checkbox {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 250px
+    width: 250px;
 }
 
 .checkbox input {
@@ -122,6 +127,7 @@
     display: grid;
     place-content: center;
 }
+
 .checkbox input::before {
     content: "";
     width: 0.65em;
@@ -133,6 +139,7 @@
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
     transform-origin: left top;
 }
+
 .checkbox input:checked::before {
     transform: scale(1);
 }

@@ -5,6 +5,7 @@ import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
 import { Index } from "../../../service";
 import { MutatingDots } from "react-loader-spinner";
 import ProfileEducation from "../../../Components/ProfileEducation";
+import ProfileAddress from "../../../Components/ProfileAddress";
 
 const sidebarArr = ["Personal Details", "Education", "Address"];
 
@@ -52,6 +53,8 @@ const Profile = ({ isLoggedIn }) => {
       return <ProfilePersonal fUserData={fUserData} />;
     } else if (activeFilter === 1) {
       return <ProfileEducation fUserData={fUserData} />;
+    } else if (activeFilter === 2) {
+      return <ProfileAddress fUserData={fUserData} />;
     }
   };
 

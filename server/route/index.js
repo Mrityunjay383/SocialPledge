@@ -27,6 +27,8 @@ router.post("/profile", valToken, async (req, res) => {
     };
   } else if (type === "Education") {
     buildUser = user.education;
+  } else if (type === "Address") {
+    buildUser = user.address;
   }
 
   res.status(200).json({ buildUser });
@@ -50,6 +52,8 @@ router.post("/saveDel", valToken, async (req, res) => {
       if (newUserDel.currStudying) {
         user.education.endDate = null;
       }
+    } else if (type === "Address") {
+      user.address = newUserDel;
     }
 
     await user.save();

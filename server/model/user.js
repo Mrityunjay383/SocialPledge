@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   },
   dob: {
     type: String,
-    default: null,
+    default: "",
   },
   gender: {
     type: String,
@@ -27,20 +27,21 @@ const userSchema = new mongoose.Schema({
   address: {
     type: Object,
     default: {
-      title: "",
+      line1: "",
+      line2: "",
       country: "",
       state: "",
       city: "",
-      zipCode: null,
+      zipCode: "",
     },
   },
   education: {
     type: Object,
     default: {
-      currStudying: null,
+      currStudying: false,
       title: "",
-      startDate: null,
-      endDate: null,
+      startDate: "",
+      endDate: "",
       institute: "",
     },
   },
