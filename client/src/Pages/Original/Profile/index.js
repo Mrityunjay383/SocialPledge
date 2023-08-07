@@ -91,7 +91,7 @@ const Profile = ({ isLoggedIn }) => {
                 wrapperClass=""
                 visible={true}
               />
-              <p>Fetching Profile Data, please wait...</p>
+              <p>Fetching {sidebarArr[activeFilter]} Data, please wait...</p>
             </div>
           )}
         </div>
