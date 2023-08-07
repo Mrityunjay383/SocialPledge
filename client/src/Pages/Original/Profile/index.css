@@ -11,6 +11,8 @@
 .profileCom{
     padding: 0 !important;
     height: 70vh;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
 }
 .ComLine{
     width: 50%;
@@ -39,48 +41,4 @@
     border-radius: 10px;
     /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
     background: #FF5A60;
-}
-
-.profile-box {
-    position: relative;
-    margin-top: 20px;
-}
-
-.profile-box input {
-    width: 90% !important;
-    padding: 10px 0 !important;
-    font-size: 16px !important;
-    color: #333 !important;
-    border: none !important;
-    border-bottom: 1px solid #333 !important;
-    border-right: 1px solid #333 !important;
-    outline: none !important;
-    background: transparent;
-    margin-right: 20px !important;
-    margin-top: 0 !important;
-    text-align: left !important;
-    border-radius: 0 !important;
-}
-
-.profile-box label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #333;
-    pointer-events: none;
-    transition: .5s;
-}
-
-.profile-box input:focus {
-    border-bottom: 1px solid #FF5A60 !important;
-    border-right: 1px solid #FF5A60 !important;
-}
-
-.profile-box input:focus ~ label{
-    top: -20px;
-    left: 0;
-    color: #FF5A60;
-    font-size: 12px;
 }

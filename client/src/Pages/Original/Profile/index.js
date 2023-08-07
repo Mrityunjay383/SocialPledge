@@ -2,27 +2,79 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
+import { Index } from "../../../service";
+import { toast } from "react-toastify";
 
 const sidebarArr = ["Personal Details", "Education", "Address"];
 
 const Profile = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
-  const fetchUser = async () => {};
+  const [fUserData, setFUserData] = useState({});
+  const [selType, setSelType] = useState("");
+
+  const [activeFilter, setActiveFilter] = useState(0);
+
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  const fetchUser = async () => {
+    const res = await Index.profile({ type: sidebarArr[activeFilter] });
+
+    if (res.status === 200) {
+      const { buildUser, type } = res.data;
+
+      setFUserData(buildUser);
+      setSelType(type);
+      setIsDataLoaded(true);
+    }
+  };
+
+  const [btnClick, setBtnClick] = useState(false);
+
+  const saveNewDetails = async () => {
+    setBtnClick(true);
+
+    const res = await Index.saveDel({ newUserDel: fUserData, type: selType });
+
+    if (res.status === 200) {
+      toast.success("Details Updated");
+    } else {
+      toast.error(res.data);
+    }
+
+    setBtnClick(false);
+  };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchUser();
-    } else {
+    if (!isLoggedIn) {
       navigate("/auth");
     }
   }, [isLoggedIn]);
 
-  const [activeFilter, setActiveFilter] = useState(0);
+  const activeFFunc = () => {
+    setIsDataLoaded(false);
+    fetchUser();
+  };
+  useEffect(() => {
+    activeFFunc();
+  }, [activeFilter]);
 
   const changeActive = (e) => {
     const index = sidebarArr.indexOf(e.target.innerText);
     setActiveFilter(index);
+  };
+
+  const DetailsComponent = () => {
+    if (activeFilter === 0) {
+      return (
+        <ProfilePersonal
+          fUserData={fUserData}
+          setFUserData={setFUserData}
+          btnClick={btnClick}
+          saveNewDetails={saveNewDetails}
+        />
+      );
+    }
   };
 
   return (
@@ -40,10 +92,10 @@ const Profile = ({ isLoggedIn }) => {
           );
         })}
       </div>
-      <div className={"col-lg-8 card profileCom"}>
+      <div className={"col-lg-8 profileCom"}>
         <div className={"ComLine"}></div>
         <div className={"DetailCom"}>
-          <ProfilePersonal />
+          {isDataLoaded && <DetailsComponent />}
         </div>
       </div>
     </div>

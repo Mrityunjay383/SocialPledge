@@ -20,6 +20,12 @@ export const Index = {
   contactUs: (data) => {
     return request("POST", "/contact_us", data);
   },
+  profile: (data) => {
+    return request("POST", "/profile", data);
+  },
+  saveDel: (data) => {
+    return request("POST", "/saveDel", data);
+  },
 };
 
 export const Auth = {
