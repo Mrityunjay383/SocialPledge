@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
 import { Index } from "../../../service";
-import { toast } from "react-toastify";
 import { MutatingDots } from "react-loader-spinner";
+import ProfileEducation from "../../../Components/ProfileEducation";
 
 const sidebarArr = ["Personal Details", "Education", "Address"];
 
@@ -12,7 +12,6 @@ const Profile = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
   const [fUserData, setFUserData] = useState({});
-  const [selType, setSelType] = useState("");
 
   const [activeFilter, setActiveFilter] = useState(0);
 
@@ -22,28 +21,11 @@ const Profile = ({ isLoggedIn }) => {
     const res = await Index.profile({ type: sidebarArr[activeFilter] });
 
     if (res.status === 200) {
-      const { buildUser, type } = res.data;
+      const { buildUser } = res.data;
 
       setFUserData(buildUser);
-      setSelType(type);
       setIsDataLoaded(true);
     }
-  };
-
-  const [btnClick, setBtnClick] = useState(false);
-
-  const saveNewDetails = async () => {
-    setBtnClick(true);
-
-    const res = await Index.saveDel({ newUserDel: fUserData, type: selType });
-
-    if (res.status === 200) {
-      toast.success("Details Updated");
-    } else {
-      toast.error(res.data);
-    }
-
-    setBtnClick(false);
   };
 
   useEffect(() => {
@@ -67,14 +49,9 @@ const Profile = ({ isLoggedIn }) => {
 
   const DetailsComponent = () => {
     if (activeFilter === 0) {
-      return (
-        <ProfilePersonal
-          fUserData={fUserData}
-          setFUserData={setFUserData}
-          btnClick={btnClick}
-          saveNewDetails={saveNewDetails}
-        />
-      );
+      return <ProfilePersonal fUserData={fUserData} />;
+    } else if (activeFilter === 1) {
+      return <ProfileEducation fUserData={fUserData} />;
     }
   };
 

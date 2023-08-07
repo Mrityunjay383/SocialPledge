@@ -25,9 +25,11 @@ router.post("/profile", valToken, async (req, res) => {
       dob: user.dob,
       gender: user.gender,
     };
+  } else if (type === "Education") {
+    buildUser = user.education;
   }
 
-  res.status(200).json({ buildUser, type });
+  res.status(200).json({ buildUser });
 });
 
 router.post("/saveDel", valToken, async (req, res) => {
@@ -37,14 +39,21 @@ router.post("/saveDel", valToken, async (req, res) => {
 
     const user = await User.findOne({ _id: user_id });
 
+    console.log(`#2023219221857998 type`, type);
+
     if (type === "Personal Details") {
       user.name = newUserDel.name;
       user.email = newUserDel.email;
       user.dob = newUserDel.dob;
       user.gender = newUserDel.gender;
       user.mobNo = newUserDel.mobNo;
-      await user.save();
+    } else if (type === "Education") {
+      user.education = newUserDel;
     }
+
+    console.log(`#2023219222013199 user`, user);
+
+    await user.save();
 
     res.status(200).json({ success: true });
   } catch (err) {

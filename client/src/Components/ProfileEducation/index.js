@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import "./index.css";
-import CtaBtn from "../CtaBtn";
 import { ColorRing } from "react-loader-spinner";
-import { Index } from "../../../service";
+import CtaBtn from "../Original/CtaBtn";
+import { Index } from "../../service";
 import { toast } from "react-toastify";
 
-const ProfilePersonal = ({ fUserData }) => {
+const ProfileEducation = ({ fUserData }) => {
   const [formData, setFormData] = useState(fUserData);
 
   const [btnClick, setBtnClick] = useState(false);
@@ -13,7 +12,7 @@ const ProfilePersonal = ({ fUserData }) => {
   const saveNewDetails = async (newUserDel) => {
     setBtnClick(true);
 
-    const res = await Index.saveDel({ newUserDel, type: "Personal Details" });
+    const res = await Index.saveDel({ newUserDel, type: "Education" });
 
     if (res.status === 200) {
       toast.success("Details Updated");
@@ -30,11 +29,11 @@ const ProfilePersonal = ({ fUserData }) => {
         <div className="delText">
           <input
             type="text"
-            placeholder={"Name"}
-            value={formData.name}
+            placeholder={"Title"}
+            value={formData.title}
             onChange={(e) => {
               setFormData((curr) => {
-                return { ...curr, name: e.target.value };
+                return { ...curr, title: e.target.value };
               });
             }}
           />
@@ -42,11 +41,11 @@ const ProfilePersonal = ({ fUserData }) => {
         <div className="delText">
           <input
             type="number"
-            placeholder={"Mobile Number"}
-            value={formData.mobNo}
+            placeholder={"Start Date"}
+            value={formData.startDate}
             onChange={(e) => {
               setFormData((curr) => {
-                return { ...curr, mobNo: e.target.value };
+                return { ...curr, startDate: Number(e.target.value) };
               });
             }}
           />
@@ -55,44 +54,28 @@ const ProfilePersonal = ({ fUserData }) => {
       <div className={"proRow"}>
         <div className="delText">
           <input
-            type="email"
-            placeholder={"Email"}
-            value={formData.email}
+            type="number"
+            placeholder={"End Date"}
+            value={formData.endDate}
             onChange={(e) => {
               setFormData((curr) => {
-                return { ...curr, email: e.target.value };
+                return { ...curr, endDate: Number(e.target.value) };
               });
             }}
           />
         </div>
-        <div className="delDate">
+        <div className="delText">
           <input
-            type="date"
-            placeholder={"Date of Birth"}
-            value={formData.dob}
+            type="text"
+            placeholder={"Institute"}
+            value={formData.institute}
             onChange={(e) => {
               setFormData((curr) => {
-                return { ...curr, dob: e.target.value };
+                return { ...curr, institute: e.target.value };
               });
             }}
           />
         </div>
-      </div>
-      <div className={"proRow"}>
-        <select
-          value={formData.gender}
-          className={"genSelector"}
-          onChange={(e) => {
-            setFormData((curr) => {
-              return { ...curr, gender: e.target.value };
-            });
-          }}
-        >
-          <option value={""}>Select Gender</option>
-          <option value={"male"}>Male</option>
-          <option value={"female"}>Female</option>
-          <option value={"other"}>Other</option>
-        </select>
       </div>
 
       {btnClick ? (
@@ -116,4 +99,4 @@ const ProfilePersonal = ({ fUserData }) => {
   );
 };
 
-export default ProfilePersonal;
+export default ProfileEducation;
