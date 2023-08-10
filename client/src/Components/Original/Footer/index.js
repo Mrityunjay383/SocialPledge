@@ -4,9 +4,9 @@ import "./index.css";
 import {
   FaFacebook,
   FaInstagram,
+  FaLinkedin,
   FaTwitter,
   FaWindowClose,
-  FaYoutube,
 } from "react-icons/fa";
 import CtaBtn from "../CtaBtn";
 import { toast } from "react-toastify";
@@ -170,8 +170,12 @@ const Footer = () => {
           >
             <FaFacebook />
           </NavLink>
-          <NavLink to="/" className={"socialLinks"} target={"_blank"}>
-            <FaYoutube />
+          <NavLink
+            to="https://www.linkedin.com/company/socialpledge"
+            className={"socialLinks"}
+            target={"_blank"}
+          >
+            <FaLinkedin />
           </NavLink>
           <NavLink
             to="https://twitter.com/SocialPledgeIn"
