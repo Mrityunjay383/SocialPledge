@@ -169,6 +169,15 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
     }
   }, [isCanvasMounted]);
 
+  const [textDone, setTextDone] = useState(false);
+  useEffect(() => {
+    if (pledgeDataLoaded) {
+      setTimeout(() => {
+        setTextDone(true);
+      }, pledgeData.name.length * 33 + pledgeData.about.length * 33);
+    }
+  }, [pledgeDataLoaded]);
+
   return (
     <div className={"pledgeSection"}>
       {isPledgeLive &&
@@ -236,7 +245,7 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
                 />
               </p>
 
-              {isCanvasMounted && (
+              {textDone && (
                 <CtaBtn
                   Text={"I Accept"}
                   fontSize={16}
