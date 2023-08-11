@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ColorRing } from "react-loader-spinner";
-import CtaBtn from "../Original/CtaBtn";
-import { Index } from "../../service";
+import CtaBtn from "../CtaBtn";
+import { Index } from "../../../service";
 import { toast } from "react-toastify";
 
 const ProfileEducation = ({ fUserData, fetchSteps }) => {

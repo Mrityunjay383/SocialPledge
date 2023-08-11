@@ -4,8 +4,8 @@ import "./index.css";
 import ProfilePersonal from "../../../Components/Original/ProfilePersonal";
 import { Index } from "../../../service";
 import { MutatingDots, ThreeDots } from "react-loader-spinner";
-import ProfileEducation from "../../../Components/ProfileEducation";
-import ProfileAddress from "../../../Components/ProfileAddress";
+import ProfileEducation from "../../../Components/Original/ProfileEducation";
+import ProfileAddress from "../../../Components/Original/ProfileAddress";
 
 const sidebarArr = ["Personal Details", "Education", "Address"];
 

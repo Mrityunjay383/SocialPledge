@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Index } from "../../service";
+import { Index } from "../../../service";
 import { toast } from "react-toastify";
 import { ColorRing } from "react-loader-spinner";
-import CtaBtn from "../Original/CtaBtn";
+import CtaBtn from "../CtaBtn";
 
 import "react-select/dist/react-select.css";
 import "react-virtualized/styles.css";
