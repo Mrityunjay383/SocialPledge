@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-const Canvas = ({
+const CanvasCom = ({
   userName,
   pledgeData,
   qrURL,
@@ -98,4 +98,4 @@ const Canvas = ({
   return <canvas id={"myCanvas"} ref={canvasRef} className={"unShow"} />;
 };
 
-export default Canvas;
+export default CanvasCom;

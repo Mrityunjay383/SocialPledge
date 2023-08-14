@@ -3,12 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { toast } from "react-toastify";
 
-import Canvas from "../../../Components/Original/Canvas";
 import { Certificate, Pledge, Supporter } from "../../../service";
 import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
 import Typewriter from "typewriter-effect";
 import { Dna } from "react-loader-spinner";
+import CanvasCom from "../../../Components/Original/Canvas";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -184,7 +184,7 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
         (pledgeDataLoaded && supporterDataLoaded ? (
           <div className={"row mainSection"}>
             <div className={"col-lg-8 pledgeImgCon"}>
-              {isCanvasMounted ? (
+              {imgSrc ? (
                 <img src={imgSrc} className={"pledgeImg"} alt="" />
               ) : (
                 <div className={"loadingCon"}>
@@ -202,7 +202,7 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
                   </p>
                 </div>
               )}
-              <Canvas
+              <CanvasCom
                 pledgeData={pledgeData}
                 userName={userData.name}
                 qrURL={qrURL}
