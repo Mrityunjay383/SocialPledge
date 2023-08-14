@@ -83,6 +83,22 @@ exports.newDownload = async (req, res) => {
   }
 };
 
+exports.isCertificateExist = async (req, res) => {
+  const { userId, pledgeId, supporterId } = req.body;
+
+  const exactCertificateExist = await Certificate.findOne({
+    userId,
+    pledgeId,
+    supporterId,
+  });
+
+  if (exactCertificateExist) {
+    return res.status(200).json({ exist: true });
+  } else {
+    return res.status(200).json({ exist: false });
+  }
+};
+
 exports.indieCertificate = async (req, res) => {
   try {
     const { certificateUid } = req.body;

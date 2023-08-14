@@ -74,8 +74,8 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
   }, [intervalId]);
 
   //
-  const [pledgeData, setPledgeData] = useState({});
-  const [supporterData, setSupporterData] = useState({});
+  const [pledgeData, setPledgeData] = useState();
+  const [supporterData, setSupporterData] = useState();
   const [isCanvasMounted, setIsCanvasMount] = useState(false);
 
   const [isPledgeLive, setIsPledgeLive] = useState(false);
@@ -113,6 +113,29 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
       setSupporterDataLoaded(true);
     }
   };
+
+  const [certificateExist, setCertificateExist] = useState(false);
+  const certificateStatus = async () => {
+    const res = await Certificate.isCertificateExist({
+      userId: userData.user_id,
+      pledgeId: pledgeData._id,
+      supporterId: supporterData.id,
+    });
+
+    console.log(`#2023226231630598 res.data`, res.data);
+
+    if (res.status === 200) {
+      if (res.data.exist) {
+        setCertificateExist(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (pledgeData && supporterData) {
+      certificateStatus();
+    }
+  }, [pledgeData, supporterData]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -247,7 +270,7 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
 
               {textDone && (
                 <CtaBtn
-                  Text={"I Accept"}
+                  Text={certificateExist ? "Download Certificate" : "I Accept"}
                   fontSize={16}
                   onClick={downloadPledge}
                 />

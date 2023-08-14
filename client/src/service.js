@@ -92,6 +92,9 @@ export const Certificate = {
   indieCertificate: (data) => {
     return request("POST", "/certificate/get_indie_certificate", data);
   },
+  isCertificateExist: (data) => {
+    return request("POST", "/certificate/is_certificate_exist", data);
+  },
 };
 
 export const Report = {
