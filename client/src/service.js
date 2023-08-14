@@ -95,6 +95,9 @@ export const Certificate = {
   isCertificateExist: (data) => {
     return request("POST", "/certificate/is_certificate_exist", data);
   },
+  certificateCount: () => {
+    return request("POST", "/certificate/certificate_count");
+  },
 };
 
 export const Report = {

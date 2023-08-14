@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
 import HomePledge from "../../../Components/Original/HomePledge";
 import CountUp from "react-countup";
+import { Certificate } from "../../../service";
 
 const Home = () => {
+  const [certificateCount, setCertificateCount] = useState(0);
+  const countCertificates = async () => {
+    const res = await Certificate.certificateCount();
+
+    if (res.status === 200) {
+      setCertificateCount(res.data.certificateCount);
+    }
+  };
+  useEffect(() => {
+    countCertificates();
+  }, []);
+
   return (
     <div>
       <div className="title">
@@ -58,7 +71,12 @@ const Home = () => {
 
       <div className={"countCon"}>
         <div>
-          <CountUp end={121} enableScrollSpy={true} scrollSpyDelay={200} />+
+          <CountUp
+            end={certificateCount}
+            enableScrollSpy={true}
+            scrollSpyDelay={200}
+          />
+          +
         </div>
         <p>Pledges have already been taken.</p>
       </div>

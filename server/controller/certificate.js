@@ -125,3 +125,12 @@ exports.indieCertificate = async (req, res) => {
     res.status(400);
   }
 };
+
+exports.certificateCount = async (req, res) => {
+  try {
+    const certificateCount = await Certificate.count();
+    res.status(200).json({ certificateCount });
+  } catch (err) {
+    console.log(`#202322623340143 err`, err);
+  }
+};
