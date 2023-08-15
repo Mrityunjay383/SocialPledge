@@ -6,7 +6,7 @@ import CountUp from "react-countup";
 import { Certificate } from "../../../service";
 
 const Home = () => {
-  const [certificateCount, setCertificateCount] = useState(0);
+  const [certificateCount, setCertificateCount] = useState();
   const countCertificates = async () => {
     const res = await Certificate.certificateCount();
 
@@ -71,11 +71,13 @@ const Home = () => {
 
       <div className={"countCon"}>
         <div>
-          <CountUp
-            end={certificateCount}
-            enableScrollSpy={true}
-            scrollSpyDelay={200}
-          />
+          {certificateCount && (
+            <CountUp
+              end={certificateCount}
+              enableScrollSpy={true}
+              scrollSpyDelay={200}
+            />
+          )}
           +
         </div>
         <p>Pledges have already been taken.</p>

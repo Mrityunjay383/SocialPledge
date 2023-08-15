@@ -122,8 +122,6 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
       supporterId: supporterData.id,
     });
 
-    console.log(`#2023226231630598 res.data`, res.data);
-
     if (res.status === 200) {
       if (res.data.exist) {
         setCertificateExist(true);

@@ -96,7 +96,7 @@ export const Certificate = {
     return request("POST", "/certificate/is_certificate_exist", data);
   },
   certificateCount: () => {
-    return request("POST", "/certificate/certificate_count");
+    return request("GET", "/certificate/certificate_count");
   },
 };
 
