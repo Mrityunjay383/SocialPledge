@@ -18,6 +18,7 @@ import IndieCertificate from "../Pages/Original/IndieCertificate";
 import Pledges from "../Pages/Original/Pledges";
 import Profile from "../Pages/Original/Profile";
 import ScrollToTop from "../ScrollToTop";
+import HybridAuth from "../Pages/HybridAuth";
 
 const Original = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -107,7 +108,7 @@ const Original = () => {
                   path="/auth"
                   element={
                     <div>
-                      <AuthPage setIsLoggedIn={setIsLoggedIn} />
+                      <HybridAuth setIsLoggedIn={setIsLoggedIn} />
                     </div>
                   }
                 />

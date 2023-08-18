@@ -10,18 +10,23 @@ exports.otp = async (req, res) => {
   try {
     const { mobNo } = req.body;
 
-    const existingUser = await User.findOne({ mobNo });
-    if (existingUser) {
-      return res
-        .status(401)
-        .send("Account already exist with provided Mobile number");
+    const existingUser = await User.findOne({ mobNo }).select("_id").lean();
+    let user_id;
+    if (!existingUser) {
+      const user = await User.create({
+        mobNo,
+      });
+      user_id = user._id;
+    } else {
+      user_id = existingUser._id;
     }
 
     const result = await sendOpt({ mobNo });
-
     if (result.success) {
       OTPs[mobNo] = result.otp;
-      res.status(200).json({ success: true });
+      res
+        .status(200)
+        .json({ success: true, userExist: !!existingUser, user_id });
     }
   } catch (err) {
     console.log(`#2023197104341576 err`, err);
@@ -31,10 +36,10 @@ exports.otp = async (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const { name, mobNo, password, otp } = req.body;
+    const { name, mobNo, otp, user_id } = req.body;
 
-    if (!(name && mobNo && password)) {
-      return res.status(404).send("All fields are required");
+    if (!mobNo) {
+      return res.status(404).send("Mobile Number is Required");
     }
 
     if (otp !== OTPs[mobNo]) {
@@ -43,23 +48,14 @@ exports.register = async (req, res) => {
       delete OTPs[mobNo];
     }
 
-    const existingUser = await User.findOne({ mobNo });
-    if (existingUser) {
-      return res
-        .status(401)
-        .send("Account already exist with provided Mobile number");
+    if (name !== "") {
+      const user = await User.findOne({ _id: user_id });
+      user.name = name;
+      user.save();
     }
 
-    const encPassword = await bcrypt.hash(password, 10);
-
-    const user = await User.create({
-      name,
-      mobNo,
-      password: encPassword,
-    });
-
     //token
-    const token = jwt.sign({ user_id: user._id }, process.env.SECRET_KEY, {
+    const token = jwt.sign({ user_id }, process.env.SECRET_KEY, {
       expiresIn: 30 * 24 * 60 * 60,
     });
 
