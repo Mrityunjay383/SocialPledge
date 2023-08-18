@@ -4,7 +4,7 @@ import { Pledge } from "../../../service";
 import PledgeCon from "../../../Components/Original/PledgeCon";
 import { BallTriangle } from "react-loader-spinner";
 
-const filters = ["All", "Live", "Coming Soon", "Closed"];
+const filters = ["Live", "Coming Soon", "Closed", "All"];
 
 const Pledges = () => {
   const [activeFilter, setActiveFilter] = useState(0);

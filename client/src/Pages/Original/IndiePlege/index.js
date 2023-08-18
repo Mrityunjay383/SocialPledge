@@ -155,14 +155,14 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
 
     if (res.status === 200) {
       await setQrURL(res.data.qrURL);
-      startAnimation();
+      // startAnimation();
       setTimeout(() => {
         setIsCanvasMount(true);
         let canvas = document.getElementById("myCanvas");
         let dataURL = canvas.toDataURL("image/jpeg", 1.0);
         downloadImage(dataURL, `${userData.name}_${pledgeData.name}`);
         toast.success("Your Certificate has been downloaded!!!");
-      }, 50);
+      }, 100);
     } else {
       toast.error("Some Error occurred, please try again");
     }
@@ -177,7 +177,7 @@ const IndiePledge = ({ userData, isLoggedIn }) => {
     a.click();
   }
 
-  const [imgSrc, setImgSrc] = useState();
+  const [imgSrc, setImgSrc] = useState(null);
 
   const buildImg = () => {
     let canvas = document.getElementById("myCanvas");

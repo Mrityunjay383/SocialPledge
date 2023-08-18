@@ -26,7 +26,12 @@ exports.createNew = async (req, res) => {
 
 exports.getHomePledges = async (req, res) => {
   try {
-    let allPledges = await Pledge.find({}).sort({
+    const currTime = new Date().getTime() / 1000;
+
+    let allPledges = await Pledge.find({
+      liveDate: { $lt: currTime },
+      $or: [{ endDate: { $gt: currTime } }, { endDate: null }],
+    }).sort({
       liveDate: -1,
     });
 
