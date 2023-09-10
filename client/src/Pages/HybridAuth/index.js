@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Auth } from "../../service";
 import { useNavigate } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
+import "./index.css";
 
 const HybridAuth = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
