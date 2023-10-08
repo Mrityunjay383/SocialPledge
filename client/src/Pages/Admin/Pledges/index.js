@@ -5,6 +5,7 @@ import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
 import { AiFillEdit } from "react-icons/ai";
 import EditPledgeModel from "../../../Components/Admin/EditPledgeModel";
+import AddPledgeModel from "../../../Components/Admin/AddPledgeModel";
 
 const AdminPledges = ({ adminData }) => {
   const [pledges, setPledges] = useState([]);
@@ -47,7 +48,7 @@ const AdminPledges = ({ adminData }) => {
         fetchPledges={fetchPledges}
       />
 
-      <EditPledgeModel
+      <AddPledgeModel
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
         fetchPledges={fetchPledges}

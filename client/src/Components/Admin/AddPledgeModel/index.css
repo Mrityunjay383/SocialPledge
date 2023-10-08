@@ -16,3 +16,7 @@
 .closeIcon:hover {
     color: #FF5A60;
 }
+
+.delBtn{
+    margin-right: 25px;
+}

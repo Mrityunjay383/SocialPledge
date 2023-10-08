@@ -134,3 +134,18 @@ exports.update = async (req, res) => {
     res.status(400).json({ success: false });
   }
 };
+
+exports.delete = async (req, res) => {
+  try {
+    const { pledgeId } = req.body;
+
+    await Pledge.deleteOne({
+      _id: pledgeId,
+    });
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.log(`#202319712556255 err`, err);
+    res.status(400).json({ success: false });
+  }
+};

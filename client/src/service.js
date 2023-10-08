@@ -65,6 +65,9 @@ export const Pledge = {
   update: (data) => {
     return request("POST", "/pledge/update", data);
   },
+  delete: (data) => {
+    return request("POST", "/pledge/delete", data);
+  },
   launch: () => {
     return request("GET", "/pledge/launch");
   },

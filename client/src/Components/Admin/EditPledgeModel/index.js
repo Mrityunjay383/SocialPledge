@@ -69,6 +69,23 @@ const EditPledgeModel = ({
     }
   };
 
+  const deletePledge = async () => {
+    try {
+      setPledgeAddLoading(true);
+
+      const res = await Pledge.delete({ pledgeId: pledgeData._id });
+
+      if (res.status === 200) {
+        fetchPledges();
+        toast.success("Pledge deleted successfully!");
+        setIsOpen(false);
+        setPledgeAddLoading(false);
+      }
+    } catch (err) {
+      console.log(`#2023281232726226 err`, err);
+    }
+  };
+
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -181,7 +198,12 @@ const EditPledgeModel = ({
             </div>
           </div>
 
-          <CtaBtn Text={"Update"} fontSize={16} onClick={updatePledge} />
+          <CtaBtn
+            Text={"Delete Pledge"}
+            className={"delBtn"}
+            onClick={deletePledge}
+          />
+          <CtaBtn Text={"Update"} onClick={updatePledge} />
         </>
       )}
     </Modal>

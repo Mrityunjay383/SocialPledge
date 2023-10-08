@@ -260,7 +260,7 @@ const AddPledgeModel = ({ modalIsOpen, setIsOpen, fetchPledges }) => {
             </div>
           </div>
 
-          <CtaBtn Text={"Add"} fontSize={20} onClick={uploadImg} />
+          <CtaBtn Text={"Add"} onClick={uploadImg} />
         </>
       )}
     </Modal>
