@@ -1,0 +1,30 @@
+.rootSup {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 6%;
+}
+.rootSup img{
+    max-width: 60%;
+    margin-bottom: 50px;
+}
+.rootSup p {
+    color: #FF5A60;
+}
+
+.SecChild {
+    font-size: 1.7rem;
+}
+
+@media screen and (max-width: 560px) {
+    .fiChild {
+        font-size: 2rem;
+    }
+    .SecChild {
+        font-size: 1.1rem;
+    }
+}

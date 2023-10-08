@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:5000";
+// const baseUrl = "https://socialpledge.cyclic.app";
 
 const request = async (method, url, data) => {
   const config = {
@@ -105,5 +106,17 @@ export const Report = {
   },
   genReport: (data) => {
     return request("POST", "/report/genReport", data);
+  },
+};
+
+export const Admin = {
+  root: () => {
+    return request("GET", "/admin");
+  },
+  login: (data) => {
+    return request("POST", "/admin/login", data);
+  },
+  logout: () => {
+    return request("GET", "/admin/logout");
   },
 };
