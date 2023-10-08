@@ -112,3 +112,25 @@ exports.launch = async (req, res) => {
     res.status(400).json({ success: false });
   }
 };
+
+exports.update = async (req, res) => {
+  try {
+    const { _id, name, about, liveDate, endDate } = req.body;
+
+    const pledge = await Pledge.findOne({
+      _id,
+    });
+
+    pledge.name = name;
+    pledge.about = about;
+    pledge.liveDate = liveDate;
+    pledge.endDate = endDate;
+
+    await pledge.save();
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.log(`#202319712556255 err`, err);
+    res.status(400).json({ success: false });
+  }
+};

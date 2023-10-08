@@ -3,7 +3,8 @@ import AdminHeader from "../../../Components/Admin/Header";
 import { Pledge } from "../../../service";
 import "./index.css";
 import CtaBtn from "../../../Components/Original/CtaBtn";
-import AddPledgeModel from "../../../Components/Admin/AddPledgeModel";
+import { AiFillEdit } from "react-icons/ai";
+import EditPledgeModel from "../../../Components/Admin/EditPledgeModel";
 
 const AdminPledges = ({ adminData }) => {
   const [pledges, setPledges] = useState([]);
@@ -13,7 +14,6 @@ const AdminPledges = ({ adminData }) => {
       const res = await Pledge.getPledges({ filter: "All" });
 
       if (res.status === 200) {
-        console.log(`#202328119021951 res`, res.data);
         setPledges(res.data.pledgesData);
       }
     } catch (err) {
@@ -23,6 +23,15 @@ const AdminPledges = ({ adminData }) => {
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
+  const [editPledgeName, setEditPledgeName] = useState("");
+  const [editModalIsOpen, setEditModalIsOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (editPledgeName !== "") {
+      setEditModalIsOpen(true);
+    }
+  }, [editPledgeName]);
+
   useEffect(() => {
     fetchPledges();
   }, []);
@@ -31,7 +40,14 @@ const AdminPledges = ({ adminData }) => {
     <div className={"centerCon"}>
       <AdminHeader adminData={adminData} />
 
-      <AddPledgeModel
+      <EditPledgeModel
+        modalIsOpen={editModalIsOpen}
+        setIsOpen={setEditModalIsOpen}
+        editPledgeName={editPledgeName}
+        fetchPledges={fetchPledges}
+      />
+
+      <EditPledgeModel
         modalIsOpen={modalIsOpen}
         setIsOpen={setIsOpen}
         fetchPledges={fetchPledges}
@@ -50,6 +66,7 @@ const AdminPledges = ({ adminData }) => {
           <div>Name</div>
           <div>Live Date</div>
           <div>End Date</div>
+          <div style={{ width: "5%", textAlign: "right" }}></div>
         </div>
 
         {pledges.length !== 0 &&
@@ -80,6 +97,20 @@ const AdminPledges = ({ adminData }) => {
                   {pledge.endDate
                     ? new Date(pledge.endDate * 1000).toLocaleString()
                     : "-"}
+                </div>
+                <div
+                  style={{
+                    width: "5%",
+                    textAlign: "right",
+                    fontSize: "1.6rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setEditPledgeName(pledge.name.replaceAll(" ", "_"));
+                  }}
+                >
+                  {" "}
+                  <AiFillEdit />{" "}
                 </div>
               </div>
             );

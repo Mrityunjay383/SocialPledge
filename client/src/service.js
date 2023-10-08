@@ -62,6 +62,9 @@ export const Pledge = {
   getPledges: (data) => {
     return request("POST", "/pledge/pledges", data);
   },
+  update: (data) => {
+    return request("POST", "/pledge/update", data);
+  },
   launch: () => {
     return request("GET", "/pledge/launch");
   },
