@@ -6,8 +6,18 @@ import CtaBtn from "../../../Components/Original/CtaBtn";
 import { AiFillEdit } from "react-icons/ai";
 import EditPledgeModel from "../../../Components/Admin/EditPledgeModel";
 import AddPledgeModel from "../../../Components/Admin/AddPledgeModel";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AdminPledges = ({ adminData }) => {
+  const navigate = useNavigate();
+  const { adminUserName } = useParams();
+
+  useEffect(() => {
+    if (adminUserName !== adminData.userName && adminData.userName !== "") {
+      navigate(`/${adminData.userName}/pledges`);
+    }
+  }, []);
+
   const [pledges, setPledges] = useState([]);
 
   const fetchPledges = async () => {

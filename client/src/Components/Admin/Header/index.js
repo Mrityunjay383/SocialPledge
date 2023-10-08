@@ -56,12 +56,12 @@ const AdminHeader = ({ adminData }) => {
 
             <li className="nav-item">
               <NavLink
-                to={`/${adminData.userName}/add_supporter`}
+                to={`/${adminData.userName}/supporters`}
                 activeclassname="active"
                 className="nav-links"
                 onClick={click ? handleClick : null}
               >
-                Add Supporter
+                Supporters
               </NavLink>
             </li>
           </ul>

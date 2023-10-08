@@ -15,7 +15,7 @@ const AdminReports = ({ adminData }) => {
 
   useEffect(() => {
     if (adminUserName !== adminData.userName && adminData.userName !== "") {
-      navigate(`/${adminData.userName}`);
+      navigate(`/${adminData.userName}/report`);
     }
   }, []);
 

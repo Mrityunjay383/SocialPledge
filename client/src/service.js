@@ -92,6 +92,9 @@ export const Supporter = {
   logout: () => {
     return request("GET", "/supporter/logout");
   },
+  list: () => {
+    return request("GET", "/supporter/list");
+  },
 };
 
 export const Certificate = {

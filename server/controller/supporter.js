@@ -162,3 +162,14 @@ exports.logout = async (req, res) => {
     })
     .json({ success: true });
 };
+
+exports.list = async (req, res) => {
+  try {
+    let supporters = await Supporter.find();
+    supporters = supporters.reverse();
+    res.status(200).json({ supporters });
+  } catch (err) {
+    console.log(`#2023203205938875 err`, err);
+    res.status(400).json({ success: false });
+  }
+};

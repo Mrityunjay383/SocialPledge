@@ -3,11 +3,15 @@ const router = express.Router();
 
 const controller = require("../controller/supporter");
 const { valToken } = require("../middleware/auth");
-const { valSupToken } = require("../middleware/supporterAuth"); //Requiring Controllers
+const { valSupToken } = require("../middleware/supporterAuth");
+const { valAdminToken } = require("../middleware/adminAuth"); //Requiring Controllers
 
 router.get("/", valSupToken, controller.root);
 router.post("/login", controller.login);
-router.post("/create_new", controller.createNew);
+
+router.post("/create_new", valAdminToken, controller.createNew);
+router.get("/list", valAdminToken, controller.list);
+
 router.get("/indieSup", valSupToken, controller.indieSup);
 router.post("/updateSup", valSupToken, controller.updateSup);
 router.get("/get_ava", valToken, controller.getAvaSup);

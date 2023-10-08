@@ -14,6 +14,7 @@ import AdminAuth from "../Pages/Admin/AdminAuth";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import AdminReports from "../Pages/Admin/Report";
 import AdminPledges from "../Pages/Admin/Pledges";
+import Supporters from "../Pages/Admin/Supporters";
 
 const AdminScreen = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -116,11 +117,11 @@ const AdminScreen = () => {
             />
 
             <Route
-              path="/:adminUserName/add_supporter"
+              path="/:adminUserName/supporters"
               element={
                 <div>
                   {isLoggedIn ? (
-                    <AdminDashboard adminData={adminData} />
+                    <Supporters adminData={adminData} />
                   ) : (
                     <AdminAuth />
                   )}
