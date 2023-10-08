@@ -50,6 +50,9 @@ export const Auth = {
 };
 
 export const Pledge = {
+  createNew: (data) => {
+    return request("POST", "/pledge/create_new", data);
+  },
   getHomePledges: () => {
     return request("GET", "/pledge/get_home_pledges");
   },

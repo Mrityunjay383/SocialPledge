@@ -31,7 +31,11 @@ const AdminPledges = ({ adminData }) => {
     <div className={"centerCon"}>
       <AdminHeader adminData={adminData} />
 
-      <AddPledgeModel modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+      <AddPledgeModel
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+        fetchPledges={fetchPledges}
+      />
 
       <div className={"pledgesCon"}>
         <CtaBtn
