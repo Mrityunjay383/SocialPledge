@@ -104,8 +104,14 @@ export const Report = {
   reportData: (data) => {
     return request("POST", "/report/report_Data", data);
   },
+  adminReportData: (data) => {
+    return request("POST", "/report/admin_report_Data", data);
+  },
   genReport: (data) => {
     return request("POST", "/report/genReport", data);
+  },
+  adminDashData: () => {
+    return request("GET", "/report/admin_dashboard_Data");
   },
 };
 

@@ -1,0 +1,18 @@
+.modelHead {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modelHead h2 {
+    font-weight: bolder;
+    color: #FF5A60;
+}
+
+.closeIcon {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.closeIcon:hover {
+    color: #FF5A60;
+}

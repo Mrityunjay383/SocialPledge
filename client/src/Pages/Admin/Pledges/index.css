@@ -1,0 +1,25 @@
+.pledgesCon{
+    padding: 10vh 6%;
+
+}
+
+.pledgeRow{
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    elevation: above;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    padding: 10px 30px;
+    border-radius: 8px;
+}
+
+.pledgeRow div{
+    width: 20%;
+    margin-right: 20px;
+}
+
+.newPledgeBtn{
+    margin-bottom: 10vh;
+}

@@ -29,7 +29,28 @@ const AdminHeader = ({ adminData }) => {
                 className="nav-links"
                 onClick={click ? handleClick : null}
               >
-                Add Graphic
+                Dashboard
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to={`/${adminData.userName}/report`}
+                activeclassname="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                Report
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to={`/${adminData.userName}/pledges`}
+                activeclassname="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                Pledges
               </NavLink>
             </li>
 

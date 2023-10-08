@@ -12,6 +12,8 @@ import ScrollToTop from "../ScrollToTop";
 import AdminHome from "../Pages/Admin/Home";
 import AdminAuth from "../Pages/Admin/AdminAuth";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
+import AdminReports from "../Pages/Admin/Report";
+import AdminPledges from "../Pages/Admin/Pledges";
 
 const AdminScreen = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,6 +83,31 @@ const AdminScreen = () => {
                 <div>
                   {isLoggedIn ? (
                     <AdminDashboard adminData={adminData} />
+                  ) : (
+                    <AdminAuth />
+                  )}
+                </div>
+              }
+            />
+
+            <Route
+              path="/:adminUserName/report"
+              element={
+                <div>
+                  {isLoggedIn ? (
+                    <AdminReports adminData={adminData} />
+                  ) : (
+                    <AdminAuth />
+                  )}
+                </div>
+              }
+            />
+            <Route
+              path="/:adminUserName/pledges"
+              element={
+                <div>
+                  {isLoggedIn ? (
+                    <AdminPledges adminData={adminData} />
                   ) : (
                     <AdminAuth />
                   )}

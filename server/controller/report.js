@@ -2,6 +2,7 @@ const { genLabels } = require("../helpers/genLabels");
 const Certificate = require("../model/certificate");
 const Pledge = require("../model/pledge");
 const User = require("../model/user");
+const Supporter = require("../model/supporter");
 
 const { getDate, getTime } = require("../helpers/getDateTime");
 
@@ -92,6 +93,76 @@ exports.generateReport = async (req, res) => {
     res.status(200).json({ reportData });
   } catch (err) {
     console.log(`#202320915155226 err`, err);
+    res.status(400);
+  }
+};
+
+exports.adminReportData = async (req, res) => {
+  try {
+    const { period } = req.body;
+
+    const { labels, tsArr } = genLabels(period);
+
+    const allCertificates = await Certificate.find({});
+
+    allCertificates.sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
+
+    const newDLArr = Array(labels.length).fill(0);
+    const repDLArr = Array(labels.length).fill(0);
+    let totalNewCount = 0;
+    let totalRepCount = 0;
+    const certificateIds = [];
+
+    for (let i = 0; i < tsArr.length - 1; i++) {
+      for (let certificate of allCertificates) {
+        if (
+          certificate.createdAt <= tsArr[i] &&
+          certificate.createdAt >= tsArr[i + 1]
+        ) {
+          certificateIds.push(certificate._id);
+
+          if (certificate.type === "new") {
+            newDLArr[i]++;
+            totalNewCount++;
+          } else if (certificate.type === "repeat") {
+            repDLArr[i]++;
+            totalRepCount++;
+          }
+        }
+      }
+    }
+
+    res.status(200).json({
+      labels: labels.reverse(),
+      newDLArr: newDLArr.reverse(),
+      totalNewCount,
+      repDLArr: repDLArr.reverse(),
+      totalRepCount,
+      certificateIds,
+    });
+  } catch (err) {
+    console.log(`#2023208145118705 err`, err);
+    res.status(400);
+  }
+};
+
+exports.adminDashData = async (req, res) => {
+  try {
+    const userCount = await User.count();
+    const supportCount = await Supporter.count();
+    const pledgeCount = await Pledge.count();
+    const certificateCount = await Certificate.count();
+
+    res.status(200).json({
+      userCount,
+      supportCount,
+      pledgeCount,
+      certificateCount,
+    });
+  } catch (err) {
+    console.log(`#2023208145118705 err`, err);
     res.status(400);
   }
 };
