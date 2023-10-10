@@ -211,19 +211,6 @@ exports.indieSupForAdmin = async (req, res) => {
   }
 };
 
-exports.indieSupForAdmin = async (req, res) => {
-  try {
-    const { userName } = req.body;
-
-    const supporter = await Supporter.findOne({ userName });
-
-    res.status(200).json({ supporter });
-  } catch (err) {
-    console.log(`#20232063273211 err`, err);
-    res.status(400);
-  }
-};
-
 exports.delete = async (req, res) => {
   try {
     const { supporterId } = req.body;
