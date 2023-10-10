@@ -173,3 +173,68 @@ exports.list = async (req, res) => {
     res.status(400).json({ success: false });
   }
 };
+
+exports.updateSupByAdmin = async (req, res) => {
+  try {
+    const { supporterData } = req.body;
+
+    const supporter = await Supporter.findOne({ _id: supporterData._id });
+
+    if (!supporter) {
+      return res.status(404).send("Supporter Not Found!");
+    }
+
+    supporter.name = supporterData.name;
+    supporter.userName = supporterData.userName;
+    supporter.newLimit = supporterData.newLimit;
+    supporter.repLimit = supporterData.repLimit;
+    supporter.priority = supporterData.priority;
+    await supporter.save();
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.log(`#2023206171443163 err`, err);
+    res.status(400).send("Some Error occurred!");
+  }
+};
+
+exports.indieSupForAdmin = async (req, res) => {
+  try {
+    const { userName } = req.body;
+
+    const supporter = await Supporter.findOne({ userName });
+
+    res.status(200).json({ supporter });
+  } catch (err) {
+    console.log(`#20232063273211 err`, err);
+    res.status(400);
+  }
+};
+
+exports.indieSupForAdmin = async (req, res) => {
+  try {
+    const { userName } = req.body;
+
+    const supporter = await Supporter.findOne({ userName });
+
+    res.status(200).json({ supporter });
+  } catch (err) {
+    console.log(`#20232063273211 err`, err);
+    res.status(400);
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const { supporterId } = req.body;
+
+    await Supporter.deleteOne({
+      _id: supporterId,
+    });
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.log(`#202319712556255 err`, err);
+    res.status(400).json({ success: false });
+  }
+};

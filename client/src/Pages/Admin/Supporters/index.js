@@ -4,6 +4,8 @@ import AdminHeader from "../../../Components/Admin/Header";
 import { Supporter } from "../../../service";
 import { AiFillEdit } from "react-icons/ai";
 import CtaBtn from "../../../Components/Original/CtaBtn";
+import AddSupporterModel from "../../../Components/Admin/AddSupporterModel";
+import EditSupporterModel from "../../../Components/Admin/EditSupporterModel";
 
 const Supporters = ({ adminData }) => {
   const navigate = useNavigate();
@@ -18,10 +20,10 @@ const Supporters = ({ adminData }) => {
 
   const fetchSupporters = async () => {
     try {
+      setEditSupporterUN("");
       const res = await Supporter.list();
 
       if (res.status === 200) {
-        console.log(`#202328123493921 res`, res.data);
         setSupporter(res.data.supporters);
       }
     } catch (err) {
@@ -33,20 +35,46 @@ const Supporters = ({ adminData }) => {
     fetchSupporters();
   }, []);
 
+  const [addSupporterModalIsOpen, setAddSupporterModalIsOpen] =
+    React.useState(false);
+
+  const [editSupporterUN, setEditSupporterUN] = useState("");
+  const [editModalIsOpen, setEditModalIsOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (editSupporterUN !== "") {
+      setEditModalIsOpen(true);
+    }
+  }, [editSupporterUN]);
+
   return (
     <div className={"centerCon"}>
+      <EditSupporterModel
+        modalIsOpen={editModalIsOpen}
+        setIsOpen={setEditModalIsOpen}
+        editSupporterUN={editSupporterUN}
+        fetchSupporters={fetchSupporters}
+      />
+
+      <AddSupporterModel
+        modalIsOpen={addSupporterModalIsOpen}
+        setIsOpen={setAddSupporterModalIsOpen}
+        fetchSupporters={fetchSupporters}
+      />
+
       <AdminHeader adminData={adminData} />
 
       <div className={"pledgesCon"}>
         <CtaBtn
           Text={"Add New Supporter"}
           className={"newPledgeBtn"}
-          // onClick={() => setIsOpen(true)}
+          onClick={() => setAddSupporterModalIsOpen(true)}
         />
 
         <div className={"pledgeRow"}>
           <div>Logo</div>
           <div>Name</div>
+          <div>UserName</div>
           <div>New Limit</div>
           <div>Repeat Limit</div>
           <div>Priority</div>
@@ -67,8 +95,9 @@ const Supporters = ({ adminData }) => {
                   />
                 </div>
                 <div>{supporter.name}</div>
+                <div>{supporter.userName}</div>
                 <div>
-                  {supporter.newCount} /{supporter.newLimit}
+                  {supporter.newCount} / {supporter.newLimit}
                 </div>
                 <div>
                   {supporter.repCount} / {supporter.repLimit}
@@ -82,9 +111,9 @@ const Supporters = ({ adminData }) => {
                     fontSize: "1.6rem",
                     cursor: "pointer",
                   }}
-                  // onClick={() => {
-                  //   setEditPledgeName(pledge.name.replaceAll(" ", "_"));
-                  // }}
+                  onClick={() => {
+                    setEditSupporterUN(supporter.userName);
+                  }}
                 >
                   {" "}
                   <AiFillEdit />{" "}

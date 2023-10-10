@@ -83,6 +83,9 @@ export const Supporter = {
   indieSup: () => {
     return request("GET", "/supporter/indieSup");
   },
+  indieSupForAdmin: (data) => {
+    return request("POST", "/supporter/indie_sup_for_admin", data);
+  },
   updateSup: (data) => {
     return request("POST", "/supporter/updateSup", data);
   },
@@ -94,6 +97,15 @@ export const Supporter = {
   },
   list: () => {
     return request("GET", "/supporter/list");
+  },
+  createNew: (data) => {
+    return request("POST", "/supporter/create_new", data);
+  },
+  updateSupByAdmin: (data) => {
+    return request("POST", "/supporter/update_sup_by_admin", data);
+  },
+  delete: (data) => {
+    return request("POST", "/supporter/delete_sup_for_admin", data);
   },
 };
 

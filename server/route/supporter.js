@@ -17,4 +17,8 @@ router.post("/updateSup", valSupToken, controller.updateSup);
 router.get("/get_ava", valToken, controller.getAvaSup);
 router.get("/logout", valSupToken, controller.logout);
 
+router.post("/update_sup_by_admin", valAdminToken, controller.updateSupByAdmin);
+router.post("/indie_sup_for_admin", valAdminToken, controller.indieSupForAdmin);
+router.post("/delete_sup_for_admin", valAdminToken, controller.delete);
+
 module.exports = router;
