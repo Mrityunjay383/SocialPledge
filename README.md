@@ -15,7 +15,7 @@ SocialPledge is a web platform aimed at empowering individuals to make commitmen
 ## Tech Stack
 
 - **Front-end:** HTML5, CSS3, JavaScript (ES6+), React.js, Chart.js, Axios, React Router, Material-UI, React Hook Form
-- **Back-end:** Node.js, Express.js, MongoDB, Mongoose ODM, Express Validator, Passport.js
+- **Back-end:** Node.js, Express.js, MongoDB, Mongoose ODM, Express Validator
 - **Deployment:** Heroku (back-end), Netlify (front-end), MongoDB Atlas (database)
 
 ## Installation
